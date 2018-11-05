@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<airports>
+  <airport airportID="BEG" name="Nikola Tesla" city="Belgrade" />
+  <airport airportID="LON" name="Heathrow" city="London" />
+  <airport airportID="AMS" name="Schiphol" city="Amsterdam" />
+  <airport airportID="NYA" name="John F. Kennedy" city="New York" />
+  <airport airportID="PAR" name="Charles de Gaulle" city="Paris" />
+</airports>
