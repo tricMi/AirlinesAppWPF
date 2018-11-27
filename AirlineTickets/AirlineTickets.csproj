@@ -49,17 +49,60 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\Xceed.Wpf.Toolkit\bin\Debug\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddFlightWindow.xaml.cs">
+      <DependentUpon>AddFlightWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AircompanyWindow.xaml.cs">
+      <DependentUpon>AircompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditAircompanyWindow.xaml.cs">
+      <DependentUpon>EditAircompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Aircompany.cs" />
+    <Compile Include="Models\Airplane.cs" />
+    <Compile Include="Models\Seat.cs" />
+    <Compile Include="Models\Seats.cs" />
+    <Compile Include="Models\Tickets.cs" />
+    <Compile Include="UserEditWindow.xaml.cs">
+      <DependentUpon>UserEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddFlightWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AircompanyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AirportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditAircompanyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditAirportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditFlightsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlightsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -78,10 +121,24 @@
     <Compile Include="EditAirportWindow.xaml.cs">
       <DependentUpon>EditAirportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditFlightsWindow.xaml.cs">
+      <DependentUpon>EditFlightsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlightsWindow.xaml.cs">
+      <DependentUpon>FlightsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Airport.cs" />
@@ -118,6 +175,9 @@
     <Resource Include="Data\Airports.xml">
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\airplane.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

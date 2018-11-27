@@ -2,6 +2,7 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,35 +22,43 @@ namespace AirlineTickets
     /// </summary>
     public partial class AirportWindow : Window
     {
+        ICollectionView view;
+
         public AirportWindow()
         {
             InitializeComponent();
-            Reload(); 
+            view = CollectionViewSource.GetDefaultView(Data.Instance.Airports);
+            view.Filter = CustomFilter;
+            DGAirport.ItemsSource = view;
+            DGAirport.IsReadOnly = true;
+            DGAirport.IsSynchronizedWithCurrentItem = true;
+            DGAirport.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
         }
 
-        private void Reload()
+        private bool CustomFilter(object obj)
         {
-            if (LbAirport.HasItems)
-                LbAirport.Items.Clear();
-            foreach (var airport in Data.Instance.Airports)
+            Airport airport = obj as Airport;
+            if(TxtSearch.Text.Equals(String.Empty))
             {
-                if (!airport.Active)
-                {
-                    LbAirport.Items.Add(airport); 
-                }
+                return !airport.Active;
+            }
+            else
+            {
+                return !airport.Active && airport.Name.Contains(TxtSearch.Text);
             }
         }
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            Airport airport = (Airport)LbAirport.SelectedItem;
+            Airport airport = (Airport)DGAirport.SelectedItem;
             if (SelectedAirport(airport))
             {
                 if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
-                    var index = IndexOfSelectedAirport(airport.AirportID);
+                    int index = IndexOfSelectedAirport(airport.AirportID);
                     Data.Instance.Airports[index].Active = true;
-                    Reload();
+                    view.Refresh();
                 }
             }
             
@@ -58,25 +67,24 @@ namespace AirlineTickets
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
-            Airport airport = (Airport)LbAirport.SelectedItem;
-            if (SelectedAirport(airport))
+            Airport selectedAirport = (Airport)DGAirport.SelectedItem;
+            if (SelectedAirport(selectedAirport))
             {
-                EditAirportWindow eaw = new EditAirportWindow(airport, EditAirportWindow.Option.EDIT);
-                if (eaw.ShowDialog() == true)
+                Airport oldAirport = selectedAirport.Clone() as Airport;
+                EditAirportWindow eaw = new EditAirportWindow(selectedAirport, EditAirportWindow.Option.EDIT);
+                if (eaw.ShowDialog() != true)
                 {
-                    Reload();
+                    int index = IndexOfSelectedAirport(oldAirport.AirportID);
+                    Data.Instance.Airports[index] = oldAirport;
                 }
             }
            
-        }
+        } 
 
         private void Btn_Add_Click(object sender, RoutedEventArgs e)
         {
             EditAirportWindow eaw = new EditAirportWindow(new Airport(), EditAirportWindow.Option.ADDING);
-            if (eaw.ShowDialog() == true)
-            {
-                Reload();
-            }
+            eaw.ShowDialog();
         }
 
         private int IndexOfSelectedAirport(String airportID)
@@ -101,6 +109,11 @@ namespace AirlineTickets
                 return false;
             }
             return true;
+        }
+
+        private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

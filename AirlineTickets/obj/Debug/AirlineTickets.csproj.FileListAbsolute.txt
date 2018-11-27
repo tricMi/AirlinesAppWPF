@@ -17,3 +17,39 @@ D:\Documents\Platforme za objektno programiranje\Vezbe\PrvaApp\AirlineTickets\ob
 D:\Documents\Platforme za objektno programiranje\Vezbe\PrvaApp\AirlineTickets\obj\Debug\AirlineTickets.pdb
 D:\Documents\Platforme za objektno programiranje\Vezbe\PrvaApp\AirlineTickets\obj\Debug\EditAirportWindow.g.cs
 D:\Documents\Platforme za objektno programiranje\Vezbe\PrvaApp\AirlineTickets\obj\Debug\EditAirportWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\bin\Debug\AirlineTickets.exe.config
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\bin\Debug\AirlineTickets.exe
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\bin\Debug\AirlineTickets.pdb
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.csprojAssemblyReference.cache
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirportWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\EditAirportWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\MainWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\App.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets_MarkupCompile.cache
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets_MarkupCompile.lref
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirportWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\EditAirportWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\MainWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.g.resources
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.Properties.Resources.resources
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.csproj.GenerateResource.cache
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.csproj.CoreCompileInputs.cache
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.exe
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.pdb
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\EditFlightsWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\FlightsWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\EditFlightsWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\FlightsWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\UserEditWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\UserWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\UserEditWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\UserWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\bin\Debug\Xceed.Wpf.Toolkit.pdb
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AirlineTickets.csproj.CopyComplete
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AircompanyWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\EditAircompanyWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AircompanyWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\EditAircompanyWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AddFlightWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AddFlightWindow.baml

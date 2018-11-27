@@ -1,4 +1,5 @@
-﻿using AirlineTickets.Models;
+﻿using AirlineTickets.Database;
+using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +32,7 @@ namespace AirlineTickets
             this.airport = airport;
             this.option = option;
 
-            TxtAirportID.Text = airport.AirportID;
-            TxtName.Text = airport.Name;
-            TxtCity.Text = airport.City;
+            this.DataContext = airport;
 
             if (option.Equals(Option.EDIT))
             {
@@ -43,12 +42,21 @@ namespace AirlineTickets
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
+            if (option.Equals(Option.ADDING) && !airportExists(airport.AirportID)) {
 
+                Data.Instance.Airports.Add(airport);
+            }
         }
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
+        }
 
+        private bool airportExists(string airportID)
+        {
+            return Data.Instance.Airports.ToList().Find(a => a.AirportID.Equals(airportID)) != null ? true : false;
         }
     }
 }

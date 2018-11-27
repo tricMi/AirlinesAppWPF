@@ -1,38 +1,107 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlineTickets.Models
 {
-    class User
+    public class User : INotifyPropertyChanged, ICloneable
     {
-        public String Name { get; set; }
-        public String Surname { get; set; }
-        public String Password { get; set; }
-        public String Username { get; set; }
-        public EGender Gender { get; set; }
-        public String Address { get; set; }
-        public EUserType UserType { get; set; }
+        private String name;
 
-        public Boolean Active { get; set; }
-
-        public User()
+        public String Name
         {
-
+            get { return name; }
+            set { name = value; OnPropertyChanged("Name"); }
         }
 
-        public User(String Name, String Surname, String Password, String Username, EGender Gender, String Address, EUserType UserType)
+        private String surname;
+
+        public String Surname
         {
-            this.Name = Name;
-            this.Surname = Surname;
-            this.Password = Password;
-            this.Username = Username;
-            this.Gender = Gender;
-            this.Address = Address;
-            this.UserType = UserType;
+            get { return surname; }
+            set { surname = value; OnPropertyChanged("Surname"); }
         }
+
+        private String password;
+
+        public String Password
+        {
+            get { return password; }
+            set { password = value; OnPropertyChanged("Password"); }
+        }
+
+        private String username;
+
+        public String Username
+        {
+            get { return username; }
+            set { username = value; OnPropertyChanged("Username"); }
+        }
+
+        private EGender gender;
+
+        public EGender Gender
+        {
+            get { return gender; }
+            set { gender = value; OnPropertyChanged("Gender"); }
+        }
+
+        private String address;
+
+        public String Address
+        {
+            get { return address; }
+            set { address = value; OnPropertyChanged("Address"); }
+        }
+
+        private EUserType userType;
+
+        public EUserType UserType
+        {
+            get { return userType; }
+            set { userType = value; OnPropertyChanged("UserType"); }
+        }
+
+        private bool active;
+
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; OnPropertyChanged("Active"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(String name)
+        {
+            
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public object Clone()
+        {
+            User newUser = new User
+            {
+                Name = this.Name,
+                Surname = this.Surname,
+                Password = this.Password,
+                Username = this.Username,
+                Gender = this.Gender,
+                Address = this.Address,
+                UserType = this.UserType,
+                Active = this.Active
+            };
+
+            return newUser;
+        }
+
+
         public override string ToString()
         {
             return $"Name: {Name} Surname: {Surname} Username: {Username} User type: {UserType} Gender: {Gender} \n";

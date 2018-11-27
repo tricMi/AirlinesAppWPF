@@ -1,34 +1,107 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlineTickets.Models
 {
-    class Flight
+    public class Flight : INotifyPropertyChanged, ICloneable
     {
-        public String FlightNumber { get; set; }
-        public DateTime DepartureTime { get; set; }
-        public DateTime ArrivalTime { get; set; }
-        public String DeparturePlace { get; set; }
-        public String Destination { get; set; }
-        public Double OneWayTicketPrice { get; set; }
 
-        public Flight()
+        private String flightNumber;
+
+        public String FlightNumber
         {
-
+            get { return flightNumber; }
+            set { flightNumber = value; OnPropertyChanged("FlightNumber"); }
         }
 
-        public Flight(String FlightNumber, DateTime DepartureTime, DateTime ArrivalTime, String DeparturePlace, String Destination, Double OneWayTicketPrice)
+        private DateTime departureTime;
+
+        public DateTime DepartureTime
         {
-            this.FlightNumber = FlightNumber;
-            this.DepartureTime = DepartureTime;
-            this.ArrivalTime = ArrivalTime;
-            this.DeparturePlace = DeparturePlace;
-            this.Destination = Destination;
-            this.OneWayTicketPrice = OneWayTicketPrice;
+            get { return departureTime; }
+            set { departureTime = value; OnPropertyChanged("DepartureTime"); }
         }
+
+        private DateTime arrivalTime;
+
+        public DateTime ArrivalTime
+        {
+            get { return arrivalTime; }
+            set { arrivalTime = value; OnPropertyChanged("ArrivalTime"); }
+        }
+
+        private String departurePlace;
+
+        public String DeparturePlace
+        {
+            get { return departurePlace; }
+            set { departurePlace = value; OnPropertyChanged("DeparturePlace"); }
+        }
+
+        private String destination;
+
+        public String Destination
+        {
+            get { return destination; }
+            set { destination = value; OnPropertyChanged("Destination"); }
+        }
+
+        private double oneWayTicketPrice;
+
+        public double OneWayTicketPrice
+        {
+            get { return oneWayTicketPrice; }
+            set { oneWayTicketPrice = value; OnPropertyChanged("OneWayTicketPrice"); }
+        }
+
+        private bool active;
+
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; OnPropertyChanged("Active"); }
+        }
+
+        public Flight() { }
+
+        public Flight(String flightNumber)
+        {
+            flightNumber = FlightNumber;
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(String name)
+        {
+            
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public object Clone()
+        {
+            Flight newFlight = new Flight
+            {
+                FlightNumber = this.FlightNumber,
+                DepartureTime = this.DepartureTime,
+                ArrivalTime = this.ArrivalTime,
+                DeparturePlace = this.DeparturePlace,
+                Destination = this.Destination,
+                OneWayTicketPrice = this.OneWayTicketPrice,
+                Active = this.Active
+            };
+
+            return newFlight;
+        }
+
+        
         public override string ToString()
         {
             return "Flight number: " + FlightNumber + " Departure time: " + DepartureTime + " Arrival time "

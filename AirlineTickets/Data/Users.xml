@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<users>
+  <user name ="Petar" surname ="Petrovic" password ="petar123" username ="petarp" gender ="0" address ="Narodnog Fronta 29" userType ="1"></user>
+  <user name ="Mina" surname ="Markovic" password ="minna" username ="mina98" gender ="1" address ="Danila Kisa 11" userType ="0"></user>
+  <user name ="Milan" surname ="Milanovic" password ="milan111" username ="milance" gender ="1" address ="Ante Bogicevica 84" userType ="1"></user>
+</users>

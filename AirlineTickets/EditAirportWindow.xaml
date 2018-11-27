@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="Airport" Height="360" Width="365" Background="#FFEAE3E3">
+        Title="Airport Edit Window" Height="360" Width="365" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="160*"/>
@@ -14,9 +14,9 @@
         <Label Name ="LblCity" Content="City" HorizontalAlignment="Left" Margin="48,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.447,0.423" Grid.Row="1" Width="86" Height="28"/>
         <Label Name ="LblAirportID" Content="Airport ID" HorizontalAlignment="Left" Margin="48,40,0,0" RenderTransformOrigin="-2.447,0.423" Width="86" Height="35" VerticalAlignment="Top"/>
         <Label Name ="LblName" Content="Name" HorizontalAlignment="Left" Margin="48,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.447,0.423" Width="86" Height="28"/>
-        <TextBox Name ="TxtAirportID" HorizontalAlignment="Left" Height="40" Margin="162,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
-        <TextBox Name ="TxtName" HorizontalAlignment="Left" Height="40" Margin="162,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129" Grid.RowSpan="2"/>
-        <TextBox Name ="TxtCity" HorizontalAlignment="Left" Height="39" Margin="162,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129" Grid.Row="1"/>
+        <TextBox Name ="TxtAirportID" HorizontalAlignment="Left" Height="40" Margin="162,40,0,0" TextWrapping="Wrap" Text="{Binding Path=AirportID}" VerticalAlignment="Top" Width="129"/>
+        <TextBox Name ="TxtName" HorizontalAlignment="Left" Height="40" Margin="162,96,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" VerticalAlignment="Top" Width="129" Grid.RowSpan="2"/>
+        <TextBox Name ="TxtCity" HorizontalAlignment="Left" Height="39" Margin="162,27,0,0" TextWrapping="Wrap" Text="{Binding Path=City}" VerticalAlignment="Top" Width="129" Grid.Row="1"/>
         <Button Name ="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="209,126,0,0" Grid.Row="1" VerticalAlignment="Top" Width="82" RenderTransformOrigin="-0.32,0.15" Height="34" Click="BtnSave_Click"/>
         <Button Name ="BtnDiscard" Content="Discard" Background ="DarkGray" HorizontalAlignment="Left" Margin="48,126,0,0" Grid.Row="1" VerticalAlignment="Top" Width="86" Height="34" Click="BtnDiscard_Click"/>
 

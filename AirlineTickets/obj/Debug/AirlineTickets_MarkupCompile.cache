@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Documents\Platforme za objektno programiranje\Vezbe\PrvaApp\AirlineTickets\obj\Debug\
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\
 AirlineTickets
 none
 false
 DEBUG;TRACE
-D:\Documents\Platforme za objektno programiranje\Vezbe\PrvaApp\AirlineTickets\App.xaml
-3-961897956
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\App.xaml
+10-1968524505
 
-13681732870
-131569487696
-AirportWindow.xaml;EditAirportWindow.xaml;MainWindow.xaml;
+251750680319
+14-1027544066
+AddFlightWindow.xaml;AircompanyWindow.xaml;AirportWindow.xaml;EditAircompanyWindow.xaml;EditAirportWindow.xaml;EditFlightsWindow.xaml;FlightsWindow.xaml;MainWindow.xaml;UserEditWindow.xaml;UserWindow.xaml;
 
 False
 

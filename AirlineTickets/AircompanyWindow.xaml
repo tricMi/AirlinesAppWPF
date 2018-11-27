@@ -1,0 +1,16 @@
+﻿<Window x:Class="AirlineTickets.AircompanyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        mc:Ignorable="d"
+        Title="Aircompany" Height="393" Width="735" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid AutoGenerateColumns = "True" Name="DGAircompany" HorizontalAlignment="Left" Height="265" Margin="31,68,0,0" VerticalAlignment="Top" Width="666" AutoGeneratingColumn="DGAircompany_AutoGeneratingColumn" />
+        <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="31,20,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Click="BtnDelete_Click"/>
+        <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="145,20,0,0" VerticalAlignment="Top" Width="87" Height="34" Click="BtnEdit_Click"/>
+        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="259,20,0,0" VerticalAlignment="Top" Width="87" Height="34" Click="BtnAdd_Click"/>
+
+    </Grid>
+</Window>

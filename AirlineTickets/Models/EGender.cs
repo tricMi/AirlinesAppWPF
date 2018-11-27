@@ -8,7 +8,9 @@ namespace AirlineTickets.Models
 {
     public enum EGender
     {
-        M,
-        F
+        MALE,
+        FEMALE
     }
+
+    
 }

@@ -2,6 +2,8 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +13,26 @@ namespace AirlineTickets.Database
 {
     class Data
     {
-       // public List<Korisnik> Korisnici { get; set; }
-        public List<Airport> Airports { get; set; }
-        //public List<Let> Letovi { get; set; }
+        public ObservableCollection<User> Users { get; set; }
+        public ObservableCollection<Airport> Airports { get; set; }
+        public ObservableCollection<Flight> Flights { get; set; }
+        public ObservableCollection<Aircompany> Aircompanies { get; set; }
+        public ObservableCollection<Seats> Seats { get; set; }
 
         public String LoggedUser { get; set; }
+
         private Data()
         {
             LoggedUser = String.Empty;
-         //   Korisnici = new List<Korisnik>();
-            Airports = new List<Airport>();
+            Users = new ObservableCollection<User>();
+            Airports = new ObservableCollection<Airport>();
+            Flights = new ObservableCollection<Flight>();
+            Aircompanies = new ObservableCollection<Aircompany>();
+            Seats = new ObservableCollection<Seats>();
             LoadAllAirports();
-         //   Letovi = new List<Let>();
+            LoadAllFlights();
+            LoadAllUsers();
+            LoadAllAircompanies();
         }
 
         private static Data _instance = null;
@@ -82,35 +92,109 @@ namespace AirlineTickets.Database
             writer.Close();
         }
 
-        /*
-        public void UcitajSveKorisnike()
+        public void LoadAllFlights()
         {
-            XmlReader reader = XmlReader.Create("..//..//Data//Korisnici.xml");
-
-            while (reader.Read())
+            Flights.Add(new Flight
             {
-                if (reader.NodeType.Equals(XmlNodeType.Element) && reader.Name.Equals("korisnik"))
-                {
-                    var korisnik = new Korisnik
-                    {
-                        Ime = reader.GetAttribute("ime"),
-                        Prezime = reader.GetAttribute("prezime"),
-                        Lozinka = reader.GetAttribute("lozinka"),
-                        KorisnickoIme = reader.GetAttribute("korisnickoIme"),
-                        Pol = (reader.GetAttribute("pol").Equals("M") ? EPol.M : EPol.Z),
-                        Adresa = reader.GetAttribute("adresa"),
-                        TipKorisnika = (reader.GetAttribute("tipKorisnika");
-                        
-                    };
+                FlightNumber = "111",
+                DepartureTime = new DateTime(2018, 12, 2, 11, 10, 33),
+                ArrivalTime = new DateTime(2018, 12, 2, 15, 30, 11),
+                DeparturePlace = "Belgrade",
+                Destination = "Paris",
+                OneWayTicketPrice = 2500,
+                Active = false
+            });
 
-                    Korisnici.Add(korisnik);
-                }
-            }
+            Flights.Add(new Flight
+            {
+                FlightNumber = "222",
+                DepartureTime = new DateTime(2018, 10, 7, 09, 16, 37),
+                ArrivalTime = new DateTime(2018, 10, 7, 13, 38, 16),
+                DeparturePlace = "New York",
+                Destination = "Amsterdam",
+                OneWayTicketPrice = 5700,
+                Active = false
+            });
 
-            reader.Close();
+            Flights.Add(new Flight
+            {
+                FlightNumber = "333",
+                DepartureTime = new DateTime(2018, 1, 1, 19, 50, 00),
+                ArrivalTime = new DateTime(2018, 1, 1, 22, 40, 07),
+                DeparturePlace = "London",
+                Destination = "Belgrade",
+                OneWayTicketPrice = 3200,
+                Active = false
+            });
         }
 
-        */
+        public void LoadAllUsers()
+        {
+            Users.Add(new User
+            {
+                Name = "Petar",
+                Surname = "Petrovic",
+                Password = "pera123",
+                Username = "pera",
+                Gender = EGender.MALE,
+                Address = "Novi Sad 1",
+                UserType = EUserType.PASSENGER,
+                Active = false
+            });
+
+            Users.Add(new User
+            {
+                Name = "Mina",
+                Surname = "Minic",
+                Password = "minna",
+                Username = "mina",
+                Gender = EGender.FEMALE,
+                Address = "Paris 21",
+                UserType = EUserType.ADMIN,
+                Active = false
+            });
+
+            Users.Add(new User
+            {
+                Name = "Milan",
+                Surname = "Milanovic",
+                Password = "milance11",
+                Username = "milance",
+                Gender = EGender.MALE,
+                Address = "Belgrade 12",
+                UserType = EUserType.UNREGISTERED,
+                Active = false
+            });
+        }
+
+        //public ObservableCollection<Flight> F { get; set; }
+
+        public void LoadAllAircompanies()
+
+        {
+            Aircompany A = new Aircompany();
+            Flight F = new Flight();
+            F.FlightNumber = "111";
+            F.DepartureTime = new DateTime(2018, 1, 1, 19, 50, 00);
+            F.ArrivalTime = new DateTime(2018, 1, 1, 22, 40, 07);
+            F.DeparturePlace = "London";
+            F.Destination = "Belgrade";
+            F.OneWayTicketPrice = 3200;
+            A.CompanyPassword = "675";
+            A.FlightList.Add(F);
+            A.Active = false;
+            //Trace.WriteLine(F);
+            Aircompanies.Add(A);
+            
+        }
+
+
+        public void LoadAllSeats()
+        {
+
+        }
+        
+
     }
 }
 

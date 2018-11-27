@@ -1,0 +1,24 @@
+﻿<Window x:Class="AirlineTickets.EditAircompanyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        mc:Ignorable="d"
+        Title="Edit Aircompany Window" Height="449" Width="800" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="277*"/>
+            <ColumnDefinition Width="96*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="LblCompPass" Content="Company password" HorizontalAlignment="Left" Margin="28,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.658,0.462" Width="122" Height="37" FontWeight="Bold"/>
+        <Label x:Name="LblFlightList" Content="FlightList" HorizontalAlignment="Left" Margin="28,96,0,0" VerticalAlignment="Top" Width="80" Height="33" FontWeight="Bold"/>
+        <TextBox x:Name="TxtCompanyPass" HorizontalAlignment="Left" Height="37" Margin="166,44,0,0" Text="{Binding Path=CompanyPassword}" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
+        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="575,360,0,0" VerticalAlignment="Top" Width="96" Height="35" Click="BtnSave_Click" FontWeight="Bold" Grid.ColumnSpan="2" RenderTransformOrigin="0.542,-0.2"/>
+        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="28,360,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="BtnDiscard_Click" FontWeight="Bold" RenderTransformOrigin="-1.8,0.029"/>
+        <DataGrid Name ="DgFlights" HorizontalAlignment="Left" Height="200" Margin="28,134,0,0" VerticalAlignment="Top" Width="643" Grid.ColumnSpan="2"/>
+        <Button x:Name="BtnAddFlight" Content="Add Flight" Background="AntiqueWhite" Grid.Column="1" HorizontalAlignment="Left" Margin="99,134,0,0" VerticalAlignment="Top" Width="87" Height="34" RenderTransformOrigin="0.276,0.559" Click="BtnAddFlight_Click"/>
+        <Button x:Name="BtnDelFlight" Content="DeleteFlight" Background="Azure" Grid.Column="1" HorizontalAlignment="Left" Margin="99,183,0,0" VerticalAlignment="Top" Width="87" Height="35" RenderTransformOrigin="0.77,0.486" Click="BtnDelFlight_Click"/>
+
+    </Grid>
+</Window>

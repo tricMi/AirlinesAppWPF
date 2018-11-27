@@ -1,29 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlineTickets.Models
 {
-    public class Airport
+    public class Airport : INotifyPropertyChanged, ICloneable
+
     {
-        public String AirportID { get; set; }
-        public String Name { get; set; }
-        public String City { get; set; }
+        private String airportID;
 
-        public Boolean Active { get; set; }
-
-        public Airport()
+        public String AirportID
         {
-
+            get { return airportID; }
+            set { airportID = value; OnPropertyChanged("AirportID"); }
         }
 
-        public Airport(String AirportID, String Name, String City)
+        private String name;
+
+        public String Name
         {
-            this.AirportID = AirportID;
-            this.Name = Name;
-            this.City = City;
+            get { return name; }
+            set { name = value; OnPropertyChanged("Name"); }
+        }
+
+        private String city;
+
+        public String City
+        {
+            get { return city; }
+            set { city = value; OnPropertyChanged("City"); }
+        }
+
+        private bool active;
+
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; OnPropertyChanged("Active"); }
+        }
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(String name)
+        {
+            
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public object Clone()
+        {
+            Airport newAirport = new Airport
+            {
+                AirportID = this.AirportID,
+                Name = this.Name,
+                City = this.City,
+                Active = this.Active
+
+            };
+
+            return newAirport;
         }
 
 
