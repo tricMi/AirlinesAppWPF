@@ -58,31 +58,66 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAirplane.xaml.cs">
+      <DependentUpon>AddAirplane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddFlightWindow.xaml.cs">
       <DependentUpon>AddFlightWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="AircompanyWindow.xaml.cs">
       <DependentUpon>AircompanyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AirplaneWindow.xaml.cs">
+      <DependentUpon>AirplaneWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditAircompanyWindow.xaml.cs">
       <DependentUpon>EditAircompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditAirplaneWindow.xaml.cs">
+      <DependentUpon>EditAirplaneWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditSeatsWindow.xaml.cs">
+      <DependentUpon>EditSeatsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditSeatWindow.xaml.cs">
+      <DependentUpon>EditSeatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditTicketsWindow.xaml.cs">
+      <DependentUpon>EditTicketsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Aircompany.cs" />
     <Compile Include="Models\Airplane.cs" />
     <Compile Include="Models\Seat.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\Tickets.cs" />
+    <Compile Include="PickSeatWindow.xaml.cs">
+      <DependentUpon>PickSeatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SeatsWindow.xaml.cs">
+      <DependentUpon>SeatsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TicketsWindow.xaml.cs">
+      <DependentUpon>TicketsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserEditWindow.xaml.cs">
       <DependentUpon>UserEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddAirplane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddFlightWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AircompanyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AirplaneWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,11 +129,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditAirplaneWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditAirportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditFlightsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditSeatsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditSeatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditTicketsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,6 +182,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PickSeatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SeatsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TicketsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

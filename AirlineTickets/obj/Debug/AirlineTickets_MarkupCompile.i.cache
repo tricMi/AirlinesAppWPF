@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\App.xaml
-10-1968524505
+192142460713
 
-291387462488
+38934478862
 14-1027544066
-AddFlightWindow.xaml;AircompanyWindow.xaml;AirportWindow.xaml;EditAircompanyWindow.xaml;EditAirportWindow.xaml;EditFlightsWindow.xaml;FlightsWindow.xaml;MainWindow.xaml;UserEditWindow.xaml;UserWindow.xaml;
+AddAirplane.xaml;AddFlightWindow.xaml;AircompanyWindow.xaml;AirplaneWindow.xaml;AirportWindow.xaml;EditAircompanyWindow.xaml;EditAirplaneWindow.xaml;EditAirportWindow.xaml;EditFlightsWindow.xaml;EditSeatsWindow.xaml;EditSeatWindow.xaml;EditTicketsWindow.xaml;FlightsWindow.xaml;MainWindow.xaml;PickSeatWindow.xaml;SeatsWindow.xaml;TicketsWindow.xaml;UserEditWindow.xaml;UserWindow.xaml;
 
 False
 

@@ -7,29 +7,54 @@ using System.Threading.Tasks;
 
 namespace AirlineTickets.Models
 {
-    class Seat : INotifyPropertyChanged, ICloneable
+    public class Seat : INotifyPropertyChanged, ICloneable
     {
-        private int rowNum;
+        public enum EClass {BUSINESS, ECONOMY}
 
-        public int RowNum
+        private String seatLabel;
+
+        public String SeatLabel
         {
-            get { return rowNum; }
-            set { rowNum = value; OnPropertyChanged("RowNum"); }
+            get { return seatLabel; }
+            set { seatLabel = value; }
         }
 
-        private String columnNum;
+        private bool seatState;
 
-        public String ColumnNum
+        public bool SeatState
         {
-            get { return columnNum; }
-            set { columnNum = value; OnPropertyChanged("ColumnNum"); }
+            get { return seatState; }
+            set { seatState = value; }
+        }
+
+        private EClass seatClass;
+
+        public EClass SeatClass
+        {
+            get { return seatClass; }
+            set { seatClass = value; }
+        }
+
+        private bool active;
+
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; OnPropertyChanged("Active"); }
+        }
+
+        public Seat() { }
+
+        public Seat(String seatLabel)
+        {
+            seatLabel = SeatLabel;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(String name)
         {
-            
+
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
@@ -40,15 +65,17 @@ namespace AirlineTickets.Models
         {
             Seat newSeat = new Seat
             {
-                RowNum = this.RowNum,
-                ColumnNum = this.ColumnNum
+                SeatLabel = this.SeatLabel,
+                SeatState = this.SeatState,
+                SeatClass = this.SeatClass,
+                Active = this.Active
             };
             return newSeat;
         }
 
         public override string ToString()
         {
-            return $"Row number: {RowNum} Column number: {ColumnNum}";
+            return "Sediste " + SeatLabel + " Klasa " + SeatClass;
         }
 
     }

@@ -8,26 +8,17 @@ using System.Threading.Tasks;
 
 namespace AirlineTickets.Models
 {
-    class Seats : INotifyPropertyChanged, ICloneable
+    public class Seats : INotifyPropertyChanged, ICloneable
 
     {
-        public enum ESeatClass { BUSINESS, ECONOMY}
+        private ObservableCollection<Seat> allSeats;
 
-        private ObservableCollection<Seat> availableSeats;
-
-        public ObservableCollection<Seat> AvailableSeats
+        public ObservableCollection<Seat> AllSeats
         {
-            get { return availableSeats; }
-            set { availableSeats = value; OnPropertyChanged("AvailableSeats"); }
+            get { return allSeats; }
+            set { allSeats = value; }
         }
 
-        private ObservableCollection<Seat> takenSeats;
-
-        public ObservableCollection<Seat> TakenSeats
-        {
-            get { return takenSeats; }
-            set { takenSeats = value; OnPropertyChanged("TakenSeats"); }
-        }
 
         private bool active;
 
@@ -52,11 +43,16 @@ namespace AirlineTickets.Models
         {
             Seats newSeats = new Seats
             {
-                AvailableSeats = this.AvailableSeats,
-                TakenSeats = this.TakenSeats,
+                AllSeats = this.AllSeats,
                 Active = this.Active
             };
             return newSeats;
+        }
+
+        public override string ToString()
+        {
+            return "Seat"+  AllSeats.ToString();
+
         }
     }
 }

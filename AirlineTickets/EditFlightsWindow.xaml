@@ -17,7 +17,7 @@
         <TextBox Name ="tbFlightNum"  HorizontalAlignment="Left" Height="39" TextWrapping="Wrap" Text="{Binding Path=FlightNumber}" VerticalAlignment="Top" Width="132" Margin="201,24,0,0"/>
         <TextBox Name ="tbOneWayTicketPrice" HorizontalAlignment="Left" Height="39" Margin="201,306,0,0" TextWrapping="Wrap" Text="{Binding Path=OneWayTicketPrice}" VerticalAlignment="Top" Width="132"/>
         <ComboBox Name="CbDepPlace" HorizontalAlignment="Left" Margin="201,200,0,0" SelectedItem="{Binding Path=DeparturePlace}" VerticalAlignment="Top" Width="132" Height="29"/>
-        <ComboBox Name ="CbDestination" HorizontalAlignment="Left" Margin="201,259,0,0" SelectedItem="{Binding Path=ArrivalPlace}" VerticalAlignment="Top" Width="132" Height="27"/>
+        <ComboBox Name ="CbDestination" HorizontalAlignment="Left" Margin="201,259,0,0" SelectedItem="{Binding Path=Destination}" VerticalAlignment="Top" Width="132" Height="27"/>
         <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="38,375,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnDiscard_Click"/>
         <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="217,375,0,0" VerticalAlignment="Top" Width="116" Height="35" Click="BtnSave_Click"/>
         <xctk:DateTimePicker HorizontalAlignment="Left" Margin="201,84,0,0" Value="{Binding Path =DepartureTime}"  VerticalAlignment="Top" Width="132" Height="32"/>

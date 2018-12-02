@@ -33,8 +33,8 @@ namespace AirlineTickets
 
             this.DataContext = flight;
 
-            CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a.AirportID);
-            CbDestination.ItemsSource = Data.Instance.Airports.Select(a => a.AirportID);
+            CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a.City);
+            CbDestination.ItemsSource = Data.Instance.Airports.Select(b => b.City);
 
             if(option.Equals(Option.EDIT))
             {

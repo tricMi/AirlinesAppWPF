@@ -25,7 +25,7 @@ namespace AirlineTickets
         User user;
         Option option;
 
-        public UserEditWindow(User user, Option option)
+        public UserEditWindow(User user, Option option = Option.ADDING)
         {
             InitializeComponent();
             this.user = user;
@@ -35,13 +35,18 @@ namespace AirlineTickets
             CbUserType.ItemsSource = Enum.GetValues(typeof(EUserType));
 
             this.DataContext = user;
+
+            if(option.Equals(Option.EDIT))
+            {
+                txtUsername.IsEnabled = false;
+            }
             
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            if(option.Equals(Option.ADDING) && !userExists(user.Username))
+            if(option.Equals(Option.ADDING) && !userExists(user.Name))
             {
                 Data.Instance.Users.Add(user);
             }
@@ -53,9 +58,9 @@ namespace AirlineTickets
             this.DialogResult = false;
         }
 
-        private bool userExists(string username)
+        private bool userExists(string name)
         {
-            return Data.Instance.Users.ToList().Find(a => a.Username.Equals(username)) != null ? true : false;
+            return Data.Instance.Users.ToList().Find(a => a.Name.Equals(name)) != null ? true : false;
         }
     }
 }

@@ -1,0 +1,25 @@
+﻿<Window x:Class="AirlineTickets.EditSeatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        mc:Ignorable="d"
+        Title="EditSeatWindow" Height="413" Width="355" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="319*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="28*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="LblSeatlbl" Content="Seat Label" HorizontalAlignment="Left" Margin="44,39,0,0" VerticalAlignment="Top" Width="91" Height="34"/>
+        <Label x:Name="LblSeatState" Content="Seat State" HorizontalAlignment="Left" Margin="44,120,0,0" VerticalAlignment="Top" Width="91" Height="30"/>
+        <Label x:Name="LblSeatClass" Content="Seat Class" HorizontalAlignment="Left" Margin="44,207,0,0" VerticalAlignment="Top" Width="91" Height="32"/>
+        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="44,306,0,0" VerticalAlignment="Top" Width="102" Height="32" Click="BtnDiscard_Click"/>
+        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="195,306,0,0" VerticalAlignment="Top" Width="102" Height="32" Click="BtnSave_Click"/>
+        <TextBox x:Name="TxtSeatLabel" HorizontalAlignment="Left" Height="34" Margin="162,39,0,0" TextWrapping="Wrap" Text="{Binding Path=SeatLabel}" VerticalAlignment="Top" Width="135"/>
+        <TextBox x:Name="TxtSeatState" HorizontalAlignment="Left" Height="30" Margin="162,120,0,0" TextWrapping="Wrap" Text ="{Binding Path=SeatState}" VerticalAlignment="Top" Width="135"/>
+        <ComboBox x:Name="CbSeatCls" HorizontalAlignment="Left" Margin="162,212,0,0" SelectedItem ="{Binding Path=SeatClass}" VerticalAlignment="Top" Width="135" Height="27"/>
+
+    </Grid>
+</Window>

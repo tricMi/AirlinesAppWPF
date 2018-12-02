@@ -40,7 +40,7 @@
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>
         </Button>
-        <Button Name ="BtnSeats" Content="Seats" Foreground ="White" HorizontalAlignment="Left" Margin="0,216,0,0" VerticalAlignment="Top" Width="198" Height="38">
+        <Button Name ="BtnSeats" Content="Seats" Foreground ="White" HorizontalAlignment="Left" Margin="0,216,0,0" VerticalAlignment="Top" Width="198" Height="38" Click="BtnSeats_Click">
             <Button.Background>
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>
@@ -50,12 +50,12 @@
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>
         </Button>
-        <Button Name ="BtnAirplane" Content="Airplane" Foreground ="White" HorizontalAlignment="Left" Margin="0,292,0,0" VerticalAlignment="Top" Width="198" Height="38">
+        <Button Name ="BtnAirplane" Content="Airplane" Foreground ="White" HorizontalAlignment="Left" Margin="0,292,0,0" VerticalAlignment="Top" Width="198" Height="38" Click="BtnAirplane_Click">
             <Button.Background>
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>
         </Button>
-        <Button Name="BtnTickets" Content="Tickets" Foreground ="White" HorizontalAlignment="Left" Margin="0,330,0,0" VerticalAlignment="Top" Width="198" Height="38">
+        <Button Name="BtnTickets" Content="Tickets" Foreground ="White" HorizontalAlignment="Left" Margin="0,330,0,0" VerticalAlignment="Top" Width="198" Height="38" Click="BtnTickets_Click">
             <Button.Background>
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>

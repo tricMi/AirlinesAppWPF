@@ -1,6 +1,7 @@
 ﻿using AirlineTickets.Database;
 using AirlineTickets.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace AirlineTickets
         public enum Option { ADDING, EDIT}
         Aircompany aircompany;
         Option option;
-      
+        ICollection view;
         
 
         public EditAircompanyWindow(Aircompany aircompany, Option option = Option.ADDING)
@@ -34,8 +35,9 @@ namespace AirlineTickets
             this.option = option;
 
             this.DataContext = aircompany;
-
+            
             DgFlights.ItemsSource = aircompany.FlightList;
+            DgFlights.IsReadOnly = true;
 
             if(option.Equals(Option.EDIT))
             {
@@ -62,7 +64,7 @@ namespace AirlineTickets
         private void BtnAddFlight_Click(object sender, RoutedEventArgs e)
         {
             AddFlightWindow af = new AddFlightWindow();
-            if(af.ShowDialog() ==true)
+            if(af.ShowDialog() == true)
             {
                 aircompany.FlightList.Add(af.Flight);
             }
@@ -70,8 +72,8 @@ namespace AirlineTickets
 
         private void BtnDelFlight_Click(object sender, RoutedEventArgs e)
         {
-            //aircompany.FlightList.Remove(DgFlights.ItemsSource as Flight);
-            
+            aircompany.FlightList.Remove(DgFlights.SelectedItem as Flight);
+
         }
 
         private bool aircompanyExists(string companyPassword)

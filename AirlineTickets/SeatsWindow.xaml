@@ -1,0 +1,14 @@
+﻿<Window x:Class="AirlineTickets.SeatsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        mc:Ignorable="d"
+        Title="Seats Window" Height="323" Width="468" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid Name ="DGSeats" GridLinesVisibility="None"  HorizontalAlignment="Left" Height="190" Margin="23,65,0,0" VerticalAlignment="Top" Width="404" AutoGeneratingColumn="DGSeats_AutoGeneratingColumn"/>
+        <Button x:Name="BtnShow" Background ="DarkGray" Content="Show Seats" HorizontalAlignment="Left" Margin="174,19,0,0" VerticalAlignment="Top" Width="75" Height="32" Click="BtnShow_Click"/>
+
+    </Grid>
+</Window>

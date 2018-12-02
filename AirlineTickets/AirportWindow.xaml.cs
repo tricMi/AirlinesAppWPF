@@ -113,7 +113,7 @@ namespace AirlineTickets
 
         private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
         {
-
+            view.Refresh();
         }
     }
 }

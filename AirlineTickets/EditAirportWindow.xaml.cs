@@ -26,7 +26,7 @@ namespace AirlineTickets
         Airport airport;
         Option option;
 
-        public EditAirportWindow(Airport airport, Option option)
+        public EditAirportWindow(Airport airport, Option option = Option.ADDING)
         {
             InitializeComponent();
             this.airport = airport;

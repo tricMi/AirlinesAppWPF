@@ -7,39 +7,32 @@ using System.Threading.Tasks;
 
 namespace AirlineTickets.Models
 {
-    class Tickets : INotifyPropertyChanged, ICloneable
+    public class Tickets : INotifyPropertyChanged, ICloneable
     {
-        private Flight flightNum;
+        private String flightNum;
 
-        public Flight FlightNum
+        public String FlightNum
         {
             get { return flightNum; }
             set { flightNum = value; OnPropertyChanged("FlightNum"); }
         }
 
-        private Seats seatNum;
+        private Seat seatNum;
 
-        public Seats SeatNum
+        public Seat SeatNum
         {
             get { return seatNum; }
             set { seatNum = value; OnPropertyChanged("SeatNum"); }
         }
 
-        private User currentUser;
+        private String currentUser;
 
-        public User CurrentUser
+        public String CurrentUser
         {
             get { return currentUser; }
             set { currentUser = value; OnPropertyChanged("CurrentUser"); }
         }
 
-        private Airplane seatClass;
-
-        public Airplane SeatClass
-        {
-            get { return seatClass; }
-            set { seatClass = value; OnPropertyChanged("SeatClass"); }
-        }
 
         private string gate;
 
@@ -83,7 +76,6 @@ namespace AirlineTickets.Models
                 FlightNum = this.FlightNum,
                 SeatNum = this.SeatNum,
                 CurrentUser = this.CurrentUser,
-                SeatClass = this.SeatClass,
                 Gate = this.Gate,
                 TicketPrice = this.TicketPrice,
                 Active = this.Active

@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace AirlineTickets.Models
 {
-    class Airplane : INotifyPropertyChanged, ICloneable
+    public class Airplane : INotifyPropertyChanged, ICloneable
     {
         private string pilot;
 
         public string Pilot
         {
-            get { return Pilot; }
-            set { Pilot = value; OnPropertyChanged("Pilot"); }
+            get { return pilot; }
+            set { pilot = value; OnPropertyChanged("Pilot"); }
         }
 
-        private Flight flightNum;
+        private String flightNum;
 
-        public Flight FlightNum
+        public String FlightNum
         {
             get { return flightNum; }
             set { flightNum = value; OnPropertyChanged("FlightNum"); }

@@ -1,0 +1,25 @@
+﻿<Window x:Class="AirlineTickets.EditTicketsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        mc:Ignorable="d"
+        Title="Tickets Window" Height="450" Width="422" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label x:Name="LblFnum" Content="Flight Number" HorizontalAlignment="Left" Margin="27,34,0,0" VerticalAlignment="Top" Width="89" Height="31"/>
+        <Label x:Name="LblSeat" Content="Seat" HorizontalAlignment="Left" Margin="27,105,0,0" VerticalAlignment="Top" Width="89" Height="31"/>
+        <Label x:Name="LblUser" Content="User" HorizontalAlignment="Left" Margin="27,175,0,0" VerticalAlignment="Top" Width="89" Height="30"/>
+        <Label x:Name="LblGate" Content="Gate" HorizontalAlignment="Left" Margin="27,243,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.763,0" Width="89" Height="31"/>
+        <Label x:Name="LblPrice" Content="Price" HorizontalAlignment="Left" Margin="27,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.658,1.462" Width="89" Height="31"/>
+        <Button x:Name="BtnDiscard" Background="DarkGray" Content="Discard" HorizontalAlignment="Left" Margin="27,371,0,0" VerticalAlignment="Top" Width="89" Height="29" Click="BtnDiscard_Click"/>
+        <Button x:Name="BtnSave"  Background ="IndianRed" Content="Save" HorizontalAlignment="Left" Margin="294,371,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="BtnSave_Click"/>
+        <ComboBox x:Name="CbFlNum" SelectedItem="{Binding Path=FlightNum}" HorizontalAlignment="Left" Margin="161,34,0,0" VerticalAlignment="Top" Width="204" Height="31"/>
+        <Button x:Name="BtnPickSeat" Content="Pick a seat" HorizontalAlignment="Left" Margin="227,123,0,0" VerticalAlignment="Top" Width="71" Height="31" Click="BtnPickSeat_Click" RenderTransformOrigin="0.732,0.194"/>
+        <ComboBox x:Name="CbUser" SelectedItem="{Binding Path=CurrentUser}" HorizontalAlignment="Left" Margin="161,175,0,0" VerticalAlignment="Top" Width="204" Height="32"/>
+        <TextBox x:Name="TxtGate" Text="{Binding Path=Gate}" HorizontalAlignment="Left" Height="31" Margin="161,243,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"/>
+        <TextBox x:Name="TxtPrice" Text="{Binding Path=TicketPrice}" HorizontalAlignment="Left" Height="30" Margin="161,314,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204"/>
+        <TextBox x:Name ="TxtSeat" HorizontalAlignment="Left" Height="28" Margin="161,90,0,0" TextWrapping="Wrap" Text="{Binding Path=SeatNum, Mode=OneWay}" VerticalAlignment="Top" Width="204" IsReadOnly="True"/>
+
+    </Grid>
+</Window>

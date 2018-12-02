@@ -48,5 +48,23 @@ namespace AirlineTickets
             AircompanyWindow arw = new AircompanyWindow();
             arw.ShowDialog();
         }
+
+        private void BtnSeats_Click(object sender, RoutedEventArgs e)
+        {
+            SeatsWindow sw = new SeatsWindow();
+            sw.ShowDialog();
+        }
+
+        private void BtnAirplane_Click(object sender, RoutedEventArgs e)
+        {
+            AirplaneWindow apw = new AirplaneWindow();
+            apw.ShowDialog();
+        }
+
+        private void BtnTickets_Click(object sender, RoutedEventArgs e)
+        {
+            TicketsWindow tw = new TicketsWindow();
+            tw.ShowDialog();
+        }
     }
 }

@@ -16,7 +16,7 @@
         <TextBox x:Name="TxtCompanyPass" HorizontalAlignment="Left" Height="37" Margin="166,44,0,0" Text="{Binding Path=CompanyPassword}" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
         <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="575,360,0,0" VerticalAlignment="Top" Width="96" Height="35" Click="BtnSave_Click" FontWeight="Bold" Grid.ColumnSpan="2" RenderTransformOrigin="0.542,-0.2"/>
         <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="28,360,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="BtnDiscard_Click" FontWeight="Bold" RenderTransformOrigin="-1.8,0.029"/>
-        <DataGrid Name ="DgFlights" HorizontalAlignment="Left" Height="200" Margin="28,134,0,0" VerticalAlignment="Top" Width="643" Grid.ColumnSpan="2"/>
+        <DataGrid Name ="DgFlights" CanUserAddRows="False" GridLinesVisibility="None" HorizontalAlignment="Left" Height="200" Margin="28,134,0,0" VerticalAlignment="Top" Width="643" Grid.ColumnSpan="2"/>
         <Button x:Name="BtnAddFlight" Content="Add Flight" Background="AntiqueWhite" Grid.Column="1" HorizontalAlignment="Left" Margin="99,134,0,0" VerticalAlignment="Top" Width="87" Height="34" RenderTransformOrigin="0.276,0.559" Click="BtnAddFlight_Click"/>
         <Button x:Name="BtnDelFlight" Content="DeleteFlight" Background="Azure" Grid.Column="1" HorizontalAlignment="Left" Margin="99,183,0,0" VerticalAlignment="Top" Width="87" Height="35" RenderTransformOrigin="0.77,0.486" Click="BtnDelFlight_Click"/>
 

@@ -11,7 +11,7 @@
             <ColumnDefinition Width="520*"/>
             <ColumnDefinition Width="207*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Name ="DGUser" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="666" Grid.ColumnSpan="2"/>
+        <DataGrid Name ="DGUser" GridLinesVisibility="None" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="666" Grid.ColumnSpan="2"/>
         <Button Name ="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="27,23,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Click="BtnDelete_Click"/>
         <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="154,23,0,0" VerticalAlignment="Top" Width="85" Height="34" Click="BtnEdit_Click"/>
         <Button Name ="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="277,23,0,0" VerticalAlignment="Top" Width="88" Height="34" Click="BtnAdd_Click"/>

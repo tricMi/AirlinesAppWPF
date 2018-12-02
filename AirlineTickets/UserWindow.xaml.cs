@@ -63,9 +63,9 @@ namespace AirlineTickets
             {
                 User oldUser = selectedUser.Clone() as User;
                 UserEditWindow uew = new UserEditWindow(selectedUser, UserEditWindow.Option.EDIT);
-                if(uew.ShowDialog() != null)
+                if(uew.ShowDialog() != true)
                     {
-                        int index = IndexOfSelectedUser(selectedUser.Username);
+                        int index = IndexOfSelectedUser(selectedUser.Name);
                         Data.Instance.Users[index] = oldUser;
                     }
             }
@@ -77,12 +77,12 @@ namespace AirlineTickets
             uew.ShowDialog();
         }
 
-        private int IndexOfSelectedUser(String username)
+        private int IndexOfSelectedUser(String name)
         {
             var index = -1;
             for (int i = 0; i < Data.Instance.Users.Count; i++)
             {
-                if (Data.Instance.Users[i].Username.Equals(username))
+                if (Data.Instance.Users[i].Name.Equals(name))
                 {
                     index = i;
                     break;
