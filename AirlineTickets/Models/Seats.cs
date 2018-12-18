@@ -11,6 +11,8 @@ namespace AirlineTickets.Models
     public class Seats : INotifyPropertyChanged, ICloneable
 
     {
+        public int Id { get; set; }
+
         private ObservableCollection<Seat> allSeats;
 
         public ObservableCollection<Seat> AllSeats
@@ -43,6 +45,7 @@ namespace AirlineTickets.Models
         {
             Seats newSeats = new Seats
             {
+                Id = this.Id,
                 AllSeats = this.AllSeats,
                 Active = this.Active
             };

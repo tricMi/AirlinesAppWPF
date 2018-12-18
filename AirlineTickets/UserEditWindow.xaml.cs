@@ -48,7 +48,7 @@ namespace AirlineTickets
             this.DialogResult = true;
             if(option.Equals(Option.ADDING) && !userExists(user.Name))
             {
-                Data.Instance.Users.Add(user);
+                user.SaveUsers();
             }
 
         }

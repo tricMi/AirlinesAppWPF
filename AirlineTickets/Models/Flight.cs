@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,9 @@ namespace AirlineTickets.Models
 {
     public class Flight : INotifyPropertyChanged, ICloneable
     {
+        public const String CONNECTION_STRING = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=AirlineApp;Integrated Security=true";
+
+        public int Id { get; set; }
 
         private String flightNumber;
 
@@ -89,6 +93,7 @@ namespace AirlineTickets.Models
         {
             Flight newFlight = new Flight
             {
+                Id = this.Id,
                 FlightNumber = this.FlightNumber,
                 DepartureTime = this.DepartureTime,
                 ArrivalTime = this.ArrivalTime,
@@ -107,6 +112,61 @@ namespace AirlineTickets.Models
             return "Flight number: " + FlightNumber + " Departure time: " + DepartureTime + " Arrival time "
                 + ArrivalTime + " Destination place: " + DeparturePlace + " Destination: "
                 + Destination + " Ticket price: " + OneWayTicketPrice; 
+        }
+
+        public void SaveFlights()
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"INSERT INTO Flight( FlightNumber, DepartureTime, ArrivalTime, DeparturePlace, Destination, OneWayTicketPrice, Active)" +
+               " VALUES (@FlightNumber, @DepartureTime, @ArrivalTime, @DeparturePlace, @Destination, @OneWayTicketPrice, @Active)";
+
+
+
+                command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
+                command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
+                command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
+                command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace));
+                command.Parameters.Add(new SqlParameter("@Destination", this.Destination));
+                command.Parameters.Add(new SqlParameter("@OneWayTicketPrice", this.OneWayTicketPrice));
+                command.Parameters.Add(new SqlParameter("@Active", false));
+
+                command.ExecuteNonQuery();
+
+            }
+
+            Database.Data.Instance.LoadFlights();
+        }
+
+        public void ChangeFlight()
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"UPDATE Flight SET FlightNumber = @FlightNumber, DepartureTime= @DepartureTime, ArrivalTime = @ArrivalTime,DeparturePlace = @DeparturePlace,Destination = @Destination,OneWayTicketPrice = @OneWayTicketPrice, Active = @Active WHERE @Id = Id";
+
+
+                command.Parameters.Add(new SqlParameter("@Id", this.Id));
+                command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
+                command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
+                command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
+                command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace));
+                command.Parameters.Add(new SqlParameter("@Destination", this.Destination));
+                command.Parameters.Add(new SqlParameter("@OneWayTicketPrice", this.OneWayTicketPrice));
+                command.Parameters.Add(new SqlParameter("@Active", this.Active));
+
+                command.ExecuteNonQuery();
+
+            }
+
+            Database.Data.Instance.LoadFlights();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace AirlineTickets.Models
     {
         public enum EClass {BUSINESS, ECONOMY}
 
+        public int Id { get; set; }
+
         private String seatLabel;
 
         public String SeatLabel
@@ -65,6 +67,7 @@ namespace AirlineTickets.Models
         {
             Seat newSeat = new Seat
             {
+                Id = this.Id,
                 SeatLabel = this.SeatLabel,
                 SeatState = this.SeatState,
                 SeatClass = this.SeatClass,

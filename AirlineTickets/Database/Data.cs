@@ -3,6 +3,8 @@ using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -25,6 +27,7 @@ namespace AirlineTickets.Database
         public ObservableCollection<Seat> SeatE { get; set; }
         public ObservableCollection<Tickets> Tickets { get; set; }
 
+        public const String CONNECTION_STRING = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=AirlineApp;Integrated Security=true";
         public String LoggedUser { get; set; }
 
         private Data()
@@ -40,20 +43,23 @@ namespace AirlineTickets.Database
             SeatE = new ObservableCollection<Seat>();
             Airplanes = new ObservableCollection<Airplane>();
             Tickets = new ObservableCollection<Tickets>();
-            LoadAllAirports();
-            LoadAllFlights();
-            LoadAllUsers();
-            LoadAllAircompanies();
-            LoadSeat();
-            LoadAllSeats();
-            LoadAllAirplanes();
-            SeatsBusiness();
-            SeatsEconomy();
-            
+
+           // LoadAllFlights();
+
+            //LoadAllAircompanies();
+            //LoadSeat();
+            //LoadAllSeats();
+            //LoadAllAirplanes();
+            //SeatsBusiness();
+            //SeatsEconomy();
+
+            LoadAirport();
+            LoadUsers();
+            LoadFlights();
 
         }
 
-
+        
 
         private static Data _instance = null;
 
@@ -69,48 +75,110 @@ namespace AirlineTickets.Database
             }
         }
 
-
-
-        public void LoadAllAirports()
+        public void LoadUsers()
         {
-            XmlReader reader = XmlReader.Create("..//..//Data//Airports.xml");
-
-            while (reader.Read())
+            Users.Clear();
+            using (SqlConnection conn = new SqlConnection())
             {
-                if (reader.NodeType.Equals(XmlNodeType.Element) && reader.Name.Equals("airport"))
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM Users";
+
+                SqlDataAdapter daUser = new SqlDataAdapter();
+                DataSet dsUser = new DataSet();
+
+                daUser.SelectCommand = command;
+                daUser.Fill(dsUser, "User");
+
+                foreach(DataRow row in dsUser.Tables["User"].Rows)
                 {
-                    var airport = new Airport
-                    {
-                        AirportID = reader.GetAttribute("airportID"),
-                        Name = reader.GetAttribute("name"),
-                        City = reader.GetAttribute("city"),
-                        Active = false
-                    };
+                    User user = new User();
+
+                    user.Id = (int)row["Id"];
+                    user.Name = (string)row["Name"];
+                    user.Surname = (string)row["Surname"];
+                    user.Password = (string)row["Password"];
+                    user.Username = (string)row["Username"];
+                    user.Gender = (EGender)row["Gender"];
+                    user.Address = (string)row["Address"];
+                    user.UserType = (EUserType)row["UserType"];
+                    user.Active = (bool)row["Active"];
+
+                    Users.Add(user);
+                }
+            }
+        }
+
+        public void LoadAirport()
+        {
+            Airports.Clear();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM Airport";
+
+                SqlDataAdapter daAirport = new SqlDataAdapter();
+                DataSet dsAirport = new DataSet();
+
+                daAirport.SelectCommand = command;
+                daAirport.Fill(dsAirport, "Airports");
+
+                foreach (DataRow row in dsAirport.Tables["Airports"].Rows)
+                {
+                    Airport airport = new Airport();
+
+                    airport.Id = (int)row["Id"];
+                    airport.AirportID = (string)row["AirportID"];
+                    airport.Name = (string)row["Name"];
+                    airport.City = (string)row["City"];
+                    airport.Active = (bool)row["Active"];
 
                     Airports.Add(airport);
                 }
             }
-
-            reader.Close();
         }
 
-        public void SacuvajSveAerodrome()
+        public void LoadFlights()
         {
-            XmlWriter writer = XmlWriter.Create("..//..//Data//Airports.xml");
-
-            writer.WriteStartElement("airports");
-
-            foreach (var airport in Airports)
+            Flights.Clear();
+            using (SqlConnection conn = new SqlConnection())
             {
-                writer.WriteStartElement("airport");
-                writer.WriteAttributeString("airportId", airport.AirportID);
-                writer.WriteAttributeString("name", airport.Name);
-                writer.WriteAttributeString("city", airport.City);
-                writer.WriteEndElement();
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM Flight";
+
+                SqlDataAdapter daFlight = new SqlDataAdapter();
+                DataSet dsFlight = new DataSet();
+
+                daFlight.SelectCommand = command;
+                daFlight.Fill(dsFlight, "Flights");
+
+                foreach(DataRow row in dsFlight.Tables["Flights"].Rows)
+                {
+                    Flight flight = new Flight();
+
+                    flight.Id = (int)row["Id"];
+                    flight.FlightNumber = (string)row["FlightNumber"];
+                    flight.DepartureTime = (DateTime)row["DepartureTime"];
+                    flight.ArrivalTime = (DateTime)row["ArrivalTime"];
+                    flight.DeparturePlace = (string)row["DeparturePlace"];
+                    flight.Destination = (string)row["Destination"];
+                    flight.OneWayTicketPrice = (int)row["OneWayTicketPrice"];
+                    flight.Active = (bool)row["Active"];
+
+                    Flights.Add(flight);
+                }
             }
-            writer.WriteEndDocument();
-            writer.Close();
         }
+
+
 
         public void LoadAllFlights()
         {

@@ -50,6 +50,8 @@ namespace AirlineTickets
                 if(MessageBox.Show("Are you sure that you want to delete this user?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedUser(selectedUser.Username);
+                    selectedUser.Active = true;
+                    selectedUser.ChangeUsers();
                     Data.Instance.Users[index].Active = true;
                     view.Refresh();
                 }
@@ -64,10 +66,14 @@ namespace AirlineTickets
                 User oldUser = selectedUser.Clone() as User;
                 UserEditWindow uew = new UserEditWindow(selectedUser, UserEditWindow.Option.EDIT);
                 if(uew.ShowDialog() != true)
-                    {
-                        int index = IndexOfSelectedUser(selectedUser.Name);
-                        Data.Instance.Users[index] = oldUser;
-                    }
+                {
+                    int index = IndexOfSelectedUser(selectedUser.Name);
+                    Data.Instance.Users[index] = oldUser;
+                }
+                else
+                {
+                    selectedUser.ChangeUsers();
+                }
             }
         }
 
@@ -77,12 +83,12 @@ namespace AirlineTickets
             uew.ShowDialog();
         }
 
-        private int IndexOfSelectedUser(String name)
+        private int IndexOfSelectedUser(String username)
         {
             var index = -1;
             for (int i = 0; i < Data.Instance.Users.Count; i++)
             {
-                if (Data.Instance.Users[i].Name.Equals(name))
+                if (Data.Instance.Users[i].Username.Equals(username))
                 {
                     index = i;
                     break;

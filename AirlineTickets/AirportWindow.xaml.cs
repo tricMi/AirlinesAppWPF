@@ -57,6 +57,8 @@ namespace AirlineTickets
                 if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedAirport(airport.AirportID);
+                    airport.Active = true;
+                    airport.Change();
                     Data.Instance.Airports[index].Active = true;
                     view.Refresh();
                 }
@@ -76,6 +78,10 @@ namespace AirlineTickets
                 {
                     int index = IndexOfSelectedAirport(oldAirport.AirportID);
                     Data.Instance.Airports[index] = oldAirport;
+                }
+                else
+                {
+                    selectedAirport.Change();
                 }
             }
            

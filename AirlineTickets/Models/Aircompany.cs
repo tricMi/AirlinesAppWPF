@@ -10,6 +10,7 @@ namespace AirlineTickets.Models
 {
     public class Aircompany : INotifyPropertyChanged, ICloneable
     {
+        public int Id { get; set; }
 
         private String companyPassword;
 
@@ -69,6 +70,7 @@ namespace AirlineTickets.Models
         {
             Aircompany newAircompany = new Aircompany
             {
+                Id = this.Id,
                 CompanyPassword = this.CompanyPassword,
                 FlightList = this.FlightList,
                 Active = this.Active

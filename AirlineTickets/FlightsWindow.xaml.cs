@@ -49,6 +49,8 @@ namespace AirlineTickets
                 if (MessageBox.Show("Are you sure that you want to delete this flight?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedFlight(selectedFlight.FlightNumber);
+                    selectedFlight.Active = true;
+                    selectedFlight.ChangeFlight();
                     Data.Instance.Flights[index].Active = true;
                     view.Refresh();
                 }
@@ -68,6 +70,10 @@ namespace AirlineTickets
                 {
                     int index = IndexOfSelectedFlight(oldFlight.FlightNumber);
                     Data.Instance.Flights[index] = oldFlight;
+                }
+                else
+                {
+                    selectedFlight.ChangeFlight();
                 }
             }
 

@@ -54,7 +54,7 @@ namespace AirlineTickets
             this.DialogResult = true;
             if (option.Equals(Option.ADDING) && !flightExists(flight.FlightNumber))
             {
-                Data.Instance.Flights.Add(flight);
+                flight.SaveFlights();
                 this.Close();
             }
         }

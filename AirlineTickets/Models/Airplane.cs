@@ -9,6 +9,8 @@ namespace AirlineTickets.Models
 {
     public class Airplane : INotifyPropertyChanged, ICloneable
     {
+        public int Id { get; set; }
+
         private string pilot;
 
         public string Pilot
@@ -73,6 +75,7 @@ namespace AirlineTickets.Models
         {
             Airplane newPlane = new Airplane
             {
+                Id = this.Id,
                 Pilot = this.Pilot,
                 FlightNum = this.FlightNum,
                 BusinessClass = this.BusinessClass,

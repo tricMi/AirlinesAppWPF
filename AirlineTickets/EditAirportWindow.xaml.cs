@@ -45,7 +45,7 @@ namespace AirlineTickets
             this.DialogResult = true;
             if (option.Equals(Option.ADDING) && !airportExists(airport.AirportID)) {
 
-                Data.Instance.Airports.Add(airport);
+                airport.Save();
             }
         }
 

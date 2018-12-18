@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ namespace AirlineTickets.Models
 {
     public class User : INotifyPropertyChanged, ICloneable
     {
+        public const String CONNECTION_STRING = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=AirlineApp;Integrated Security=true";
+
+        public int Id { get; set; }
+
         private String name;
 
         public String Name
@@ -88,6 +93,7 @@ namespace AirlineTickets.Models
         {
             User newUser = new User
             {
+                Id = this.Id,
                 Name = this.Name,
                 Surname = this.Surname,
                 Password = this.Password,
@@ -105,6 +111,59 @@ namespace AirlineTickets.Models
         public override string ToString()
         {
             return $"Name: {Name} Surname: {Surname} Username: {Username} User type: {UserType} Gender: {Gender} \n";
+        }
+
+        public void SaveUsers()
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"INSERT INTO Users(Name, Surname, Password, Username, Gender, Address, UserType, Active)" +
+                                        "VALUES(@Name, @Surname, @Password, @Username, @Gender, @Address, @UserType, @Active)";
+
+                command.Parameters.Add(new SqlParameter("@Name", this.Name));
+                command.Parameters.Add(new SqlParameter("@Surname", this.Surname));
+                command.Parameters.Add(new SqlParameter("@Password", this.Password));
+                command.Parameters.Add(new SqlParameter("@Username", this.Username));
+                command.Parameters.Add(new SqlParameter("@Gender", this.Gender));
+                command.Parameters.Add(new SqlParameter("@Address", this.Address));
+                command.Parameters.Add(new SqlParameter("@UserType", this.UserType));
+                command.Parameters.Add(new SqlParameter("@Active", false));
+
+                command.ExecuteNonQuery();
+            }
+
+            Database.Data.Instance.LoadUsers();
+        }
+
+        public void ChangeUsers()
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"UPDATE Users SET Name = @Name, Surname = @Surname,Password = @Password,Username= @Username,Gender= @Gender,Address= @Address,UserType= @UserType,Active= @Active WHERE @Id = Id";
+
+
+                command.Parameters.Add(new SqlParameter("@Id", Id));
+                command.Parameters.Add(new SqlParameter("@Name", this.Name));
+                command.Parameters.Add(new SqlParameter("@Surname", this.Surname));
+                command.Parameters.Add(new SqlParameter("@Password", this.Password));
+                command.Parameters.Add(new SqlParameter("@Username", this.Username));
+                command.Parameters.Add(new SqlParameter("@Gender", this.Gender));
+                command.Parameters.Add(new SqlParameter("@Address", this.Address));
+                command.Parameters.Add(new SqlParameter("@UserType", this.UserType));
+                command.Parameters.Add(new SqlParameter("@Active", this.active));
+
+                command.ExecuteNonQuery();
+            }
+
+            Database.Data.Instance.LoadUsers();
         }
     }
 }
