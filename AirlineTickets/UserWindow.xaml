@@ -7,14 +7,21 @@
         mc:Ignorable="d"
         Title="Users" Height="393" Width="735" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="520*"/>
             <ColumnDefinition Width="207*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Name ="DGUser" GridLinesVisibility="None" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="666" Grid.ColumnSpan="2"/>
-        <Button Name ="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="27,23,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Click="BtnDelete_Click"/>
-        <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="154,23,0,0" VerticalAlignment="Top" Width="85" Height="34" Click="BtnEdit_Click"/>
-        <Button Name ="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="277,23,0,0" VerticalAlignment="Top" Width="88" Height="34" Click="BtnAdd_Click"/>
+        <DataGrid Name ="DGUser" GridLinesVisibility="None" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="666" Grid.ColumnSpan="2" Opacity="0.8"/>
+
+
+        <Button Name ="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="27,23,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Background="#FF725959" Click="BtnDelete_Click" Foreground="White" Opacity="0.8"/>
+        <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="154,23,0,0" VerticalAlignment="Top" Width="85" Height="34" Background="#FF725959" Click="BtnEdit_Click" Foreground="White" Opacity="0.8"/>
+        <Button Name ="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="277,23,0,0" VerticalAlignment="Top" Width="88" Height="34" Background="#FF725959" Click="BtnAdd_Click" Foreground="White" Opacity="0.8"/>
+        <TextBox x:Name="txtSearch" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="47,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtSearch_KeyUp"/>
+        <Label x:Name="lblSerach" Content="Search" HorizontalAlignment="Left" Margin="509,25,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="53" Foreground="White" FontWeight="Bold" FontSize="14"/>
 
     </Grid>
 </Window>

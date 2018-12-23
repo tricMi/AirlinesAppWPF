@@ -27,6 +27,24 @@ namespace AirlineTickets.Models
             set { flightNum = value; OnPropertyChanged("FlightNum"); }
         }
 
+        private int rowNum;
+
+        public int RowNum
+        {
+            get { return rowNum; }
+            set { rowNum = value; OnPropertyChanged("RowNum"); }
+        }
+
+        private int columnNum;
+
+        public int ColumnNum
+        {
+            get { return columnNum; }
+            set { columnNum = value; OnPropertyChanged("ColumnNum"); }
+        }
+
+
+
         private Seats businessClass;
 
         public Seats BusinessClass
@@ -78,6 +96,8 @@ namespace AirlineTickets.Models
                 Id = this.Id,
                 Pilot = this.Pilot,
                 FlightNum = this.FlightNum,
+                RowNum = this.RowNum,
+                ColumnNum = this.ColumnNum,
                 BusinessClass = this.BusinessClass,
                 EconomyClass = this.EconomyClass,
                 AircompanyName = this.AircompanyName,

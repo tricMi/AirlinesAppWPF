@@ -52,7 +52,7 @@ namespace AirlineTickets
             this.DialogResult = true;
             if(option.Equals(Option.ADDING) && !aircompanyExists(aircompany.CompanyPassword))
             {
-                Data.Instance.Aircompanies.Add(aircompany);
+                aircompany.Save();
             }
         }
 

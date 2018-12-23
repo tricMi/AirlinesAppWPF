@@ -58,9 +58,9 @@ namespace AirlineTickets
             this.DialogResult = false;
         }
 
-        private bool userExists(string name)
+        private bool userExists(string username)
         {
-            return Data.Instance.Users.ToList().Find(a => a.Name.Equals(name)) != null ? true : false;
+            return Data.Instance.Users.ToList().Find(a => a.Username.Equals(username)) != null ? true : false;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirlineTickets.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
@@ -38,21 +39,30 @@ namespace AirlineTickets.Models
             set { arrivalTime = value; OnPropertyChanged("ArrivalTime"); }
         }
 
-        private String departurePlace;
+        private Airport departurePlace;
 
-        public String DeparturePlace
+        public Airport DeparturePlace
         {
             get { return departurePlace; }
             set { departurePlace = value; OnPropertyChanged("DeparturePlace"); }
         }
 
-        private String destination;
+        private Airport destination;
 
-        public String Destination
+        public Airport Destination
         {
             get { return destination; }
             set { destination = value; OnPropertyChanged("Destination"); }
         }
+
+        private Aircompany companyName;
+
+        public Aircompany CompanyName
+        {
+            get { return companyName; }
+            set { companyName = value; OnPropertyChanged("Company name"); }
+        }
+
 
         private double oneWayTicketPrice;
 
@@ -100,6 +110,7 @@ namespace AirlineTickets.Models
                 DeparturePlace = this.DeparturePlace,
                 Destination = this.Destination,
                 OneWayTicketPrice = this.OneWayTicketPrice,
+                CompanyName = this.CompanyName,
                 Active = this.Active
             };
 
@@ -130,9 +141,10 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
                 command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
                 command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
-                command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace));
-                command.Parameters.Add(new SqlParameter("@Destination", this.Destination));
+                command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));
+                command.Parameters.Add(new SqlParameter("@Destination", this.Destination.City));
                 command.Parameters.Add(new SqlParameter("@OneWayTicketPrice", this.OneWayTicketPrice));
+                command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName.CompanyName));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
                 command.ExecuteNonQuery();
@@ -157,9 +169,10 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
                 command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
                 command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
-                command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace));
-                command.Parameters.Add(new SqlParameter("@Destination", this.Destination));
+                command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));
+                command.Parameters.Add(new SqlParameter("@Destination", this.Destination.City));
                 command.Parameters.Add(new SqlParameter("@OneWayTicketPrice", this.OneWayTicketPrice));
+                command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName.CompanyName));
                 command.Parameters.Add(new SqlParameter("@Active", this.Active));
 
                 command.ExecuteNonQuery();

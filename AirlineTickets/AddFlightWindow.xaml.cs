@@ -29,8 +29,8 @@ namespace AirlineTickets
             Flight = new Flight("");
 
             this.DataContext = Flight;
-            CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a.AirportID);
-            CbDestination.ItemsSource = Data.Instance.Airports.Select(a => a.AirportID);
+            CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a);
+            CbDestination.ItemsSource = Data.Instance.Airports.Select(a => a);
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

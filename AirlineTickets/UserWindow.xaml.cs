@@ -3,6 +3,7 @@ using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,13 +34,28 @@ namespace AirlineTickets
             DGUser.IsReadOnly = true;
             DGUser.IsSynchronizedWithCurrentItem = true;
             DGUser.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-            
+            view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            view.SortDescriptions.Add(new SortDescription("Surname", ListSortDirection.Ascending));
+        
+           
+
         }
+
 
         private bool CustomFilter(object obj)
         {
             User user = obj as User;
-            return !user.Active;
+            if (txtSearch.Text.Equals(String.Empty))
+            {
+                return !user.Active;
+            }
+            else
+            {
+                return !user.Active && user.Name.Contains(txtSearch.Text) || 
+                (!user.Active && user.Surname.Contains(txtSearch.Text)) ||
+                (!user.Active && user.Username.ToLower().Contains(txtSearch.Text.Trim().ToLower())) ||
+                (!user.Active && user.UserType.ToString().ToUpper().Contains(txtSearch.Text.Trim().ToUpper()));
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -67,7 +83,7 @@ namespace AirlineTickets
                 UserEditWindow uew = new UserEditWindow(selectedUser, UserEditWindow.Option.EDIT);
                 if(uew.ShowDialog() != true)
                 {
-                    int index = IndexOfSelectedUser(selectedUser.Name);
+                    int index = IndexOfSelectedUser(selectedUser.Username);
                     Data.Instance.Users[index] = oldUser;
                 }
                 else
@@ -105,6 +121,11 @@ namespace AirlineTickets
                 return false;
             }
             return true;
+        }
+
+        private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
         }
     }
 }

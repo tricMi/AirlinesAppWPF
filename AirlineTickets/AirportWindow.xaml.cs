@@ -43,10 +43,11 @@ namespace AirlineTickets
             {
                 return !airport.Active;
             }
-            else
+            else 
             {
                 return !airport.Active && airport.Name.Contains(TxtSearch.Text);
             }
+          
         }
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)

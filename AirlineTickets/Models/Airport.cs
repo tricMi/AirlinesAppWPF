@@ -78,7 +78,7 @@ namespace AirlineTickets.Models
 
         public override string ToString()
         {
-            return $"Airport ID: {AirportID} Name: {Name} City: {City}\n";
+            return $"{City}";
         }
 
         public void Save()

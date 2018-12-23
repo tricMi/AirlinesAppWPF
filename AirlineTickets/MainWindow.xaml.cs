@@ -25,46 +25,13 @@ namespace AirlineTickets
             InitializeComponent();
         }
 
-        private void BtnAirport_Click(object sender, RoutedEventArgs e)
-        {
-            AirportWindow aw = new AirportWindow();
-            aw.Show();
-        }
+        
 
-        private void BtnFlights_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            FlightsWindow fw = new FlightsWindow();
-            fw.Show();
-        }
-
-        private void BtnUsers_Click(object sender, RoutedEventArgs e)
-        {
-            UserWindow uw = new UserWindow();
-            uw.Show();
-        }
-
-        private void BtnAircompany_Click(object sender, RoutedEventArgs e)
-        {
-            AircompanyWindow arw = new AircompanyWindow();
-            arw.ShowDialog();
-        }
-
-        private void BtnSeats_Click(object sender, RoutedEventArgs e)
-        {
-            SeatsWindow sw = new SeatsWindow();
-            sw.ShowDialog();
-        }
-
-        private void BtnAirplane_Click(object sender, RoutedEventArgs e)
-        {
-            AirplaneWindow apw = new AirplaneWindow();
-            apw.ShowDialog();
-        }
-
-        private void BtnTickets_Click(object sender, RoutedEventArgs e)
-        {
-            TicketsWindow tw = new TicketsWindow();
-            tw.ShowDialog();
+            Login l = new Login();
+            l.ShowDialog();
+    
         }
     }
 }

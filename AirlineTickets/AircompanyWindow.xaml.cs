@@ -51,6 +51,8 @@ namespace AirlineTickets
                 if (MessageBox.Show("Are you sure that you want to delete aircompany?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedAircompany(selectedCompany.CompanyPassword);
+                    selectedCompany.Active = true;
+                    selectedCompany.Change();
                     Data.Instance.Aircompanies[index].Active = true;
                     view.Refresh();
                 }
@@ -69,7 +71,10 @@ namespace AirlineTickets
                     int index = IndexOfSelectedAircompany(selectedCompany.CompanyPassword);
                     Data.Instance.Aircompanies[index] = oldAircompany;
                 }
-
+                else
+                {
+                    selectedCompany.Change();
+                }
 
             }
         }

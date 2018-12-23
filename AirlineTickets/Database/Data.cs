@@ -56,7 +56,8 @@ namespace AirlineTickets.Database
             LoadAirport();
             LoadUsers();
             LoadFlights();
-
+            LoadAircompany();
+            SeatLabels();
         }
 
         
@@ -110,6 +111,20 @@ namespace AirlineTickets.Database
                 }
             }
         }
+
+        public User LoginUser(String username, String password)
+        {
+            foreach(User u in Users)
+            {
+                if (u.Username.Equals(username) && u.Password.Equals(password))
+                {
+                    return u;
+                }
+            }
+            return null;
+        }
+
+       
 
         public void LoadAirport()
         {
@@ -168,9 +183,10 @@ namespace AirlineTickets.Database
                     flight.FlightNumber = (string)row["FlightNumber"];
                     flight.DepartureTime = (DateTime)row["DepartureTime"];
                     flight.ArrivalTime = (DateTime)row["ArrivalTime"];
-                    flight.DeparturePlace = (string)row["DeparturePlace"];
-                    flight.Destination = (string)row["Destination"];
+                    flight.DeparturePlace = AirportCity((string)row["DeparturePlace"]);
+                    flight.Destination = AirportCity((string)row["Destination"]);
                     flight.OneWayTicketPrice = (int)row["OneWayTicketPrice"];
+
                     flight.Active = (bool)row["Active"];
 
                     Flights.Add(flight);
@@ -178,76 +194,149 @@ namespace AirlineTickets.Database
             }
         }
 
-
-
-        public void LoadAllFlights()
+        public void LoadAircompany()
         {
-            Flights.Add(new Flight
+            Aircompanies.Clear();
+            using (SqlConnection conn = new SqlConnection())
             {
-                FlightNumber = "111",
-                DepartureTime = new DateTime(2018, 12, 2, 11, 10, 33),
-                ArrivalTime = new DateTime(2018, 12, 2, 15, 30, 11),
-                DeparturePlace = "Belgrade",
-                Destination = "Paris",
-                OneWayTicketPrice = 2500,
-                Active = false
-            });
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
 
-            Flights.Add(new Flight
-            {
-                FlightNumber = "222",
-                DepartureTime = new DateTime(2018, 10, 7, 09, 16, 37),
-                ArrivalTime = new DateTime(2018, 10, 7, 13, 38, 16),
-                DeparturePlace = "New York",
-                Destination = "Amsterdam",
-                OneWayTicketPrice = 5700,
-                Active = false
-            });
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM Aircompany";
 
-            Flights.Add(new Flight
-            {
-                FlightNumber = "333",
-                DepartureTime = new DateTime(2018, 1, 1, 19, 50, 00),
-                ArrivalTime = new DateTime(2018, 1, 1, 22, 40, 07),
-                DeparturePlace = "London",
-                Destination = "Belgrade",
-                OneWayTicketPrice = 3200,
-                Active = false
-            });
+                SqlDataAdapter daAircompany = new SqlDataAdapter();
+                DataSet dsAircompany = new DataSet();
 
-            Flights.Add(new Flight
-            {
-                FlightNumber = "444",
-                DepartureTime = new DateTime(2018, 7, 9, 23, 50, 00),
-                ArrivalTime = new DateTime(2018, 1, 1, 00, 10, 07),
-                DeparturePlace = "Belgrade",
-                Destination = "London",
-                OneWayTicketPrice = 4200,
-                Active = false
-            });
+                daAircompany.SelectCommand = command;
+                daAircompany.Fill(dsAircompany, "Aircompanies");
 
-            Flights.Add(new Flight
-            {
-                FlightNumber = "555",
-                DepartureTime = new DateTime(2018, 3, 5, 03, 30, 00),
-                ArrivalTime = new DateTime(2018, 3, 5, 06, 40, 07),
-                DeparturePlace = "New York",
-                Destination = "Paris",
-                OneWayTicketPrice = 5000,
-                Active = false
-            });
+                foreach (DataRow row in dsAircompany.Tables["Aircompanies"].Rows)
+                {
+                    Aircompany aircompany = new Aircompany();
 
-            Flights.Add(new Flight
-            {
-                FlightNumber = "666",
-                DepartureTime = new DateTime(2018, 10, 23, 18, 50, 00),
-                ArrivalTime = new DateTime(2018, 1, 1, 21, 40, 07),
-                DeparturePlace = "Amsterdam",
-                Destination = "Belgrade",
-                OneWayTicketPrice = 1200,
-                Active = false
-            });
+                    aircompany.Id = (int)row["Id"];
+                    aircompany.CompanyName = (string)row["CompanyName"];
+                    aircompany.CompanyPassword = (string)row["CompanyPassword"];
+                    aircompany.FlightList.Add(GetFlight((int)row["FlightList"]));
+                    aircompany.Active = (bool)row["Active"];
+
+                    Aircompanies.Add(aircompany);
+
+                }
+            }
+            
         }
+
+       
+
+        public Airport AirportCity(String city)
+        {
+            foreach(Airport a in Airports)
+            {
+                if(a.City.Equals(city) && a.Active == false)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
+        public Flight GetFlight(int id)
+        {
+            
+            foreach(Flight f in Flights)
+            {
+                if(f.Id.Equals(id) && f.Active == false)
+                {
+                    
+                    return f;
+                }
+            }
+            return null;
+        }
+      
+        public Aircompany GetName(string name)
+        {
+            foreach(Aircompany a in Aircompanies)
+            {
+                if(a.CompanyName.Equals(name) && a.Active == false)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
+
+        //public void LoadAllFlights()
+        //{
+        //    Flights.Add(new Flight
+        //    {
+        //        FlightNumber = "111",
+        //        DepartureTime = new DateTime(2018, 12, 2, 11, 10, 33),
+        //        ArrivalTime = new DateTime(2018, 12, 2, 15, 30, 11),
+        //        DeparturePlace = "Belgrade",
+        //        Destination = "Paris",
+        //        OneWayTicketPrice = 2500,
+        //        Active = false
+        //    });
+
+        //    Flights.Add(new Flight
+        //    {
+        //        FlightNumber = "222",
+        //        DepartureTime = new DateTime(2018, 10, 7, 09, 16, 37),
+        //        ArrivalTime = new DateTime(2018, 10, 7, 13, 38, 16),
+        //        DeparturePlace = "New York",
+        //        Destination = "Amsterdam",
+        //        OneWayTicketPrice = 5700,
+        //        Active = false
+        //    });
+
+        //    Flights.Add(new Flight
+        //    {
+        //        FlightNumber = "333",
+        //        DepartureTime = new DateTime(2018, 1, 1, 19, 50, 00),
+        //        ArrivalTime = new DateTime(2018, 1, 1, 22, 40, 07),
+        //        DeparturePlace = "London",
+        //        Destination = "Belgrade",
+        //        OneWayTicketPrice = 3200,
+        //        Active = false
+        //    });
+
+        //    Flights.Add(new Flight
+        //    {
+        //        FlightNumber = "444",
+        //        DepartureTime = new DateTime(2018, 7, 9, 23, 50, 00),
+        //        ArrivalTime = new DateTime(2018, 1, 1, 00, 10, 07),
+        //        DeparturePlace = "Belgrade",
+        //        Destination = "London",
+        //        OneWayTicketPrice = 4200,
+        //        Active = false
+        //    });
+
+        //    Flights.Add(new Flight
+        //    {
+        //        FlightNumber = "555",
+        //        DepartureTime = new DateTime(2018, 3, 5, 03, 30, 00),
+        //        ArrivalTime = new DateTime(2018, 3, 5, 06, 40, 07),
+        //        DeparturePlace = "New York",
+        //        Destination = "Paris",
+        //        OneWayTicketPrice = 5000,
+        //        Active = false
+        //    });
+
+        //    Flights.Add(new Flight
+        //    {
+        //        FlightNumber = "666",
+        //        DepartureTime = new DateTime(2018, 10, 23, 18, 50, 00),
+        //        ArrivalTime = new DateTime(2018, 1, 1, 21, 40, 07),
+        //        DeparturePlace = "Amsterdam",
+        //        Destination = "Belgrade",
+        //        OneWayTicketPrice = 1200,
+        //        Active = false
+        //    });
+        //}
 
         public void LoadAllUsers()
         {
@@ -288,48 +377,48 @@ namespace AirlineTickets.Database
             });
         }
 
-        public void LoadAllAircompanies()
+        //public void LoadAllAircompanies()
 
-        {
-            Aircompany A = new Aircompany();
-            Flight F = new Flight();
-            A.CompanyPassword = "675";
-            A.FlightList.Add(Flights[0]);
-            A.Active = false;
-            Aircompanies.Add(A);
+        //{
+        //    Aircompany A = new Aircompany();
+        //    Flight F = new Flight();
+        //    A.CompanyPassword = "675";
+        //    A.FlightList.Add(Flights[0]);
+        //    A.Active = false;
+        //    Aircompanies.Add(A);
 
-            A = new Aircompany();
-            F = new Flight();
-            A.CompanyPassword = "743";
-            A.FlightList.Add(Flights[1]);
-            A.FlightList.Add(Flights[2]);
-            A.Active = false;
-            Aircompanies.Add(A);
+        //    A = new Aircompany();
+        //    F = new Flight();
+        //    A.CompanyPassword = "743";
+        //    A.FlightList.Add(Flights[1]);
+        //    A.FlightList.Add(Flights[2]);
+        //    A.Active = false;
+        //    Aircompanies.Add(A);
 
-            A = new Aircompany();
-            F = new Flight();
-            A.CompanyPassword = "821";
-            A.FlightList.Add(Flights[3]);
-            A.FlightList.Add(Flights[2]);
-            A.Active = false;
-            Aircompanies.Add(A);
+        //    A = new Aircompany();
+        //    F = new Flight();
+        //    A.CompanyPassword = "821";
+        //    A.FlightList.Add(Flights[3]);
+        //    A.FlightList.Add(Flights[2]);
+        //    A.Active = false;
+        //    Aircompanies.Add(A);
 
-            A = new Aircompany();
-            F = new Flight();
-            A.CompanyPassword = "313";
-            A.FlightList.Add(Flights[5]);
-            A.Active = false;
-            Aircompanies.Add(A);
+        //    A = new Aircompany();
+        //    F = new Flight();
+        //    A.CompanyPassword = "313";
+        //    A.FlightList.Add(Flights[5]);
+        //    A.Active = false;
+        //    Aircompanies.Add(A);
 
-            A = new Aircompany();
-            F = new Flight();
-            A.CompanyPassword = "483";
-            A.FlightList.Add(Flights[4]);
-            A.FlightList.Add(Flights[3]);
-            A.Active = false;
-            Aircompanies.Add(A);
+        //    A = new Aircompany();
+        //    F = new Flight();
+        //    A.CompanyPassword = "483";
+        //    A.FlightList.Add(Flights[4]);
+        //    A.FlightList.Add(Flights[3]);
+        //    A.Active = false;
+        //    Aircompanies.Add(A);
 
-        }
+        //}
 
         public void LoadSeat()
         {
@@ -506,6 +595,8 @@ namespace AirlineTickets.Database
 
         }
 
+        
+
 
         public void LoadAllAirplanes()
         {
@@ -573,6 +664,22 @@ namespace AirlineTickets.Database
             return s;
 
 
+        }
+
+        public void SeatLabels()
+        {
+            Seat s = new Seat();
+            int[] row = { 1, 2, 3, 4, 5 };
+            int[] column = { 1, 2, 3, 4, 5, 6 };
+            for(int i = 0; i < row.GetLength(0) - 1; i++)
+            {
+                for(int j = 0; j< column.GetLength(0)-1; j++)
+                {
+                   // Trace.WriteLine(i + j);
+                    s.SeatLabel = i.ToString() + j.ToString();
+                    Trace.WriteLine(s.SeatLabel);
+                }
+            }
         }
     }
 }

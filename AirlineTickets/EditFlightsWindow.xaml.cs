@@ -22,21 +22,26 @@ namespace AirlineTickets
     public partial class EditFlightsWindow : Window
     {
         public enum Option {ADDING, EDIT}
+        
         Flight flight;
         Option option;
-
+        
         public EditFlightsWindow(Flight flight, Option option= Option.ADDING)
         {
             InitializeComponent();
             this.flight = flight;
             this.option = option;
 
+            
+
             this.DataContext = flight;
 
-            CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a.City);
-            CbDestination.ItemsSource = Data.Instance.Airports.Select(b => b.City);
 
-            if(option.Equals(Option.EDIT))
+
+            CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a);
+            CbDestination.ItemsSource = Data.Instance.Airports.Select(b => b);
+
+            if (option.Equals(Option.EDIT))
             {
                 tbFlightNum.IsEnabled = false;
             }
