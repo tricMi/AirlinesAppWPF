@@ -37,10 +37,10 @@ namespace AirlineTickets.Models
         public ObservableCollection<Flight> FlightList
         {
             get { return flightList; }
-           set { flightList = value; OnPropertyChanged("FlightList"); }
+            set { flightList = value; OnPropertyChanged("FlightList"); }
         }
 
-        
+
 
         private bool active;
 
@@ -96,7 +96,7 @@ namespace AirlineTickets.Models
 
         public override string ToString()
         {
-            return $"Company name: {CompanyName} Aircompany password: {CompanyPassword} Flight list: {FlightList} \n";
+            return $"{Id}";
         }
 
         public void Save()
@@ -135,7 +135,7 @@ namespace AirlineTickets.Models
                 command.CommandText = @"UPDATE Aircompany set CompanyName = @CompanyName, CompanyPassword = @CompanyPassword, FlightList = @FlightList, Active = @Active WHERE @Id = Id";
 
 
-
+                command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName));
                 command.Parameters.Add(new SqlParameter("@CompanyPassword", this.CompanyPassword));
                 command.Parameters.Add(new SqlParameter("@FlightList", this.FlightList));

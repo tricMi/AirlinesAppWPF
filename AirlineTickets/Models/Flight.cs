@@ -55,14 +55,6 @@ namespace AirlineTickets.Models
             set { destination = value; OnPropertyChanged("Destination"); }
         }
 
-        private Aircompany companyName;
-
-        public Aircompany CompanyName
-        {
-            get { return companyName; }
-            set { companyName = value; OnPropertyChanged("Company name"); }
-        }
-
 
         private double oneWayTicketPrice;
 
@@ -71,6 +63,15 @@ namespace AirlineTickets.Models
             get { return oneWayTicketPrice; }
             set { oneWayTicketPrice = value; OnPropertyChanged("OneWayTicketPrice"); }
         }
+
+        private Aircompany companyId;
+
+        public Aircompany CompanyId
+        {
+            get { return companyId; }
+            set { companyId = value; }
+        }
+
 
         private bool active;
 
@@ -82,9 +83,9 @@ namespace AirlineTickets.Models
 
         public Flight() { }
 
-        public Flight(String flightNumber)
+        public Flight(String id)
         {
-            flightNumber = FlightNumber;
+            flightNumber = id;
         }
 
 
@@ -110,7 +111,7 @@ namespace AirlineTickets.Models
                 DeparturePlace = this.DeparturePlace,
                 Destination = this.Destination,
                 OneWayTicketPrice = this.OneWayTicketPrice,
-                CompanyName = this.CompanyName,
+                CompanyId = this.CompanyId,
                 Active = this.Active
             };
 
@@ -122,7 +123,7 @@ namespace AirlineTickets.Models
         {
             return "Flight number: " + FlightNumber + " Departure time: " + DepartureTime + " Arrival time "
                 + ArrivalTime + " Destination place: " + DeparturePlace + " Destination: "
-                + Destination + " Ticket price: " + OneWayTicketPrice; 
+                + Destination + " Ticket price: " + OneWayTicketPrice + "Company id: " + CompanyId; 
         }
 
         public void SaveFlights()
@@ -133,8 +134,8 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Flight( FlightNumber, DepartureTime, ArrivalTime, DeparturePlace, Destination, OneWayTicketPrice, Active)" +
-               " VALUES (@FlightNumber, @DepartureTime, @ArrivalTime, @DeparturePlace, @Destination, @OneWayTicketPrice, @Active)";
+                command.CommandText = @"INSERT INTO Flight( FlightNumber, DepartureTime, ArrivalTime, DeparturePlace, Destination, OneWayTicketPrice, CompanyId, Active)" +
+               " VALUES (@FlightNumber, @DepartureTime, @ArrivalTime, @DeparturePlace, @Destination, @OneWayTicketPrice, @CompanyId, @Active)";
 
 
 
@@ -144,7 +145,7 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));
                 command.Parameters.Add(new SqlParameter("@Destination", this.Destination.City));
                 command.Parameters.Add(new SqlParameter("@OneWayTicketPrice", this.OneWayTicketPrice));
-                command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName.CompanyName));
+                command.Parameters.Add(new SqlParameter("@CompanyId", this.CompanyId.Id));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
                 command.ExecuteNonQuery();
@@ -162,7 +163,7 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"UPDATE Flight SET FlightNumber = @FlightNumber, DepartureTime= @DepartureTime, ArrivalTime = @ArrivalTime,DeparturePlace = @DeparturePlace,Destination = @Destination,OneWayTicketPrice = @OneWayTicketPrice, Active = @Active WHERE @Id = Id";
+                command.CommandText = @"UPDATE Flight SET FlightNumber = @FlightNumber, DepartureTime= @DepartureTime, ArrivalTime = @ArrivalTime,DeparturePlace = @DeparturePlace,Destination = @Destination,OneWayTicketPrice = @OneWayTicketPrice, CompanyId = @CompanyId,Active = @Active WHERE @Id = Id";
 
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
@@ -172,7 +173,7 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));
                 command.Parameters.Add(new SqlParameter("@Destination", this.Destination.City));
                 command.Parameters.Add(new SqlParameter("@OneWayTicketPrice", this.OneWayTicketPrice));
-                command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName.CompanyName));
+                command.Parameters.Add(new SqlParameter("@CompanyId", this.CompanyId.Id));
                 command.Parameters.Add(new SqlParameter("@Active", this.Active));
 
                 command.ExecuteNonQuery();

@@ -57,7 +57,11 @@ namespace AirlineTickets.Database
             LoadUsers();
             LoadFlights();
             LoadAircompany();
-            SeatLabels();
+            
+            
+            
+            
+            // SeatLabels();
         }
 
         
@@ -186,7 +190,7 @@ namespace AirlineTickets.Database
                     flight.DeparturePlace = AirportCity((string)row["DeparturePlace"]);
                     flight.Destination = AirportCity((string)row["Destination"]);
                     flight.OneWayTicketPrice = (int)row["OneWayTicketPrice"];
-
+                    flight.CompanyId = GetId((int)row["CompanyId"]);
                     flight.Active = (bool)row["Active"];
 
                     Flights.Add(flight);
@@ -218,7 +222,7 @@ namespace AirlineTickets.Database
                     aircompany.Id = (int)row["Id"];
                     aircompany.CompanyName = (string)row["CompanyName"];
                     aircompany.CompanyPassword = (string)row["CompanyPassword"];
-                    aircompany.FlightList.Add(GetFlight((int)row["FlightList"]));
+                    aircompany.FlightList = GetFlightId((int)row["Id"]);
                     aircompany.Active = (bool)row["Active"];
 
                     Aircompanies.Add(aircompany);
@@ -242,30 +246,29 @@ namespace AirlineTickets.Database
             return null;
         }
 
-        public Flight GetFlight(int id)
+       public Aircompany GetId(int id)
         {
-            
-            foreach(Flight f in Flights)
+            foreach (Aircompany f in Aircompanies)
             {
-                if(f.Id.Equals(id) && f.Active == false)
+                if (f.Id.Equals(id))
                 {
-                    
                     return f;
                 }
             }
             return null;
         }
       
-        public Aircompany GetName(string name)
+       public ObservableCollection<Flight> GetFlightId(int id)
         {
-            foreach(Aircompany a in Aircompanies)
+            ObservableCollection<Flight> fl = new ObservableCollection<Flight>();
+            foreach(Flight f in Flights)
             {
-                if(a.CompanyName.Equals(name) && a.Active == false)
+                if(f.Id.Equals(id))
                 {
-                    return a;
+                    fl.Add(f);
                 }
             }
-            return null;
+            return fl;
         }
 
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="AdminWindow" Height="450" Width="908" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="191*"/>
@@ -15,7 +15,7 @@
             <ImageBrush ImageSource="Images/air.jpg"/>
         </Grid.Background>
 
-        <StackPanel Margin="33,23,561,237" Grid.ColumnSpan="2" Opacity="0.8">
+        <StackPanel Margin="33,23,690,237" Grid.ColumnSpan="2" Opacity="0.8">
 
             <StackPanel.Background>
                 <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
@@ -24,42 +24,78 @@
 
             </Grid>
         </StackPanel>
+        <Button Name ="BtnAirplane" Content="Airplane" Foreground ="White" HorizontalAlignment="Left" Margin="68,125,0,0" VerticalAlignment="Top" Width="97" Height="38" Click="BtnAirplane_Click" >
+            <Button.Background>
+                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
+            </Button.Background>
+        </Button>
+        <Image HorizontalAlignment="Left" Height="55" Margin="93,50,0,0" VerticalAlignment="Top" Width="50" Source="Images/airplane.png"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="159" Margin="28,23,0,0" VerticalAlignment="Top" Width="187">
+            <StackPanel.Background>
+                <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
+            </StackPanel.Background>
+        </StackPanel>
+        <Image HorizontalAlignment="Left" Height="55" Margin="98,50,0,0" VerticalAlignment="Top" Width="50" Source="Images/airplane-landing.png" Grid.Column="1"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="159" Margin="253,23,0,0" VerticalAlignment="Top" Width="187">
+            <StackPanel.Background>
+                <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
+            </StackPanel.Background>
+        </StackPanel>
+        <Image HorizontalAlignment="Left" Height="55" Margin="324,50,0,0" VerticalAlignment="Top" Width="50" Source="Images/organization.png" Grid.Column="1" RenderTransformOrigin="1.2,0.527"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="159" Margin="467,23,0,0" VerticalAlignment="Top" Width="187">
+            <StackPanel.Background>
+                <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
+            </StackPanel.Background>
+        </StackPanel>
+        <Button x:Name ="BtnAirport" Content="Airports" Foreground ="White" BorderBrush="#FF684B4B" HorizontalAlignment="Left" VerticalAlignment="Top" Width="97" Click="BtnAirport_Click" Height="38" Grid.Column="1" Margin="76,125,0,0">
+            <Button.Background>
+                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name ="BtnAircompany"  Content="Aircompany" Foreground ="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Height="38" Click="BtnAircompany_Click" Grid.Column="1" Margin="305,125,0,0">
+            <Button.Background>
+                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name ="BtnUsers"  Content="Users" Foreground ="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="38" Click="BtnUsers_Click" Grid.Column="1" Margin="525,125,0,0">
+            <Button.Background>
+                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
+            </Button.Background>
+        </Button>
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="55" Margin="538,50,0,0" VerticalAlignment="Top" Width="51" Source="Images/users.png"/>
+        <StackPanel HorizontalAlignment="Left" Height="159" Margin="132,210,0,0" VerticalAlignment="Top" Width="187" Grid.ColumnSpan="2">
+            <StackPanel.Background>
+                <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
+            </StackPanel.Background>
+        </StackPanel>
+        <Button x:Name ="BtnFlights" Content="Flights" Foreground ="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="38" Click="BtnFlights_Click" Margin="178,304,0,0" Grid.ColumnSpan="2">
+            <Button.Background>
+                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
+            </Button.Background>
+        </Button>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="159" Margin="131,210,0,0" VerticalAlignment="Top" Width="187">
+            <StackPanel.Background>
+                <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
+            </StackPanel.Background>
+        </StackPanel>
+        <Button x:Name ="BtnSeats" Content="Seats" Foreground ="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Height="38" Click="BtnSeats_Click" Grid.Column="1" Margin="178,304,0,0">
+            <Button.Background>
+                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
+            </Button.Background>
+        </Button>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="159" Margin="348,210,0,0" VerticalAlignment="Top" Width="187">
+            <StackPanel.Background>
+                <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
+            </StackPanel.Background>
+        </StackPanel>
+        <Button x:Name="BtnTickets" Content="Tickets" Foreground ="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="38" Click="BtnTickets_Click" Margin="403,304,0,0" Grid.Column="1">
+            <Button.Background>
+                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
+            </Button.Background>
+        </Button>
+        <Image HorizontalAlignment="Left" Height="58" Margin="193,231,0,0" VerticalAlignment="Top" Width="72" Grid.ColumnSpan="2" Source="Images/flights.png"/>
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="58" Margin="192,231,0,0" VerticalAlignment="Top" Width="61" Source="Images/seats.png"/>
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="55" Margin="416,231,0,0" VerticalAlignment="Top" Width="55" Source="Images/ticket.png"/>
 
-        <Button Name ="BtnAirport" Content="Airports" Foreground ="White" BorderBrush="#FF684B4B" HorizontalAlignment="Left" Margin="331,71,0,0" VerticalAlignment="Top" Width="198" Click="BtnAirport_Click" Height="38" Grid.Column="1">
-            <Button.Background>
-                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
-            </Button.Background>
-        </Button>
-        <Button Name ="BtnUsers"  Content="Users" Foreground ="White" HorizontalAlignment="Left" Margin="291,178,0,0" VerticalAlignment="Top" Width="198" Height="38" Click="BtnUsers_Click" Grid.Column="1">
-            <Button.Background>
-                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
-            </Button.Background>
-        </Button>
-        <Button Name ="BtnFlights" Content="Flights" Foreground ="White" HorizontalAlignment="Left" Margin="359,254,0,0" VerticalAlignment="Top" Width="198" Height="38" Click="BtnFlights_Click" Grid.Column="1">
-            <Button.Background>
-                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
-            </Button.Background>
-        </Button>
-        <Button Name ="BtnSeats" Content="Seats" Foreground ="White" HorizontalAlignment="Left" Margin="52,328,0,0" VerticalAlignment="Top" Width="113" Height="44" Click="BtnSeats_Click">
-            <Button.Background>
-                <SolidColorBrush Color="#FF403131" Opacity="0.5"/>
-            </Button.Background>
-        </Button>
-        <Button Name ="BtnAircompany"  Content="Aircompany" Foreground ="White" HorizontalAlignment="Left" Margin="68,254,0,0" VerticalAlignment="Top" Width="198" Height="38" Click="BtnAircompany_Click" Grid.Column="1">
-            <Button.Background>
-                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
-            </Button.Background>
-        </Button>
-        <Button Name ="BtnAirplane" Content="Airplane" Foreground ="White" HorizontalAlignment="Left" Margin="84,124,0,0" VerticalAlignment="Top" Width="97" Height="38" Click="BtnAirplane_Click">
-            <Button.Background>
-                <SolidColorBrush Color="#FF423737" Opacity="0.5"/>
-            </Button.Background>
-        </Button>
-        <Button Name="BtnTickets" Content="Tickets" Foreground ="White" HorizontalAlignment="Left" Margin="68,344,0,0" VerticalAlignment="Top" Width="198" Height="38" Click="BtnTickets_Click" Grid.Column="1">
-            <Button.Background>
-                <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
-            </Button.Background>
-        </Button>
-        <Image HorizontalAlignment="Left" Height="55" Margin="105,54,0,0" VerticalAlignment="Top" Width="50" Source="Images/airplane.png"/>
     </Grid>
 </Window>

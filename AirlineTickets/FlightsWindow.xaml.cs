@@ -3,6 +3,7 @@ using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 
 namespace AirlineTickets
 {
@@ -38,7 +40,32 @@ namespace AirlineTickets
         private bool CustomFilter(object obj)
         {
             Flight fl = obj as Flight;
-            return !fl.Active;
+            if (txtSearch.Text.Equals(String.Empty))
+            {
+                return !fl.Active;
+            }
+            else 
+            {
+                return !fl.Active && fl.FlightNumber.Contains(txtSearch.Text.Trim()) ;
+              
+            }
+            
+        }
+
+        public bool RangeFilter(object obj2)
+        {
+            Flight fl = obj2 as Flight;
+            if (txtFromRange.Text.Equals(String.Empty) || txtToRange.Equals(String.Empty))
+            {
+                return !fl.Active;
+            }
+            else
+            {
+              
+                return !fl.Active && fl.DeparturePlace.ToString().Contains(txtFromRange.Text) && fl.Destination.ToString().Contains(txtToRange.Text);
+       
+            }
+
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -106,6 +133,92 @@ namespace AirlineTickets
                 return false;
             }
             return true;
+        }
+
+        private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void TxtFromRange_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void TxtToRange_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            view.Filter = RangeFilter;
+        }
+
+        private void BtnFilterPrice_Click(object sender, RoutedEventArgs e)
+        {
+            view.Filter = PriceFilter;
+            view.Refresh();
+        }
+
+        private bool PriceFilter(object obj3)
+        {
+            Flight fl = obj3 as Flight;
+            if (txtFromPrice.Text.Equals(String.Empty) || txtToPrice.Equals(String.Empty))
+            {
+                return !fl.Active;
+            }
+            else
+            {
+                
+                int start = Convert.ToInt32(txtFromPrice.Text);
+                int end = Convert.ToInt32(txtToPrice.Text);
+
+                return fl.OneWayTicketPrice >= start && fl.OneWayTicketPrice <= end;
+                
+            }
+           
+        }
+
+        private void BtnFilterDate_Click(object sender, RoutedEventArgs e)
+        {
+            view.Filter = DateFilter;
+        }
+
+        private bool DateFilter(object obj)
+        {
+            Flight fl = obj as Flight;
+            if (txtFromDate.Text.Equals(String.Empty) || txtToDate.Equals(String.Empty))
+            {
+                return !fl.Active;
+            }
+            else
+            {
+                DateTime start = Convert.ToDateTime(txtFromDate.Text);
+                DateTime end = Convert.ToDateTime(txtToDate.Text);
+
+                return fl.DepartureTime >= start && fl.ArrivalTime <= end;
+            }
+        }
+
+        private void TxtFromPrice_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void TxtToPrice_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void TxtFromDate_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void TxtToDate_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
         }
     }
 }

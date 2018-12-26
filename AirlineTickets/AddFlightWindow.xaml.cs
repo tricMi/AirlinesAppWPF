@@ -30,7 +30,7 @@ namespace AirlineTickets
 
             this.DataContext = Flight;
             CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a);
-            CbDestination.ItemsSource = Data.Instance.Airports.Select(a => a);
+            CbDestination.ItemsSource = Data.Instance.Airports.Select(b => b);
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

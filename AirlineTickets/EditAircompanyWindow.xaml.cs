@@ -3,6 +3,7 @@ using AirlineTickets.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,11 +36,13 @@ namespace AirlineTickets
             this.option = option;
 
             this.DataContext = aircompany;
-            
+
+           // view = CollectionViewSource.GetDefaultView(aircompany.FlightList);
             DgFlights.ItemsSource = aircompany.FlightList;
+
             DgFlights.IsReadOnly = true;
 
-            if(option.Equals(Option.EDIT))
+            if (option.Equals(Option.EDIT))
             {
                 TxtCompanyPass.IsEnabled = false;
             }
@@ -47,10 +50,11 @@ namespace AirlineTickets
 
        
 
+
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            if(option.Equals(Option.ADDING) && !aircompanyExists(aircompany.CompanyPassword))
+            if(option.Equals(Option.ADDING) && !aircompanyExists(aircompany.Id))
             {
                 aircompany.Save();
             }
@@ -64,9 +68,11 @@ namespace AirlineTickets
         private void BtnAddFlight_Click(object sender, RoutedEventArgs e)
         {
             AddFlightWindow af = new AddFlightWindow();
-            if(af.ShowDialog() == true)
+            if (af.ShowDialog() == true)
             {
-                aircompany.FlightList.Add(af.Flight);
+                //aircompany.FlightList.Add(af.Flight);
+                Data.Instance.Flights.Add(af.Flight);
+                
             }
         }
 
@@ -76,9 +82,9 @@ namespace AirlineTickets
 
         }
 
-        private bool aircompanyExists(string companyPassword)
+        private bool aircompanyExists(int companyId)
         {
-            return Data.Instance.Aircompanies.ToList().Find(a => a.CompanyPassword.Equals(companyPassword)) != null ? true : false;
+            return Data.Instance.Aircompanies.ToList().Find(a => a.Id.Equals(companyId)) != null ? true : false;
         }
 
     }

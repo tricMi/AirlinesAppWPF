@@ -5,12 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="Flights" Height="393" Width="986" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+        Title="Flights" Height="542" Width="986" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,2,0">
-        <DataGrid Name ="DGFlights" GridLinesVisibility="None" HorizontalAlignment="Left" Height="272" Margin="29,64,0,0" VerticalAlignment="Top" Width="703"/>
-        <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="29,22,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnDelete_Click"/>
-        <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="163,22,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnEdit_Click"/>
-        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="299,22,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnAdd_Click"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
+        <DataGrid Name ="DGFlights" GridLinesVisibility="None" HorizontalAlignment="Left" Height="293" Margin="29,121,0,0" VerticalAlignment="Top" Width="703" Opacity="0.8"/>
+        <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="29,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnDelete_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="163,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnEdit_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="299,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnAdd_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Label x:Name="lblSearch" Content="Search" HorizontalAlignment="Left" Margin="496,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.079,0.654" Width="48" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="26" Margin="564,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtSearch_KeyUp"/>
+        <Label x:Name="lblSearchByRange" Content="Search By Place" HorizontalAlignment="Left" Margin="811,25,0,0" VerticalAlignment="Top" Width="106" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="txtFromRange" HorizontalAlignment="Left" Height="33" Margin="802,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtFromRange_KeyUp"/>
+        <TextBox x:Name="txtToRange" HorizontalAlignment="Left" Height="33" Margin="802,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtToRange_KeyUp"/>
+        <Label x:Name="lblFrom" Content="From" HorizontalAlignment="Left" Margin="756,71,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" Width="41"/>
+        <Label x:Name="lblTo" Content="To" HorizontalAlignment="Left" Margin="771,113,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" Width="26"/>
+        <Button x:Name="BtnFilter" Content="Filter" HorizontalAlignment="Left" Margin="831,144,0,0" VerticalAlignment="Top" Width="75" Background="#FF725959" Foreground="White" Opacity="0.8" Click="Button_Click" Height="28"/>
+        <Label x:Name="lblSearchByPrice" Content="Search By Price" HorizontalAlignment="Left" Margin="811,189,0,0" VerticalAlignment="Top" Width="106" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblFromPrice" Content="From" HorizontalAlignment="Left" Margin="759,220,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblToPrice" Content="To" HorizontalAlignment="Left" Margin="764,260,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="txtFromPrice" HorizontalAlignment="Left" Height="35" Margin="802,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtFromPrice_KeyUp"/>
+        <TextBox x:Name="txtToPrice" HorizontalAlignment="Left" Height="36" Margin="802,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtToPrice_KeyUp"/>
+        <Button x:Name="BtnFilterPrice" Content="Filter" HorizontalAlignment="Left" Margin="831,301,0,0" VerticalAlignment="Top" Width="75" Height="29" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterPrice_Click"/>
+        <Label x:Name="lblSearchByDate" Content="Search By Date" HorizontalAlignment="Left" Margin="811,349,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblFromDate" Content="From" HorizontalAlignment="Left" Margin="760,388,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblToDate" Content="To" HorizontalAlignment="Left" Margin="764,419,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="txtFromDate" HorizontalAlignment="Left" Height="33" Margin="802,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtFromDate_KeyUp"/>
+        <TextBox x:Name="txtToDate" HorizontalAlignment="Left" Height="33" Margin="802,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtToDate_KeyUp"/>
+        <Button x:Name="BtnFilterDate" Content="Filter" HorizontalAlignment="Left" Margin="831,460,0,0" VerticalAlignment="Top" Width="75" Height="28" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterDate_Click"/>
 
     </Grid>
 </Window>

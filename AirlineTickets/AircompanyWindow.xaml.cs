@@ -3,6 +3,7 @@ using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace AirlineTickets
             {
                 if (MessageBox.Show("Are you sure that you want to delete aircompany?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
-                    int index = IndexOfSelectedAircompany(selectedCompany.CompanyPassword);
+                    int index = IndexOfSelectedAircompany(selectedCompany.Id);
                     selectedCompany.Active = true;
                     selectedCompany.Change();
                     Data.Instance.Aircompanies[index].Active = true;
@@ -68,7 +69,7 @@ namespace AirlineTickets
                 EditAircompanyWindow edw = new EditAircompanyWindow(selectedCompany, EditAircompanyWindow.Option.EDIT);
                 if(edw.ShowDialog() != true)
                 {
-                    int index = IndexOfSelectedAircompany(selectedCompany.CompanyPassword);
+                    int index = IndexOfSelectedAircompany(selectedCompany.Id);
                     Data.Instance.Aircompanies[index] = oldAircompany;
                 }
                 else
@@ -85,12 +86,25 @@ namespace AirlineTickets
             edw.ShowDialog();
         }
 
-        private int IndexOfSelectedAircompany(String companyPassword)
+        //private int IndexOfSelectedAircompany(String companyPassword)
+        //{
+        //    var index = -1;
+        //    for (int i = 0; i < Data.Instance.Aircompanies.Count; i++)
+        //    {
+        //        if (Data.Instance.Aircompanies[i].CompanyPassword.Equals(companyPassword))
+        //        {
+        //            index = i;
+        //            break;
+        //        }
+        //    }
+        //    return index;
+        //}
+        private int IndexOfSelectedAircompany(int id)
         {
             var index = -1;
             for (int i = 0; i < Data.Instance.Aircompanies.Count; i++)
             {
-                if (Data.Instance.Aircompanies[i].CompanyPassword.Equals(companyPassword))
+                if (Data.Instance.Aircompanies[i].Id.Equals(id))
                 {
                     index = i;
                     break;
@@ -119,6 +133,15 @@ namespace AirlineTickets
             }
         }
 
-
+        private void BtnFlight_Click(object sender, RoutedEventArgs e)
+        {
+            Aircompany selectedCompany = (Aircompany)DGAircompany.SelectedItem;
+            
+            
+                
+                FlightsWindow ef = new FlightsWindow();
+                ef.ShowDialog();
+            
+        }
     }
 }

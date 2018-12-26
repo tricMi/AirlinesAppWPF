@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="Edit Aircompany Window" Height="449" Width="800" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="Edit Aircompany Window" Height="477" Width="764" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,-3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="277*"/>
             <ColumnDefinition Width="96*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="LblCompPass" Content="Company password" HorizontalAlignment="Left" Margin="28,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.658,0.462" Width="122" Height="37" FontWeight="Bold"/>
-        <Label x:Name="LblFlightList" Content="FlightList" HorizontalAlignment="Left" Margin="28,96,0,0" VerticalAlignment="Top" Width="80" Height="33" FontWeight="Bold"/>
-        <TextBox x:Name="TxtCompanyPass" HorizontalAlignment="Left" Height="37" Margin="166,44,0,0" Text="{Binding Path=CompanyPassword}" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
-        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="575,360,0,0" VerticalAlignment="Top" Width="96" Height="35" Click="BtnSave_Click" FontWeight="Bold" Grid.ColumnSpan="2" RenderTransformOrigin="0.542,-0.2"/>
-        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="28,360,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="BtnDiscard_Click" FontWeight="Bold" RenderTransformOrigin="-1.8,0.029"/>
-        <DataGrid Name ="DgFlights" CanUserAddRows="False" GridLinesVisibility="None" HorizontalAlignment="Left" Height="200" Margin="28,134,0,0" VerticalAlignment="Top" Width="643" Grid.ColumnSpan="2"/>
-        <Button x:Name="BtnAddFlight" Content="Add Flight" Background="AntiqueWhite" Grid.Column="1" HorizontalAlignment="Left" Margin="99,134,0,0" VerticalAlignment="Top" Width="87" Height="34" RenderTransformOrigin="0.276,0.559" Click="BtnAddFlight_Click"/>
-        <Button x:Name="BtnDelFlight" Content="DeleteFlight" Background="Azure" Grid.Column="1" HorizontalAlignment="Left" Margin="99,183,0,0" VerticalAlignment="Top" Width="87" Height="35" RenderTransformOrigin="0.77,0.486" Click="BtnDelFlight_Click"/>
+        <TextBox x:Name="TxtCompanyPass" HorizontalAlignment="Left" Height="37" Margin="166,44,0,0" Text="{Binding Path=CompanyPassword}" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Grid.ColumnSpan="2"/>
+        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="73,374,0,0" VerticalAlignment="Top" Width="96" Height="35" Click="BtnSave_Click" FontWeight="Bold" RenderTransformOrigin="0.542,-0.2" Grid.Column="1"/>
+        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="28,374,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="BtnDiscard_Click" FontWeight="Bold" RenderTransformOrigin="-1.8,0.029"/>
+        <Label x:Name="lblCompName" Content="Company name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,121,0,0" Width="122" FontWeight="Bold"/>
+        <TextBox x:Name="TxtComName" HorizontalAlignment="Left" Height="34" Margin="166,121,0,0" TextWrapping="Wrap" Text="{Binding Path=CompanyName}" VerticalAlignment="Top" Width="128"/>
+        <DataGrid x:Name="DgFlights" HorizontalAlignment="Left" Height="165" Margin="28,191,0,0" VerticalAlignment="Top" Width="607" Grid.ColumnSpan="2"/>
+        <Button x:Name="BtnAddFlight" Content="Add" Grid.Column="1" HorizontalAlignment="Left" Margin="94,191,0,0" VerticalAlignment="Top" Width="91" Height="28" Click="BtnAddFlight_Click"/>
+        <Button x:Name="BtnDelFlight" Content="Delete" Grid.Column="1" HorizontalAlignment="Left" Margin="94,236,0,0" VerticalAlignment="Top" Width="91" Height="30" Click="BtnDelFlight_Click"/>
 
     </Grid>
 </Window>

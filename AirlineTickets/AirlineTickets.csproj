@@ -268,5 +268,23 @@
   <ItemGroup>
     <Resource Include="Images\airplane.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\airplane-landing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\organization.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\flights.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\seats.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ticket.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
