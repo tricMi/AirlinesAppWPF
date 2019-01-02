@@ -7,16 +7,19 @@
         mc:Ignorable="d"
         Title="Airports" Height="393" Width="735" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="520*"/>
             <ColumnDefinition Width="207*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Name ="DGAirport" GridLinesVisibility="None" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="666" Grid.ColumnSpan="2"/>
-        <Button Name ="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="27,23,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Click="Btn_Delete_Click"/>
-        <Button Name ="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="154,23,0,0" VerticalAlignment="Top" Width="85" Height="34" Click="Btn_Add_Click"/>
-        <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="277,23,0,0" VerticalAlignment="Top" Width="88" Height="34" Click="Btn_Edit_Click"/>
-        <TextBox x:Name="TxtSearch" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="45,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" KeyUp="TxtSearch_KeyUp"/>
-        <Label x:Name="TxtSearch1" Content="Search" HorizontalAlignment="Left" Margin="510,23,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="50" Height="34"/>
+        <DataGrid Name ="DGAirport" Opacity="0.8" GridLinesVisibility="None" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="666" Grid.ColumnSpan="2"/>
+        <Button Name ="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="27,23,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Click="Btn_Delete_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button Name ="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="154,23,0,0" VerticalAlignment="Top" Width="85" Height="34" Click="Btn_Add_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="277,23,0,0" VerticalAlignment="Top" Width="88" Height="34" Click="Btn_Edit_Click" Background="#FF725959" Foreground="White" Opacity="0.8" />
+        <TextBox x:Name="TxtSearch" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="45,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtSearch_KeyUp"/>
+        <Label x:Name="TxtSearch1" Content="Search" HorizontalAlignment="Left" Margin="510,23,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="50" Height="34" Foreground="White" FontWeight="Bold"/>
 
     </Grid>
 </Window>

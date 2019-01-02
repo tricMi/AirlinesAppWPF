@@ -59,7 +59,7 @@ namespace AirlineTickets
                 if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedSeat(seat.SeatLabel);
-                    Data.Instance.Seat[index].Active = true;
+                 //   Data.Instance.Seat[index].Active = true;
                     view.Refresh();
                 }
             }
@@ -76,7 +76,7 @@ namespace AirlineTickets
                 if (esw.ShowDialog() != true)
                 {
                     int index = IndexOfSelectedSeat(oldSeat.SeatLabel);
-                    Data.Instance.Seat[index] = oldSeat;
+                  //  Data.Instance.Seat[index] = oldSeat;
                     
                 }
             }
@@ -92,9 +92,9 @@ namespace AirlineTickets
         private int IndexOfSelectedSeat(String seatLable)
         {
             var index = -1;
-            for (int i = 0; i < Data.Instance.Seat.Count; i++)
+            for (int i = 0; i < Data.Instance.SeatAvailable.Count; i++)
             {
-                if (Data.Instance.Seat[i].SeatLabel.Equals(seatLable))
+                if (Data.Instance.SeatAvailable[i].SeatLabel.Equals(seatLable))
                 {
                     index = i;
                     break;

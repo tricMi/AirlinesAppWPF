@@ -29,6 +29,7 @@ namespace AirlineTickets
         Airplane airplane;
         Option option;
         ICollectionView view;
+        public Seat seat { get; set; }
 
 
         public EditAirplaneWindow(Airplane airplane, Option option = Option.ADDING)
@@ -37,14 +38,12 @@ namespace AirlineTickets
 
             this.airplane = airplane;
             this.option = option;
-           
+            seat = new Seat("");
 
             this.DataContext = airplane;
-
-            view = CollectionViewSource.GetDefaultView(Data.Instance.SeatB);
-            view.Filter = CustomFilter;
+            view = CollectionViewSource.GetDefaultView(airplane.BusinessClass);
             DGBSeats.ItemsSource = view;
-            view = CollectionViewSource.GetDefaultView(Data.Instance.SeatE);
+            view = CollectionViewSource.GetDefaultView(airplane.EconomyClass);
             DGBSeats.IsReadOnly = true;
             DGESeats.ItemsSource = view;
             DGESeats.IsReadOnly = true;
@@ -54,18 +53,13 @@ namespace AirlineTickets
             DGESeats.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
 
 
-            CBFlightNum.ItemsSource = Data.Instance.Flights.Select(f => f.FlightNumber);
+            CBFlightNum.ItemsSource = Data.Instance.Flights.Select(f => f);
 
-          
-            
+            CbCompanyName.ItemsSource = Data.Instance.Aircompanies.Select(a => a);
 
         }
 
-        private bool CustomFilter(object obj)
-        {
-            Seat seat = obj as Seat;
-            return !seat.Active;
-        }
+       
 
         
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -73,7 +67,16 @@ namespace AirlineTickets
             this.DialogResult = true;
             if (option.Equals(Option.ADDING) && !airplaneExists(airplane.Pilot))
             {
-                Data.Instance.Airplanes.Add(airplane);
+                int row = int.Parse(txtRowNumber.Text);
+                int column = int.Parse(txtColumnNumber.Text);
+
+              //  airplane.RowNum = row;
+               // airplane.ColumnNum = column;
+                airplane.BusinessClass = Data.Instance.SeatsBusiness(row, column);
+                airplane.EconomyClass = Data.Instance.SeatsEconomy(row, column);
+                airplane.SaveAirplane();
+                //Seat seat = (Seat)airplane.BusinessClass.Select(b => b.SeatLabel);
+                //airplane.SaveAirplaneSeats(seat.SeatLabel, airplane.Id);
             }
         }
 
@@ -91,9 +94,9 @@ namespace AirlineTickets
         private int IndexOfSelectedSeat(String seatLable)
         {
             var index = -1;
-            for (int i = 0; i < Data.Instance.Seat.Count; i++)
+            for (int i = 0; i < Data.Instance.SeatAvailable.Count; i++)
             {
-                if (Data.Instance.Seat[i].SeatLabel.Equals(seatLable))
+                if (Data.Instance.SeatAvailable[i].SeatLabel.Equals(seatLable))
                 {
                     index = i;
                     break;
@@ -117,7 +120,7 @@ namespace AirlineTickets
             AddAirplane a = new AddAirplane();
             if (a.ShowDialog() == true)
             {
-                Data.Instance.SeatB.Add(a.seat);
+                Data.Instance.SeatAvailable.Add(a.seat);
             }
         }
 
@@ -129,7 +132,8 @@ namespace AirlineTickets
                 if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedSeat(seat.SeatLabel);
-                    Data.Instance.Seat[index].Active = true;
+                    
+                    Data.Instance.SeatAvailable[index].Active = true;
                     view.Refresh();
                 }
                 
@@ -139,12 +143,7 @@ namespace AirlineTickets
 
         private void BtnAddE_Click(object sender, RoutedEventArgs e)
         {
-            AddAirplane a = new AddAirplane();
-            if(a.ShowDialog() == true)
-            {
-                Data.Instance.SeatE.Add(a.seat);
-            }
-            
+            seat.SaveSeat();
         }
 
         private void BtnDeleteE_Click(object sender, RoutedEventArgs e)
@@ -155,7 +154,7 @@ namespace AirlineTickets
                 if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedSeat(seat.SeatLabel);
-                    Data.Instance.Seat[index].Active = true;
+                    Data.Instance.SeatAvailable[index].Active = true;
                     view.Refresh();
                 }
                

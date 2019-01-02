@@ -23,9 +23,9 @@
         <Label x:Name="lblUsername" Content="Username" HorizontalAlignment="Left" Margin="21,128,0,0" VerticalAlignment="Top" Width="85" FontWeight="Bold" Foreground="#FF594B4B" RenderTransformOrigin="0.518,-0.115" />
         <Label x:Name="lblPassword" Content="Password" HorizontalAlignment="Left" Margin="21,213,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.447,-0.423" Width="85" FontWeight="Bold" Foreground="#FF594B4B"/>
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="37" Margin="132,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Background="#FFF7F1F1"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="36" Margin="132,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Background="#FFF3EDED"/>
         <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="21,302,0,0" VerticalAlignment="Top" Width="334" Height="37" Background="#FF8B7777" Foreground="White" FontWeight="Bold" FontSize="16" Click="BtnLogin_Click"/>
         <Button Name="CloseButton" Content="x" HorizontalAlignment="Left" Margin="76,-20,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="3.087,0.4" Grid.Column="1" Background="#FFCB7676" Foreground="White" Click="CloseButton_Click"/>
+        <PasswordBox Name ="pswPassword" HorizontalAlignment="Left" Margin="132,213,0,0" VerticalAlignment="Top" Width="223" Height="35"  Background="#FFF7F1F1"/>
 
     </Grid>
 </Window>

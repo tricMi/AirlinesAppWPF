@@ -26,7 +26,7 @@ namespace AirlineTickets
         public AddFlightWindow()
         {
             InitializeComponent();
-            Flight = new Flight("");
+          //  Flight = new Flight("");
 
             this.DataContext = Flight;
             CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a);
@@ -36,6 +36,7 @@ namespace AirlineTickets
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
+            Flight.SaveFlights();
             this.Close();
         }
 

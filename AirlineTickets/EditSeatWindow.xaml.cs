@@ -58,13 +58,13 @@ namespace AirlineTickets
             this.DialogResult = true;
             if (option.Equals(Option.ADD) && !seatExists(seat.SeatLabel))
             {
-                Data.Instance.Seat.Add(seat);
+                Data.Instance.SeatAvailable.Add(seat);
             }
         }
 
         private bool seatExists(string seatLabel)
         {
-            return Data.Instance.Seat.ToList().Find(a => a.SeatLabel.Equals(seatLabel)) != null ? true : false;
+            return Data.Instance.SeatAvailable.ToList().Find(a => a.SeatLabel.Equals(seatLabel)) != null ? true : false;
         }
     }
 }

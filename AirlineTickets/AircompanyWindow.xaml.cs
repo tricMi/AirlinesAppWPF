@@ -24,6 +24,7 @@ namespace AirlineTickets
     public partial class AircompanyWindow : Window
     {
         ICollectionView view;
+        
 
         public AircompanyWindow()
         {
@@ -86,19 +87,6 @@ namespace AirlineTickets
             edw.ShowDialog();
         }
 
-        //private int IndexOfSelectedAircompany(String companyPassword)
-        //{
-        //    var index = -1;
-        //    for (int i = 0; i < Data.Instance.Aircompanies.Count; i++)
-        //    {
-        //        if (Data.Instance.Aircompanies[i].CompanyPassword.Equals(companyPassword))
-        //        {
-        //            index = i;
-        //            break;
-        //        }
-        //    }
-        //    return index;
-        //}
         private int IndexOfSelectedAircompany(int id)
         {
             var index = -1;
@@ -136,12 +124,15 @@ namespace AirlineTickets
         private void BtnFlight_Click(object sender, RoutedEventArgs e)
         {
             Aircompany selectedCompany = (Aircompany)DGAircompany.SelectedItem;
-            
-            
-                
-                FlightsWindow ef = new FlightsWindow();
-                ef.ShowDialog();
-            
+
+            for (int i = 0; i < Data.Instance.Flights.Count; i++)
+            {
+                if (selectedCompany.Id.Equals(i))
+                {
+                    FlightsWindow ef = new FlightsWindow();
+                    ef.ShowDialog();
+                }
+            }
         }
     }
 }

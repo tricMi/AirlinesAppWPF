@@ -37,7 +37,7 @@ namespace AirlineTickets
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             String us = txtUsername.Text.Trim();
-            String pass = txtPassword.Text.Trim();
+            String pass = pswPassword.Password.Trim();
 
             if(us.Equals("") || pass.Equals(""))
             {
@@ -53,11 +53,18 @@ namespace AirlineTickets
                     this.Close();
                     
                 }
-                else
+                else if(u.UserType == EUserType.PASSENGER)
                 {
+                    PassengerWindow pw = new PassengerWindow();
+                    pw.ShowDialog();
                     this.Close();
                 }
+                else
+                {
+                    MessageBox.Show("There is not user with that username or password");
+                }
             }
+            
         }
 
         

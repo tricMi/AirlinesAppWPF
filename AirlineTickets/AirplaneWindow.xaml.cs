@@ -52,7 +52,10 @@ namespace AirlineTickets
                 if (eda.ShowDialog() != true)
                 {
                     int index = IndexOfSelectedAirplane(selectedPlane.Pilot);
+                    selectedPlane.Active = true;
+                    selectedPlane.ChangeAirplane();
                     Data.Instance.Airplanes[index] = oldAirplane;
+                    view.Refresh();
                 }
 
 
@@ -72,6 +75,10 @@ namespace AirlineTickets
                     int index = IndexOfSelectedAirplane(selectedPlane.Pilot);
                     Data.Instance.Airplanes[index].Active = true;
                     view.Refresh();
+                }
+                else
+                {
+                    selectedPlane.ChangeAirplane();
                 }
             }
         }

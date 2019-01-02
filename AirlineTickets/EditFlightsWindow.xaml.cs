@@ -2,6 +2,7 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,19 +33,16 @@ namespace AirlineTickets
             this.flight = flight;
             this.option = option;
 
-            
-
             this.DataContext = flight;
-
-
 
             CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a);
             CbDestination.ItemsSource = Data.Instance.Airports.Select(b => b);
+            cbCompanyId.ItemsSource = Data.Instance.Aircompanies.Select(c => c);
 
-            if (option.Equals(Option.EDIT))
-            {
-                tbFlightNum.IsEnabled = false;
-            }
+            //if (option.Equals(Option.EDIT))
+            //{
+            //    tbFlightNum.IsEnabled = false;
+            //}
 
         }
 
@@ -60,10 +58,13 @@ namespace AirlineTickets
             if (option.Equals(Option.ADDING) && !flightExists(flight.FlightNumber))
             {
                 flight.SaveFlights();
-                this.Close();
+                Aircompany pass = flight.CompanyPassword;
+                flight.SaveAircompanyFlights(pass.CompanyPassword, flight.FlightNumber);
+                
             }
-        }
 
+        }
+        
         private bool flightExists(string flightNumber)
         {
             return Data.Instance.Flights.ToList().Find(a => a.FlightNumber.Equals(flightNumber)) != null ? true : false;

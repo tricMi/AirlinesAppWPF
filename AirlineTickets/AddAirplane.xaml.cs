@@ -48,6 +48,7 @@ namespace AirlineTickets
         {
 
             this.DialogResult = true;
+            seat.SaveSeat();
             this.Close();
         }
     }

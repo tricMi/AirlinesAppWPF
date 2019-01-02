@@ -27,7 +27,7 @@ namespace AirlineTickets
         public PickSeatWindow()
         {
             InitializeComponent();
-            view = CollectionViewSource.GetDefaultView(Data.Instance.Seat);
+            view = CollectionViewSource.GetDefaultView(Data.Instance.SeatAvailable);
             DgSeat.ItemsSource = view;
             DgSeat.IsReadOnly = true;
             DgSeat.IsSynchronizedWithCurrentItem = true;

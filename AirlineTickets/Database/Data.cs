@@ -20,11 +20,9 @@ namespace AirlineTickets.Database
         public ObservableCollection<Airport> Airports { get; set; }
         public ObservableCollection<Flight> Flights { get; set; }
         public ObservableCollection<Aircompany> Aircompanies { get; set; }
+        public ObservableCollection<Seat> SeatAvailable { get; set; }
         public ObservableCollection<Seats> Seats { get; set; }
-        public ObservableCollection<Seat> Seat { get; set; }
         public ObservableCollection<Airplane> Airplanes { get; set; }
-        public ObservableCollection<Seat> SeatB { get; set; }
-        public ObservableCollection<Seat> SeatE { get; set; }
         public ObservableCollection<Tickets> Tickets { get; set; }
 
         public const String CONNECTION_STRING = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=AirlineApp;Integrated Security=true";
@@ -37,31 +35,18 @@ namespace AirlineTickets.Database
             Airports = new ObservableCollection<Airport>();
             Flights = new ObservableCollection<Flight>();
             Aircompanies = new ObservableCollection<Aircompany>();
-            Seat = new ObservableCollection<Seat>();
+            SeatAvailable = new ObservableCollection<Seat>();
             Seats = new ObservableCollection<Seats>();
-            SeatB = new ObservableCollection<Seat>();
-            SeatE = new ObservableCollection<Seat>();
             Airplanes = new ObservableCollection<Airplane>();
             Tickets = new ObservableCollection<Tickets>();
 
-           // LoadAllFlights();
-
-            //LoadAllAircompanies();
-            //LoadSeat();
-            //LoadAllSeats();
-            //LoadAllAirplanes();
-            //SeatsBusiness();
-            //SeatsEconomy();
-
             LoadAirport();
             LoadUsers();
-            LoadFlights();
             LoadAircompany();
+            LoadFlights();
+            LoadAirplane();
+            LoadSeats();
             
-            
-            
-            
-            // SeatLabels();
         }
 
         
@@ -190,11 +175,42 @@ namespace AirlineTickets.Database
                     flight.DeparturePlace = AirportCity((string)row["DeparturePlace"]);
                     flight.Destination = AirportCity((string)row["Destination"]);
                     flight.OneWayTicketPrice = (int)row["OneWayTicketPrice"];
-                    flight.CompanyId = GetId((int)row["CompanyId"]);
+                    flight.CompanyPassword = GetPass((string)row["CompanyPassword"]);
                     flight.Active = (bool)row["Active"];
 
                     Flights.Add(flight);
                 }
+            }
+        }
+
+        public ObservableCollection<Flight> LoadAircompanyFlights(string pass)
+        {
+            ObservableCollection<Flight> aircompanyFlight = new ObservableCollection<Flight>();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM CompanyFlights";
+
+                SqlDataAdapter daCompanyFlights = new SqlDataAdapter();
+                DataSet dsCompanyFlights = new DataSet();
+
+                daCompanyFlights.SelectCommand = command;
+                daCompanyFlights.Fill(dsCompanyFlights, "CompanyFlights");
+
+                foreach (DataRow row in dsCompanyFlights.Tables["CompanyFlights"].Rows)
+                {
+                    String aircompanyPass = (string)row["CompanyPass"];
+                    if(aircompanyPass.Equals(pass))
+                    {
+                        Flight fl = GetFlightNumber((string)row["FlightNum"]);
+                        aircompanyFlight.Add(fl);
+
+                    }
+                }
+            return aircompanyFlight;
             }
         }
 
@@ -222,7 +238,7 @@ namespace AirlineTickets.Database
                     aircompany.Id = (int)row["Id"];
                     aircompany.CompanyName = (string)row["CompanyName"];
                     aircompany.CompanyPassword = (string)row["CompanyPassword"];
-                    aircompany.FlightList = GetFlightId((int)row["Id"]);
+                    aircompany.FlightList = GetFlightNum((string)row["FlightList"]);
                     aircompany.Active = (bool)row["Active"];
 
                     Aircompanies.Add(aircompany);
@@ -232,7 +248,112 @@ namespace AirlineTickets.Database
             
         }
 
-       
+        public void LoadAirplane()
+        {
+            Airplanes.Clear();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM Airplane";
+
+                SqlDataAdapter daAirplane = new SqlDataAdapter();
+                DataSet dsAirplane = new DataSet();
+
+                daAirplane.SelectCommand = command;
+                daAirplane.Fill(dsAirplane, "Airplanes");
+
+                foreach (DataRow row in dsAirplane.Tables["Airplanes"].Rows)
+                {
+                    Airplane airplane = new Airplane();
+
+                    airplane.Id = (int)row["Id"];
+                    airplane.Pilot = (string)row["Pilot"];
+                    airplane.FlightNum = GetFlightNumber((string)row["CompanyPassword"]);
+                    airplane.RowNum = (int)row["RowNum"];
+                    airplane.ColumnNum =(int)row["ColumnNum"];
+                    airplane.BusinessClass = SeatsBusiness((int)row["RowNum"],(int)row["ColumnNum"]);
+                    airplane.EconomyClass = SeatsEconomy((int)row["RowNum"], (int)row["ColumnNum"]);
+                    airplane.AircompanyName = GetCompanyName((string)row["AircompanyName"]);
+                    airplane.Active = (bool)row["Active"];
+                    Airplanes.Add(airplane);
+
+                }
+            }
+
+        }
+
+
+        public void LoadSeats()
+        {
+            SeatAvailable.Clear();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM Seat";
+
+                SqlDataAdapter daSeats = new SqlDataAdapter();
+                DataSet dsSeats = new DataSet();
+
+                daSeats.SelectCommand = command;
+                daSeats.Fill(dsSeats, "Seats");
+
+                foreach (DataRow row in dsSeats.Tables["Seats"].Rows)
+                {
+                    Seat seat = new Seat();
+
+                    seat.Id = (int)row["Id"];
+                    seat.RowNum = (int)row["RowNum"];
+                    seat.ColumnNum = (int)row["ColumnNum"];
+                    seat.SeatLabel = SeatLabel((int)row["RowNum"], (int)row["ColumnNum"]);
+                    seat.SeatClass = (EClass)row["SeatClass"];
+                    seat.SeatState = (bool)row["SeatState"];
+                    seat.AirplaneId = GetAirplaneId((int)row["AirplaneId"]);
+                    seat.Active = (bool)row["Active"];
+
+                    SeatAvailable.Add(seat);
+
+                }
+            }
+
+        }
+
+        public ObservableCollection<Seat> AirplaneSeat(int id)
+        {
+            ObservableCollection<Seat> seatA = new ObservableCollection<Seat>();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM AirplaneSeat";
+
+                SqlDataAdapter daAirplaneSeat = new SqlDataAdapter();
+                DataSet dsAirplaneSeat = new DataSet();
+
+                daAirplaneSeat.SelectCommand = command;
+                daAirplaneSeat.Fill(dsAirplaneSeat, "AirplaneSeat");
+
+                foreach (DataRow row in dsAirplaneSeat.Tables["AirplaneSeat"].Rows)
+                {
+                    int aId = (int)row["AirplaneId"];
+                    if(aId.Equals(id))
+                    {
+                        Seat seatLabel = GetSeatLabel((string)row["SeatLabel"]);
+                        seatA.Add(seatLabel);
+                    }
+                }
+
+            }
+                return seatA;
+        }
+
 
         public Airport AirportCity(String city)
         {
@@ -246,11 +367,11 @@ namespace AirlineTickets.Database
             return null;
         }
 
-       public Aircompany GetId(int id)
+       public Aircompany GetPass(string pass)
         {
             foreach (Aircompany f in Aircompanies)
             {
-                if (f.Id.Equals(id))
+                if (f.CompanyPassword.Equals(pass))
                 {
                     return f;
                 }
@@ -258,12 +379,12 @@ namespace AirlineTickets.Database
             return null;
         }
       
-       public ObservableCollection<Flight> GetFlightId(int id)
+       public ObservableCollection<Flight> GetFlightNum(string num)
         {
             ObservableCollection<Flight> fl = new ObservableCollection<Flight>();
             foreach(Flight f in Flights)
             {
-                if(f.Id.Equals(id))
+                if(f.FlightNumber.Equals(num))
                 {
                     fl.Add(f);
                 }
@@ -271,418 +392,135 @@ namespace AirlineTickets.Database
             return fl;
         }
 
-
-        //public void LoadAllFlights()
-        //{
-        //    Flights.Add(new Flight
-        //    {
-        //        FlightNumber = "111",
-        //        DepartureTime = new DateTime(2018, 12, 2, 11, 10, 33),
-        //        ArrivalTime = new DateTime(2018, 12, 2, 15, 30, 11),
-        //        DeparturePlace = "Belgrade",
-        //        Destination = "Paris",
-        //        OneWayTicketPrice = 2500,
-        //        Active = false
-        //    });
-
-        //    Flights.Add(new Flight
-        //    {
-        //        FlightNumber = "222",
-        //        DepartureTime = new DateTime(2018, 10, 7, 09, 16, 37),
-        //        ArrivalTime = new DateTime(2018, 10, 7, 13, 38, 16),
-        //        DeparturePlace = "New York",
-        //        Destination = "Amsterdam",
-        //        OneWayTicketPrice = 5700,
-        //        Active = false
-        //    });
-
-        //    Flights.Add(new Flight
-        //    {
-        //        FlightNumber = "333",
-        //        DepartureTime = new DateTime(2018, 1, 1, 19, 50, 00),
-        //        ArrivalTime = new DateTime(2018, 1, 1, 22, 40, 07),
-        //        DeparturePlace = "London",
-        //        Destination = "Belgrade",
-        //        OneWayTicketPrice = 3200,
-        //        Active = false
-        //    });
-
-        //    Flights.Add(new Flight
-        //    {
-        //        FlightNumber = "444",
-        //        DepartureTime = new DateTime(2018, 7, 9, 23, 50, 00),
-        //        ArrivalTime = new DateTime(2018, 1, 1, 00, 10, 07),
-        //        DeparturePlace = "Belgrade",
-        //        Destination = "London",
-        //        OneWayTicketPrice = 4200,
-        //        Active = false
-        //    });
-
-        //    Flights.Add(new Flight
-        //    {
-        //        FlightNumber = "555",
-        //        DepartureTime = new DateTime(2018, 3, 5, 03, 30, 00),
-        //        ArrivalTime = new DateTime(2018, 3, 5, 06, 40, 07),
-        //        DeparturePlace = "New York",
-        //        Destination = "Paris",
-        //        OneWayTicketPrice = 5000,
-        //        Active = false
-        //    });
-
-        //    Flights.Add(new Flight
-        //    {
-        //        FlightNumber = "666",
-        //        DepartureTime = new DateTime(2018, 10, 23, 18, 50, 00),
-        //        ArrivalTime = new DateTime(2018, 1, 1, 21, 40, 07),
-        //        DeparturePlace = "Amsterdam",
-        //        Destination = "Belgrade",
-        //        OneWayTicketPrice = 1200,
-        //        Active = false
-        //    });
-        //}
-
-        public void LoadAllUsers()
+        public Flight GetFlightNumber(string flnum)
         {
-            Users.Add(new User
+            foreach(Flight f in Flights)
             {
-                Name = "Petar",
-                Surname = "Petrovic",
-                Password = "pera123",
-                Username = "pera",
-                Gender = EGender.MALE,
-                Address = "Novi Sad 1",
-                UserType = EUserType.PASSENGER,
-                Active = false
-            });
-
-            Users.Add(new User
-            {
-                Name = "Mina",
-                Surname = "Minic",
-                Password = "minna",
-                Username = "mina",
-                Gender = EGender.FEMALE,
-                Address = "Paris 21",
-                UserType = EUserType.ADMIN,
-                Active = false
-            });
-
-            Users.Add(new User
-            {
-                Name = "Milan",
-                Surname = "Milanovic",
-                Password = "milance11",
-                Username = "milance",
-                Gender = EGender.MALE,
-                Address = "Belgrade 12",
-                UserType = EUserType.UNREGISTERED,
-                Active = false
-            });
-        }
-
-        //public void LoadAllAircompanies()
-
-        //{
-        //    Aircompany A = new Aircompany();
-        //    Flight F = new Flight();
-        //    A.CompanyPassword = "675";
-        //    A.FlightList.Add(Flights[0]);
-        //    A.Active = false;
-        //    Aircompanies.Add(A);
-
-        //    A = new Aircompany();
-        //    F = new Flight();
-        //    A.CompanyPassword = "743";
-        //    A.FlightList.Add(Flights[1]);
-        //    A.FlightList.Add(Flights[2]);
-        //    A.Active = false;
-        //    Aircompanies.Add(A);
-
-        //    A = new Aircompany();
-        //    F = new Flight();
-        //    A.CompanyPassword = "821";
-        //    A.FlightList.Add(Flights[3]);
-        //    A.FlightList.Add(Flights[2]);
-        //    A.Active = false;
-        //    Aircompanies.Add(A);
-
-        //    A = new Aircompany();
-        //    F = new Flight();
-        //    A.CompanyPassword = "313";
-        //    A.FlightList.Add(Flights[5]);
-        //    A.Active = false;
-        //    Aircompanies.Add(A);
-
-        //    A = new Aircompany();
-        //    F = new Flight();
-        //    A.CompanyPassword = "483";
-        //    A.FlightList.Add(Flights[4]);
-        //    A.FlightList.Add(Flights[3]);
-        //    A.Active = false;
-        //    Aircompanies.Add(A);
-
-        //}
-
-        public void LoadSeat()
-        {
-            Seat.Add(new Seat
-            {
-                SeatLabel = "1A",
-                SeatState = true,
-                SeatClass = EClass.BUSINESS
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "1B",
-                SeatState = true,
-                SeatClass = EClass.BUSINESS,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "1C",
-                SeatState = true,
-                SeatClass = EClass.BUSINESS,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "1D",
-                SeatState = true,
-                SeatClass = EClass.BUSINESS,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "2A",
-                SeatState = true,
-                SeatClass = EClass.BUSINESS,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "2B",
-                SeatState = true,
-                SeatClass = EClass.BUSINESS,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "2C",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "2D",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "3A",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "3B",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "3C",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "3D",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "4A",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "4B",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "4C",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "4D",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "5A",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "5B",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "5C",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-            Seat.Add(new Seat
-            {
-                SeatLabel = "5D",
-                SeatState = true,
-                SeatClass = EClass.ECONOMY,
-                Active = false
-            });
-
-        }
-
-
-        public void LoadAllSeats()
-        {
-            Seats.Add(new Seats
-            {
-                AllSeats = Seat,
-                Active = false
-
-            });
-
-        }
-
-        
-
-
-        public void LoadAllAirplanes()
-        {
-            Airplanes.Add(new Airplane
-            {
-                Pilot = "Milan",
-                FlightNum = "111",
-                AircompanyName = "New York Air",
-                Active = false
-                 
-             });
-
-            Airplanes.Add(new Airplane
-            {
-                Pilot = "Marko",
-                FlightNum = "222",
-                AircompanyName = "Air Serbia",
-                Active = false
-
-            });
-
-            Airplanes.Add(new Airplane
-            {
-                Pilot = "Stefan",
-                FlightNum = "333",
-                AircompanyName = "Air France",
-                Active = false
-
-            });
-
-            Airplanes.Add(new Airplane
-            {
-                Pilot = "Aleksandar",
-                FlightNum = "444",
-                AircompanyName = "KLM Royal Dutch Airlines",
-                Active = false
-
-            });
-        }
-
-        public Seats SeatsBusiness()
-        {
-            Seats s = new Seats();
-            s.AllSeats = SeatB;
-            foreach (Seat ss in Seat.Where(x => x.SeatClass == EClass.BUSINESS))
-            {
-                s.AllSeats.Add(ss);
-             
-            }
-            return s;
-            
-        }
-
-        public Seats SeatsEconomy()
-        {
-            
-            Seats s = new Seats();
-            s.AllSeats = SeatE;
-            foreach (Seat ss in Seat.Where(y => y.SeatClass == EClass.ECONOMY))
-            {
-                s.AllSeats.Add(ss);
-                
-
-            }
-            return s;
-
-
-        }
-
-        public void SeatLabels()
-        {
-            Seat s = new Seat();
-            int[] row = { 1, 2, 3, 4, 5 };
-            int[] column = { 1, 2, 3, 4, 5, 6 };
-            for(int i = 0; i < row.GetLength(0) - 1; i++)
-            {
-                for(int j = 0; j< column.GetLength(0)-1; j++)
+                if(f.FlightNumber.Equals(flnum))
                 {
-                   // Trace.WriteLine(i + j);
-                    s.SeatLabel = i.ToString() + j.ToString();
-                    Trace.WriteLine(s.SeatLabel);
+                    return f;
                 }
             }
+            return null;
+        }
+        
+        public Aircompany GetCompanyName(string name)
+        {
+            foreach(Aircompany a in Aircompanies)
+            {
+                if(a.CompanyName.Equals(name))
+                {
+                    return a;
+                }
+            }
+
+            return null;
+        }
+
+        public Airplane GetAirplaneId(int id)
+        {
+            foreach(Airplane a in Airplanes)
+            {
+                if(a.Id.Equals(id))
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
+        public Seat GetSeatLabel(string label)
+        {
+            foreach(Seat s in SeatAvailable)
+            {
+                if(s.SeatLabel.Equals(label))
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
+
+        public char[] ColumnLabel()
+        {
+
+            char[] characters = "ABCDEFGH".ToCharArray();
+            return characters;
+
+        }
+
+        public List<string> SeatLabels(int rowNum, int colNum)
+        {
+            
+            List<string> seatLabels = new List<string>();
+            for (int i = 0; i < rowNum + 1; i++)
+            {
+                for(int j = 0; j < colNum + 1; j++)
+                {
+                    string s = ColumnLabel()[i].ToString() + j;
+                    seatLabels.Add(s);
+                }
+            }
+            return seatLabels;
+        }
+
+        public string SeatLabel(int rowNum, int colNum)
+        {
+            for (int i = 0; i < rowNum + 1; i++)
+            {
+                for (int j = 0; j < colNum + 1; j++)
+                {
+                    string s = ColumnLabel()[i].ToString() + j;
+                    return s;
+                }
+            }
+            return null;
+        }
+
+
+
+        public ObservableCollection<Seat> SeatsBusiness(int rowNum, int colNum)
+        {
+            ObservableCollection<Seat> seatB = new ObservableCollection<Seat>();
+            for (int i = 0; i < SeatLabels(rowNum, colNum).Count; i++)
+            {
+                if (i < 10)
+                {
+                    Seat seat = new Seat();
+                    seat.SeatLabel = SeatLabels(rowNum, colNum)[i];
+                    seat.SeatClass = EClass.BUSINESS;
+                    seat.SeatState = true;
+                    seat.Active = false;
+                    seatB.Add(seat);
+                    SeatAvailable.Add(seat);
+
+                }
+
+            }
+            return seatB;
+
+        }
+
+        public ObservableCollection<Seat> SeatsEconomy(int rowNum, int colNum)
+        {
+            ObservableCollection<Seat> seatE = new ObservableCollection<Seat>();
+            for (int i = 0; i < SeatLabels(rowNum, colNum).Count; i++)
+            {
+                if (i >= 10)
+                {
+                    Seat seatEconomy = new Seat();
+                    seatEconomy.SeatLabel = SeatLabels(rowNum, colNum)[i];
+                    seatEconomy.SeatClass = EClass.ECONOMY;
+                    seatEconomy.SeatState = true;
+                    seatEconomy.Active = false;
+                    seatE.Add(seatEconomy);
+                    SeatAvailable.Add(seatEconomy);
+                }
+
+            }
+            return seatE;
+
         }
     }
 }

@@ -75,3 +75,5 @@ D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AdminWindow.g.cs
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\Login.g.cs
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AdminWindow.baml
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\Login.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerWindow.baml

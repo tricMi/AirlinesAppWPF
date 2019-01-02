@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AirlineTickets"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AirlineTickets.EditFlightsWindow"
         mc:Ignorable="d"
-        Title="Edit Flights Window" Height="469" Width="389" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen" FontWeight="Bold">
+        Title="Edit Flights Window" Height="522" Width="389" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen" FontWeight="Bold">
     <Grid Margin="0,0,0,-2">
         <Label x:Name="LblFlightNum" Content="Flight Number" HorizontalAlignment="Left" Margin="38,29,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.813,0.106" Width="147" Height="38"/>
         <Label x:Name="LblDepartureTime" Content="Departure Time" HorizontalAlignment="Left" Margin="38,84,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.813,0.106" Width="147" Height="42"/>
@@ -18,10 +18,12 @@
         <TextBox Name ="tbOneWayTicketPrice" HorizontalAlignment="Left" Height="39" Margin="201,306,0,0" TextWrapping="Wrap" Text="{Binding Path=OneWayTicketPrice}" VerticalAlignment="Top" Width="132"/>
         <ComboBox Name="CbDepPlace" HorizontalAlignment="Left" Margin="201,200,0,0" SelectedItem="{Binding Path=DeparturePlace}" VerticalAlignment="Top" Width="132" Height="29"/>
         <ComboBox Name ="CbDestination" HorizontalAlignment="Left" Margin="201,259,0,0" SelectedItem="{Binding Path=Destination}" VerticalAlignment="Top" Width="132" Height="27"/>
-        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="38,375,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnDiscard_Click"/>
-        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="217,375,0,0" VerticalAlignment="Top" Width="116" Height="35" Click="BtnSave_Click"/>
+        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="38,430,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnDiscard_Click"/>
+        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="217,430,0,0" VerticalAlignment="Top" Width="116" Height="35" Click="BtnSave_Click"/>
         <xctk:DateTimePicker HorizontalAlignment="Left" Margin="201,84,0,0" Value="{Binding Path =DepartureTime}"  VerticalAlignment="Top" Width="132" Height="32"/>
         <xctk:DateTimePicker HorizontalAlignment="Left" Margin="201,143,0,0"  Value="{Binding Path=ArrivalTime}" VerticalAlignment="Top" Width="132" Height="32"/>
+        <Label x:Name="lblAircompanyId" Content="Aircompany ID" HorizontalAlignment="Left" Margin="38,373,0,0" VerticalAlignment="Top" Width="126"/>
+        <ComboBox x:Name="cbCompanyId" HorizontalAlignment="Left" Margin="201,373,0,0" SelectedItem="{Binding Path=CompanyPassword}" VerticalAlignment="Top" Width="132" Height="26"/>
 
     </Grid>
 </Window>

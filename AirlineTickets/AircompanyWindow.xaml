@@ -7,11 +7,13 @@
         mc:Ignorable="d"
         Title="Aircompany" Height="393" Width="735" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid AutoGenerateColumns = "True" GridLinesVisibility="None" Name="DGAircompany" HorizontalAlignment="Left" Height="265" Margin="31,68,0,0" VerticalAlignment="Top" Width="666" AutoGeneratingColumn="DGAircompany_AutoGeneratingColumn" />
-        <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="31,20,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Click="BtnDelete_Click"/>
-        <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="145,20,0,0" VerticalAlignment="Top" Width="87" Height="34" Click="BtnEdit_Click"/>
-        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="259,20,0,0" VerticalAlignment="Top" Width="87" Height="34" Click="BtnAdd_Click"/>
-        <Button x:Name="BtnFlight" Content="View Flights" HorizontalAlignment="Left" Margin="394,20,0,0" VerticalAlignment="Top" Width="98" Height="34" Click="BtnFlight_Click"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
+        <DataGrid AutoGenerateColumns = "True" GridLinesVisibility="None" Name="DGAircompany" HorizontalAlignment="Left" Height="265" Margin="31,68,0,0" VerticalAlignment="Top" Width="666" AutoGeneratingColumn="DGAircompany_AutoGeneratingColumn" Opacity="0.8" />
+        <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="31,20,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.52,-0.3" Height="34" Click="BtnDelete_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="145,20,0,0" VerticalAlignment="Top" Width="87" Height="34" Click="BtnEdit_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="259,20,0,0" VerticalAlignment="Top" Width="87" Height="34" Click="BtnAdd_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
 
     </Grid>
 </Window>

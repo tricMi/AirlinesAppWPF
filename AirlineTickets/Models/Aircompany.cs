@@ -24,9 +24,9 @@ namespace AirlineTickets.Models
         }
 
 
-        private String companyPassword;
+        private string companyPassword;
 
-        public String CompanyPassword
+        public string CompanyPassword
         {
             get { return companyPassword; }
             set { companyPassword = value; OnPropertyChanged("CompanyPassword"); }
@@ -96,7 +96,7 @@ namespace AirlineTickets.Models
 
         public override string ToString()
         {
-            return $"{Id}";
+            return $"{CompanyPassword} {CompanyName}";
         }
 
         public void Save()
@@ -107,14 +107,13 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Aircompany(CompanyName, CompanyPassword, FlightList, Active)" +
-               " VALUES (@CompanyName, @CompanyPassword, @FlightList, @Active)";
+                command.CommandText = @"INSERT INTO Aircompany(CompanyName, CompanyPassword, Active)" +
+               " VALUES (@CompanyName, @CompanyPassword, @Active)";
 
 
 
                 command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName));
                 command.Parameters.Add(new SqlParameter("@CompanyPassword", this.CompanyPassword));
-                command.Parameters.Add(new SqlParameter("@FlightList", this.FlightList));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
                 command.ExecuteNonQuery();
@@ -132,13 +131,12 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"UPDATE Aircompany set CompanyName = @CompanyName, CompanyPassword = @CompanyPassword, FlightList = @FlightList, Active = @Active WHERE @Id = Id";
+                command.CommandText = @"UPDATE Aircompany set CompanyName = @CompanyName, CompanyPassword = @CompanyPassword, Active = @Active WHERE @Id = Id";
 
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName));
                 command.Parameters.Add(new SqlParameter("@CompanyPassword", this.CompanyPassword));
-                command.Parameters.Add(new SqlParameter("@FlightList", this.FlightList));
                 command.Parameters.Add(new SqlParameter("@Active", this.Active));
 
                 command.ExecuteNonQuery();

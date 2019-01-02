@@ -96,6 +96,9 @@
     <Compile Include="Models\Seat.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\Tickets.cs" />
+    <Compile Include="PassengerWindow.xaml.cs">
+      <DependentUpon>PassengerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PickSeatWindow.xaml.cs">
       <DependentUpon>PickSeatWindow.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PassengerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PickSeatWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,6 +292,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ticket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
