@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirlineTickets.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,29 @@ namespace AirlineTickets
     /// </summary>
     public partial class PassengerWindow : Window
     {
-        public PassengerWindow()
+        private User user;
+
+        public PassengerWindow(User user)
         {
+            this.user = user;
             InitializeComponent();
+        }
+
+        private void BtnPassenger_Click(object sender, RoutedEventArgs e)
+        {
+            PassengerProfile pf = new PassengerProfile(user);
+            pf.ShowDialog();
+        }
+
+        private void BtnTickets_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void BtnFlights_Click(object sender, RoutedEventArgs e)
+        {
+            FilterFlightsWindow fw = new FilterFlightsWindow(user);
+            fw.ShowDialog();
         }
     }
 }

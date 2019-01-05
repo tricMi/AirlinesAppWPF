@@ -5,28 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="Edit Airplane Window" Height="646" Width="743" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen" FontWeight="Bold">
+        Title="Edit Airplane Window" Height="566" Width="827" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen" FontWeight="Bold">
     <Grid>
-        <DataGrid Name="DGBSeats" GridLinesVisibility="None" CanUserAddRows="False" HorizontalAlignment="Left" Height="154" Margin="401,62,0,0" VerticalAlignment="Top" Width="310"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/gradient.jpg"/>
+        </Grid.Background>
+        <DataGrid Name="DGBSeats" AutoGeneratingColumn="DGBSeats_AutoGeneratingColumn" Opacity="0.8" GridLinesVisibility="None" CanUserAddRows="False" HorizontalAlignment="Left" Height="175" Margin="352,62,0,0" VerticalAlignment="Top" Width="441"/>
         <Label x:Name="LblPilot" Content="Pilot" HorizontalAlignment="Left" Margin="31,67,0,0" VerticalAlignment="Top" Width="120" Height="30"/>
-        <Label x:Name="LblFlightNum" Content="Flight number" HorizontalAlignment="Left" Margin="31,148,0,0" VerticalAlignment="Top" Width="120" Height="29" RenderTransformOrigin="0.45,-0.034"/>
-        <Label x:Name="LblBusinessClass" Content="Bussines Class Seats" HorizontalAlignment="Left" Margin="487,26,0,0" VerticalAlignment="Top" Width="133"/>
-        <Label x:Name="LblAircompanyName" Content="Aircompany Name" HorizontalAlignment="Left" Margin="31,232,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="LblEconomyClass" Content="Economy Class Seats" HorizontalAlignment="Left" Margin="501,274,0,0" VerticalAlignment="Top" Width="133" RenderTransformOrigin="0.504,0.269"/>
-        <DataGrid Name ="DGESeats" GridLinesVisibility="None" CanUserAddRows="False" HorizontalAlignment="Left" Height="154" Margin="401,316,0,0" VerticalAlignment="Top" Width="310"/>
-        <TextBox x:Name="TxtPilot" Text ="{Binding Path=Pilot}" HorizontalAlignment="Left" Height="35" Margin="156,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.692,0.486"/>
-        <ComboBox Name ="CBFlightNum"  HorizontalAlignment="Left" SelectedItem="{Binding Path=FlightNum}"  Margin="156,148,0,0" VerticalAlignment="Top" Width="120" Height="29"/>
-        <Button x:Name="BtnSave" Background="IndianRed" Content="Save" HorizontalAlignment="Left" Margin="622,565,0,0" VerticalAlignment="Top" Width="89" Height="31" Click="BtnSave_Click"/>
-        <Button x:Name="BtnDiscard"  Background ="DarkGray" Content="Discard" HorizontalAlignment="Left" Margin="31,565,0,0" VerticalAlignment="Top" Width="81" Height="31" Click="BtnDiscard_Click"/>
-        <Button Name ="BtnAddB" Content="Add" HorizontalAlignment="Left" Margin="401,232,0,0" VerticalAlignment="Top" Width="75" Height="28" Click="BtnAddB_Click" RenderTransformOrigin="1.173,0.714"/>
-        <Button Name ="BtnDeleteB" Content="Delete" HorizontalAlignment="Left" Margin="636,229,0,0" VerticalAlignment="Top" Width="75" Height="31" Click="BtnDeleteB_Click" RenderTransformOrigin="0.467,-0.677"/>
-        <Button Name ="BtnAddE" Content="Add" HorizontalAlignment="Left" Margin="401,491,0,0" VerticalAlignment="Top" Width="75" Height="27" Click="BtnAddE_Click"/>
-        <Button Name ="BtnDeleteE" Content="Delete" HorizontalAlignment="Left" Margin="636,491,0,0" VerticalAlignment="Top" Width="75" Height="31" Click="BtnDeleteE_Click"/>
-        <Label Content="Row Number" HorizontalAlignment="Left" Margin="31,326,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.5,0.577" Width="120"/>
-        <Label Content="Column Number" HorizontalAlignment="Left" Margin="31,413,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.95,-0.154" Width="120"/>
-        <TextBox x:Name="txtRowNumber" HorizontalAlignment="Left" Height="36" Margin="156,326,0,0" TextWrapping="Wrap" Text="{Binding Path=RowNum}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtColumnNumber" HorizontalAlignment="Left" Height="36" Margin="156,413,0,0" TextWrapping="Wrap" Text ="{Binding Path=ColumnNum}" VerticalAlignment="Top" Width="120"/>
-        <ComboBox Name ="CbCompanyName" SelectedItem ="{Binding Path=AircompanyName}" HorizontalAlignment="Left" Margin="156,232,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
+        <Label x:Name="LblBusinessClass" Content="Bussines Class Seats" HorizontalAlignment="Left" Margin="511,31,0,0" VerticalAlignment="Top" Width="133"/>
+        <Label x:Name="LblAircompanyName" Content="Aircompany Name" HorizontalAlignment="Left" Margin="31,143,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="LblEconomyClass" Content="Economy Class Seats" HorizontalAlignment="Left" Margin="511,247,0,0" VerticalAlignment="Top" Width="133" RenderTransformOrigin="0.504,0.269"/>
+        <DataGrid Name ="DGESeats" AutoGeneratingColumn="DGESeats_AutoGeneratingColumn" Opacity="0.8" GridLinesVisibility="None" CanUserAddRows="False" HorizontalAlignment="Left" Height="171" Margin="352,278,0,0" VerticalAlignment="Top" Width="441"/>
+        <TextBox x:Name="TxtPilot" Text ="{Binding Path=Pilot}" HorizontalAlignment="Left" Height="35" Margin="156,62,0,0" Background="#FFCBCCDA" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.692,0.486"/>
+        <Button x:Name="BtnSave" Background="#FFC4ADCD" Opacity="0.9" Content="Save" HorizontalAlignment="Left" Margin="704,473,0,0" VerticalAlignment="Top" Width="89" Height="35" Click="BtnSave_Click"/>
+        <Button x:Name="BtnDiscard"  Background="#FF947F9C" Opacity="0.9" Content="Discard" HorizontalAlignment="Left" Margin="31,487,0,0" VerticalAlignment="Top" Width="81" Height="31" Click="BtnDiscard_Click"/>
+        <Label Content="Row Number" HorizontalAlignment="Left" Margin="31,291,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.5,0.577" Width="120"/>
+        <Label Content="Column Number" HorizontalAlignment="Left" Margin="31,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.95,-0.154" Width="120"/>
+        <TextBox x:Name="txtRowNumber" Background="#FFCBCCDA" HorizontalAlignment="Left" Height="36" Margin="156,291,0,0" TextWrapping="Wrap" Text="{Binding Path=RowNum}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtColumnNumber" Background="#FFCBCCDA" HorizontalAlignment="Left" Height="36" Margin="156,377,0,0" TextWrapping="Wrap" Text ="{Binding Path=ColumnNum}" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name ="CbCompanyName" Background="#FFCBCCDA" SelectedItem ="{Binding Path=AircompanyName}" HorizontalAlignment="Left" Margin="156,134,0,0" VerticalAlignment="Top" Width="120" Height="35"/>
+        <Label x:Name="lblInput" Content="Input" HorizontalAlignment="Left" Margin="31,211,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtInput" Background="#FFCBCCDA" HorizontalAlignment="Left" Height="30" Margin="156,207,0,0" Text="{Binding Path=Input}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.517,0.825"/>
 
 
     </Grid>

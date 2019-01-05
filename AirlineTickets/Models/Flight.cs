@@ -23,6 +23,15 @@ namespace AirlineTickets.Models
             set { flightNumber = value; OnPropertyChanged("FlightNumber"); }
         }
 
+        private Airplane airplaneId;
+
+        public Airplane AirplaneId
+        {
+            get { return airplaneId; }
+            set { airplaneId = value; }
+        }
+
+
         private DateTime departureTime;
 
         public DateTime DepartureTime
@@ -81,12 +90,7 @@ namespace AirlineTickets.Models
             set { active = value; OnPropertyChanged("Active"); }
         }
 
-        //public Flight() { }
 
-        //public Flight(String id)
-        //{
-        //    flightNumber = id;
-        //}
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -106,6 +110,7 @@ namespace AirlineTickets.Models
             {
                 Id = this.Id,
                 FlightNumber = this.FlightNumber,
+                AirplaneId = this.AirplaneId,
                 DepartureTime = this.DepartureTime,
                 ArrivalTime = this.ArrivalTime,
                 DeparturePlace = this.DeparturePlace,
@@ -132,12 +137,11 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Flight( FlightNumber, DepartureTime, ArrivalTime, DeparturePlace, Destination, OneWayTicketPrice, CompanyPassword, Active)" +
-               " VALUES (@FlightNumber, @DepartureTime, @ArrivalTime, @DeparturePlace, @Destination, @OneWayTicketPrice, @CompanyPassword, @Active)";
-
-
+                command.CommandText = @"INSERT INTO Flight( FlightNumber, AirplaneId, DepartureTime, ArrivalTime, DeparturePlace, Destination, OneWayTicketPrice, CompanyPassword, Active)" +
+               " VALUES (@FlightNumber, @AirplaneId, @DepartureTime, @ArrivalTime, @DeparturePlace, @Destination, @OneWayTicketPrice, @CompanyPassword, @Active)";
 
                 command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Id));
                 command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
                 command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
                 command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));
@@ -161,11 +165,12 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"UPDATE Flight SET FlightNumber = @FlightNumber, DepartureTime= @DepartureTime, ArrivalTime = @ArrivalTime,DeparturePlace = @DeparturePlace,Destination = @Destination,OneWayTicketPrice = @OneWayTicketPrice, CompanyPassword = @CompanyPassword,Active = @Active WHERE @Id = Id";
+                command.CommandText = @"UPDATE Flight SET FlightNumber = @FlightNumber, AirplaneId = @AirplaneId, DepartureTime= @DepartureTime, ArrivalTime = @ArrivalTime,DeparturePlace = @DeparturePlace,Destination = @Destination,OneWayTicketPrice = @OneWayTicketPrice, CompanyPassword = @CompanyPassword,Active = @Active WHERE @Id = Id";
 
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Id));
                 command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
                 command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
                 command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));

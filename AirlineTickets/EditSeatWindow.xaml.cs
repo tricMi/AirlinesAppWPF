@@ -38,14 +38,14 @@ namespace AirlineTickets
             TxtSeatState.IsEnabled = false;
             seat.SeatState = true;
 
-            if(option.Equals(Option.EDIT))
+            if (option.Equals(Option.EDIT))
             {
                 TxtSeatLabel.IsEnabled = false;
             }
 
-            
 
-            
+
+
         }
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)

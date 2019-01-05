@@ -188,7 +188,7 @@ namespace AirlineTickets
         private bool DateFilter(object obj)
         {
             Flight fl = obj as Flight;
-            if (txtFromDate.Text.Equals(String.Empty) || txtToDate.Equals(String.Empty))
+            if (txtFromDate.Text.Equals(String.Empty) || txtToDate.Text.Equals(String.Empty))
             {
                 return !fl.Active;
             }

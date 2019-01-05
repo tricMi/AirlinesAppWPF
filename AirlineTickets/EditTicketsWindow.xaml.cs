@@ -40,20 +40,20 @@ namespace AirlineTickets
 
         private void BtnPickSeat_Click(object sender, RoutedEventArgs e)
         {
-            PickSeatWindow s = new PickSeatWindow();
-            if (s.ShowDialog() == true)
-            {
-                ticket.SeatNum = s.SelectedSeat;
-            }
+            //PickSeatWindow s = new PickSeatWindow();
+            //if (s.ShowDialog() == true)
+            //{
+            //    ticket.SeatNum = s.SelectedSeat;
+            //}
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            if (option.Equals(Option.ADD) && !TicketExists(ticket.CurrentUser))
-            {
-                Data.Instance.Tickets.Add(ticket);
-            }
+            //this.DialogResult = true;
+            //if (option.Equals(Option.ADD) && !TicketExists(ticket.CurrentUser))
+            //{
+            //    Data.Instance.Tickets.Add(ticket);
+            //}
         }
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)

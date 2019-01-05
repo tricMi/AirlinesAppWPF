@@ -1,0 +1,22 @@
+﻿<Window x:Class="AirlineTickets.PassengerProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        mc:Ignorable="d"
+        Title="Passenger Profile" WindowStartupLocation="CenterScreen" Height="410" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="520*"/>
+            <ColumnDefinition Width="207*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Name ="DGPassenger" GridLinesVisibility="None" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="697" Grid.ColumnSpan="2" Opacity="0.8"/>
+        <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="27,21,0,0" VerticalAlignment="Top" Width="85" Height="34" Background="#FF725959" Click="BtnEdit_Click" Foreground="White" Opacity="0.8"/>
+
+
+    </Grid>
+</Window>

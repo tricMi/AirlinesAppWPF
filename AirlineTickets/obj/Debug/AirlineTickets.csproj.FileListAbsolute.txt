@@ -77,3 +77,12 @@ D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\AdminWindow.baml
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\Login.baml
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerWindow.g.cs
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerProfile.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerProfile.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerProfileEdit.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerProfileEdit.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\FilterFlightsWindow.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\FilterFlightsWindow.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\BookFlightPassenger.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\BookFlightPassenger.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\GeneratedInternalTypeHelper.g.cs

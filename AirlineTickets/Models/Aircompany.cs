@@ -107,13 +107,12 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Aircompany(CompanyName, CompanyPassword, Active)" +
-               " VALUES (@CompanyName, @CompanyPassword, @Active)";
-
-
+                command.CommandText = @"INSERT INTO Aircompany(CompanyName, CompanyPassword, FlightList, Active)" +
+               " VALUES (@CompanyName, @CompanyPassword, @FlightList, @Active)";
 
                 command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName));
                 command.Parameters.Add(new SqlParameter("@CompanyPassword", this.CompanyPassword));
+                command.Parameters.Add(new SqlParameter("@FlightList", this.FlightList == null));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
                 command.ExecuteNonQuery();

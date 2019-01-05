@@ -73,6 +73,9 @@
     <Compile Include="AirplaneWindow.xaml.cs">
       <DependentUpon>AirplaneWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BookFlightPassenger.xaml.cs">
+      <DependentUpon>BookFlightPassenger.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditAircompanyWindow.xaml.cs">
       <DependentUpon>EditAircompanyWindow.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,9 @@
     <Compile Include="EditTicketsWindow.xaml.cs">
       <DependentUpon>EditTicketsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FilterFlightsWindow.xaml.cs">
+      <DependentUpon>FilterFlightsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -96,6 +102,12 @@
     <Compile Include="Models\Seat.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\Tickets.cs" />
+    <Compile Include="PassengerProfile.xaml.cs">
+      <DependentUpon>PassengerProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PassengerProfileEdit.xaml.cs">
+      <DependentUpon>PassengerProfileEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PassengerWindow.xaml.cs">
       <DependentUpon>PassengerWindow.xaml</DependentUpon>
     </Compile>
@@ -114,6 +126,7 @@
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validation\UserValidation.cs" />
     <Page Include="AddAirplane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AirportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BookFlightPassenger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditTicketsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilterFlightsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +220,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PassengerProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PassengerProfileEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PassengerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,6 +324,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\gradiant.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\gradient.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

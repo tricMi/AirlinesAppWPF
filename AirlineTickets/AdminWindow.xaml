@@ -15,7 +15,7 @@
             <ImageBrush ImageSource="Images/air.jpg"/>
         </Grid.Background>
 
-        <StackPanel Margin="33,23,690,237" Grid.ColumnSpan="2" Opacity="0.8">
+        <StackPanel Margin="25,23,7,237" Opacity="0.8">
 
             <StackPanel.Background>
                 <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>

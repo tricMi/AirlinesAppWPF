@@ -92,8 +92,6 @@ namespace AirlineTickets.Models
                 command.CommandText = @"INSERT INTO AIRPORT( AirportID, Name, City, Active)" +
                " VALUES (@AirportID, @Name, @City, @Active)";
 
-
-
                 command.Parameters.Add(new SqlParameter("@AirportID", this.AirportID));
                 command.Parameters.Add(new SqlParameter("@Name", this.Name));
                 command.Parameters.Add(new SqlParameter("@City", this.City));
@@ -115,7 +113,6 @@ namespace AirlineTickets.Models
 
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"UPDATE AIRPORT set AirportID = @AirportID, Name = @Name, City = @City, Active = @Active WHERE @Id = Id";
-
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@AirportID", this.AirportID));

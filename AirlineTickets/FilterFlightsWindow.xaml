@@ -1,0 +1,37 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AirlineTickets.FilterFlightsWindow"
+        mc:Ignorable="d"
+        Title="Filter Flights Window" WindowStartupLocation="CenterScreen" Height="541" Width="985">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
+        <DataGrid x:Name ="DGFlights" GridLinesVisibility="None" HorizontalAlignment="Left" Height="293" Margin="29,121,0,0" VerticalAlignment="Top" Width="703" Opacity="0.8"/>
+        <Label x:Name="lblSearch" Content="Search" HorizontalAlignment="Left" Margin="494,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.079,0.654" Width="48" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="28" Margin="564,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtSearch_KeyUp"/>
+        <Label x:Name="lblSearchByRange" Content="Search By Place" HorizontalAlignment="Left" Margin="811,25,0,0" VerticalAlignment="Top" Width="106" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="txtFromRange" HorizontalAlignment="Left" Height="33" Margin="802,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtFromRange_KeyUp"/>
+        <TextBox x:Name="txtToRange" HorizontalAlignment="Left" Height="33" Margin="802,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtToRange_KeyUp"/>
+        <Label x:Name="lblFrom" Content="From" HorizontalAlignment="Left" Margin="756,71,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" Width="41"/>
+        <Label x:Name="lblTo" Content="To" HorizontalAlignment="Left" Margin="771,113,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" Width="26"/>
+        <Button x:Name="BtnFilter" Content="Filter" HorizontalAlignment="Left" Margin="831,144,0,0" VerticalAlignment="Top" Width="75" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilter_Click" Height="28"/>
+        <Label x:Name="lblSearchByPrice" Content="Search By Price" HorizontalAlignment="Left" Margin="811,189,0,0" VerticalAlignment="Top" Width="106" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblFromPrice" Content="From" HorizontalAlignment="Left" Margin="759,220,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblToPrice" Content="To" HorizontalAlignment="Left" Margin="764,260,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="txtFromPrice" HorizontalAlignment="Left" Height="35" Margin="802,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtFromPrice_KeyUp"/>
+        <TextBox x:Name="txtToPrice" HorizontalAlignment="Left" Height="36" Margin="802,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtToPrice_KeyUp"/>
+        <Button x:Name="BtnFilterPrice" Content="Filter" HorizontalAlignment="Left" Margin="831,301,0,0" VerticalAlignment="Top" Width="75" Height="29" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterPrice_Click"/>
+        <Label x:Name="lblSearchByDate" Content="Search By Date" HorizontalAlignment="Left" Margin="811,349,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblFromDate" Content="From" HorizontalAlignment="Left" Margin="760,388,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lblToDate" Content="To" HorizontalAlignment="Left" Margin="764,419,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+        <Button x:Name="BtnFilterDate" Content="Filter" HorizontalAlignment="Left" Margin="831,460,0,0" VerticalAlignment="Top" Width="75" Height="28" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterDate_Click"/>
+        <xctk:DateTimePicker x:Name="DD" HorizontalAlignment="Left" Background="#FF725959" Foreground="White" Margin="802,388,0,0" VerticalAlignment="Top" Width="134" Height="32" MouseDoubleClick="DateTimePicker_MouseDoubleClick"/>
+        <xctk:DateTimePicker x:Name="AD" HorizontalAlignment="Left" Background="#FF725959" Foreground="White" Margin="802,425,0,0" VerticalAlignment="Top" Width="134" Height="30" MouseDoubleClick="DateTimePicker_MouseDoubleClick_1"/>
+        <Button Name="BtnPickFlight" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Pick A Flight" HorizontalAlignment="Left" Margin="29,62,0,0" VerticalAlignment="Top" Width="114" Height="34" Click="BtnPickSeat_Click"/>
+    </Grid>
+</Window>

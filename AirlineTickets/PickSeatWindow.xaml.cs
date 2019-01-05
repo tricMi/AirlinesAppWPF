@@ -2,7 +2,9 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,15 +26,32 @@ namespace AirlineTickets
     {
         ICollectionView view;
         public Seat SelectedSeat = null;
-        public PickSeatWindow()
+        Flight flight;
+        public ObservableCollection<Airplane> seats = new ObservableCollection<Airplane>();
+        public PickSeatWindow(Flight flight)
         {
             InitializeComponent();
-            view = CollectionViewSource.GetDefaultView(Data.Instance.SeatAvailable);
-            DgSeat.ItemsSource = view;
-            DgSeat.IsReadOnly = true;
-            DgSeat.IsSynchronizedWithCurrentItem = true;
-            DgSeat.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-          //  view.Filter = CustomFilter;
+            this.flight = flight;
+
+            foreach (Airplane a in Data.Instance.Airplanes)
+            {
+                if (a.Id == flight.AirplaneId.Id)
+                {
+                    seats.Add(a);
+                    foreach(Airplane asc in seats)
+                    {
+                        view = CollectionViewSource.GetDefaultView(asc.BusinessClass);
+                      //  view = CollectionViewSource.GetDefaultView(asc.EconomyClass);
+                        DgSeat.ItemsSource = view;
+                        DgSeat.IsReadOnly = true;
+                        DgSeat.IsSynchronizedWithCurrentItem = true;
+                        DgSeat.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+                    }
+                }
+                
+            }
+
+
         }
 
         private void BtnPick_Click(object sender, RoutedEventArgs e)

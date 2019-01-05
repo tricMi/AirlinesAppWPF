@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace AirlineTickets
         Airplane airplane;
         Option option;
         ICollectionView view;
-        public Seat seat { get; set; }
+        
 
 
         public EditAirplaneWindow(Airplane airplane, Option option = Option.ADDING)
@@ -38,12 +39,12 @@ namespace AirlineTickets
 
             this.airplane = airplane;
             this.option = option;
-            seat = new Seat("");
+            
 
             this.DataContext = airplane;
-            view = CollectionViewSource.GetDefaultView(airplane.BusinessClass);
+            view = CollectionViewSource.GetDefaultView(Data.Instance.SeatsBusiness(airplane.RowNum, airplane.ColumnNum, airplane.Input));
             DGBSeats.ItemsSource = view;
-            view = CollectionViewSource.GetDefaultView(airplane.EconomyClass);
+            view = CollectionViewSource.GetDefaultView(Data.Instance.SeatsEconomy(airplane.RowNum, airplane.ColumnNum, airplane.Input));
             DGBSeats.IsReadOnly = true;
             DGESeats.ItemsSource = view;
             DGESeats.IsReadOnly = true;
@@ -53,113 +54,48 @@ namespace AirlineTickets
             DGESeats.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
 
 
-            CBFlightNum.ItemsSource = Data.Instance.Flights.Select(f => f);
-
+       
             CbCompanyName.ItemsSource = Data.Instance.Aircompanies.Select(a => a);
 
         }
 
-       
-
-        
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
             if (option.Equals(Option.ADDING) && !airplaneExists(airplane.Pilot))
             {
-                int row = int.Parse(txtRowNumber.Text);
-                int column = int.Parse(txtColumnNumber.Text);
-
-              //  airplane.RowNum = row;
-               // airplane.ColumnNum = column;
-                airplane.BusinessClass = Data.Instance.SeatsBusiness(row, column);
-                airplane.EconomyClass = Data.Instance.SeatsEconomy(row, column);
+     
                 airplane.SaveAirplane();
-                //Seat seat = (Seat)airplane.BusinessClass.Select(b => b.SeatLabel);
-                //airplane.SaveAirplaneSeats(seat.SeatLabel, airplane.Id);
+                
             }
         }
-
-        private bool airplaneExists(string Pilot)
-        {
-            return Data.Instance.Airplanes.ToList().Find(a => a.Pilot.Equals(Pilot)) != null ? true : false;
-        }
-    
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
         }
 
-        private int IndexOfSelectedSeat(String seatLable)
+        private bool airplaneExists(string Pilot)
         {
-            var index = -1;
-            for (int i = 0; i < Data.Instance.SeatAvailable.Count; i++)
-            {
-                if (Data.Instance.SeatAvailable[i].SeatLabel.Equals(seatLable))
-                {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
+            return Data.Instance.Airplanes.ToList().Find(a => a.Pilot.Equals(Pilot)) != null ? true : false;
         }
 
-        private bool SelectedSeat(Seat seat)
+        private void DGESeats_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (seat == null)
+            string headername = e.Column.Header.ToString();
+            if(headername == "AirplaneId")
             {
-                MessageBox.Show("You haven't selected any seat!");
-                return false;
-            }
-            return true;
-        }
-
-        private void BtnAddB_Click(object sender, RoutedEventArgs e)
-        {
-            AddAirplane a = new AddAirplane();
-            if (a.ShowDialog() == true)
-            {
-                Data.Instance.SeatAvailable.Add(a.seat);
+                e.Cancel = true;
             }
         }
 
-        private void BtnDeleteB_Click(object sender, RoutedEventArgs e)
+        private void DGBSeats_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            Seat seat = DGBSeats.SelectedItem as Seat;
-            if (SelectedSeat(seat))
+            string headername = e.Column.Header.ToString();
+            if (headername == "AirplaneId")
             {
-                if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
-                {
-                    int index = IndexOfSelectedSeat(seat.SeatLabel);
-                    
-                    Data.Instance.SeatAvailable[index].Active = true;
-                    view.Refresh();
-                }
-                
+                e.Cancel = true;
             }
-           
-        }
-
-        private void BtnAddE_Click(object sender, RoutedEventArgs e)
-        {
-            seat.SaveSeat();
-        }
-
-        private void BtnDeleteE_Click(object sender, RoutedEventArgs e)
-        {
-            Seat seat = DGESeats.SelectedItem as Seat;
-            if (SelectedSeat(seat))
-            {
-                if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
-                {
-                    int index = IndexOfSelectedSeat(seat.SeatLabel);
-                    Data.Instance.SeatAvailable[index].Active = true;
-                    view.Refresh();
-                }
-               
-            }
-           
         }
     }
 }

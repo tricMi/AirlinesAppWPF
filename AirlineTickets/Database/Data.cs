@@ -21,9 +21,9 @@ namespace AirlineTickets.Database
         public ObservableCollection<Flight> Flights { get; set; }
         public ObservableCollection<Aircompany> Aircompanies { get; set; }
         public ObservableCollection<Seat> SeatAvailable { get; set; }
-        public ObservableCollection<Seats> Seats { get; set; }
         public ObservableCollection<Airplane> Airplanes { get; set; }
         public ObservableCollection<Tickets> Tickets { get; set; }
+        public ObservableCollection<String> Gate { get; set; }
 
         public const String CONNECTION_STRING = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=AirlineApp;Integrated Security=true";
         public String LoggedUser { get; set; }
@@ -36,17 +36,17 @@ namespace AirlineTickets.Database
             Flights = new ObservableCollection<Flight>();
             Aircompanies = new ObservableCollection<Aircompany>();
             SeatAvailable = new ObservableCollection<Seat>();
-            Seats = new ObservableCollection<Seats>();
             Airplanes = new ObservableCollection<Airplane>();
             Tickets = new ObservableCollection<Tickets>();
-
+            Gate = new ObservableCollection<string>();
             LoadAirport();
             LoadUsers();
             LoadAircompany();
-            LoadFlights();
             LoadAirplane();
+            LoadFlights();
             LoadSeats();
-            
+         //   LoadTickets();
+
         }
 
         
@@ -170,6 +170,7 @@ namespace AirlineTickets.Database
 
                     flight.Id = (int)row["Id"];
                     flight.FlightNumber = (string)row["FlightNumber"];
+                    flight.AirplaneId = GetAirplaneId((int)row["AirplaneId"]);
                     flight.DepartureTime = (DateTime)row["DepartureTime"];
                     flight.ArrivalTime = (DateTime)row["ArrivalTime"];
                     flight.DeparturePlace = AirportCity((string)row["DeparturePlace"]);
@@ -271,11 +272,11 @@ namespace AirlineTickets.Database
 
                     airplane.Id = (int)row["Id"];
                     airplane.Pilot = (string)row["Pilot"];
-                    airplane.FlightNum = GetFlightNumber((string)row["CompanyPassword"]);
+                    airplane.Input = (int)row["Input"];
                     airplane.RowNum = (int)row["RowNum"];
                     airplane.ColumnNum =(int)row["ColumnNum"];
-                    airplane.BusinessClass = SeatsBusiness((int)row["RowNum"],(int)row["ColumnNum"]);
-                    airplane.EconomyClass = SeatsEconomy((int)row["RowNum"], (int)row["ColumnNum"]);
+                    airplane.BusinessClass = SeatsBusiness((int)row["RowNum"],(int)row["ColumnNum"], (int)row["Input"]);
+                    airplane.EconomyClass = SeatsEconomy((int)row["RowNum"], (int)row["ColumnNum"], (int)row["Input"]);
                     airplane.AircompanyName = GetCompanyName((string)row["AircompanyName"]);
                     airplane.Active = (bool)row["Active"];
                     Airplanes.Add(airplane);
@@ -308,12 +309,9 @@ namespace AirlineTickets.Database
                     Seat seat = new Seat();
 
                     seat.Id = (int)row["Id"];
-                    seat.RowNum = (int)row["RowNum"];
-                    seat.ColumnNum = (int)row["ColumnNum"];
-                    seat.SeatLabel = SeatLabel((int)row["RowNum"], (int)row["ColumnNum"]);
+                    seat.SeatLabel = (string)row["SeatLabel"];
                     seat.SeatClass = (EClass)row["SeatClass"];
                     seat.SeatState = (bool)row["SeatState"];
-                    seat.AirplaneId = GetAirplaneId((int)row["AirplaneId"]);
                     seat.Active = (bool)row["Active"];
 
                     SeatAvailable.Add(seat);
@@ -323,36 +321,102 @@ namespace AirlineTickets.Database
 
         }
 
-        public ObservableCollection<Seat> AirplaneSeat(int id)
+        public ObservableCollection<Seat> AirplaneBusinessSeat(int id)
         {
-            ObservableCollection<Seat> seatA = new ObservableCollection<Seat>();
+            ObservableCollection<Seat> seatB = new ObservableCollection<Seat>();
             using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = CONNECTION_STRING;
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"SELECT * FROM AirplaneSeat";
+                command.CommandText = @"SELECT * FROM BusinessSeats";
 
                 SqlDataAdapter daAirplaneSeat = new SqlDataAdapter();
                 DataSet dsAirplaneSeat = new DataSet();
 
                 daAirplaneSeat.SelectCommand = command;
-                daAirplaneSeat.Fill(dsAirplaneSeat, "AirplaneSeat");
+                daAirplaneSeat.Fill(dsAirplaneSeat, "BusinessSeats");
 
-                foreach (DataRow row in dsAirplaneSeat.Tables["AirplaneSeat"].Rows)
+                foreach (DataRow row in dsAirplaneSeat.Tables["BusinessSeats"].Rows)
                 {
                     int aId = (int)row["AirplaneId"];
                     if(aId.Equals(id))
                     {
                         Seat seatLabel = GetSeatLabel((string)row["SeatLabel"]);
-                        seatA.Add(seatLabel);
+                        seatB.Add(seatLabel);
                     }
                 }
 
             }
-                return seatA;
+                return seatB;
         }
+
+        public ObservableCollection<Seat> AirplaneEconomySeat(int id)
+        {
+            ObservableCollection<Seat> seatE = new ObservableCollection<Seat>();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM EconomySeats";
+
+                SqlDataAdapter daEconomySeat = new SqlDataAdapter();
+                DataSet dsEconomySeat = new DataSet();
+
+                daEconomySeat.SelectCommand = command;
+                daEconomySeat.Fill(dsEconomySeat, "EconomySeats");
+
+                foreach (DataRow row in dsEconomySeat.Tables["EconomySeats"].Rows)
+                {
+                    int aId = (int)row["AirplaneId"];
+                    if (aId.Equals(id))
+                    {
+                        Seat seatLabel = GetSeatLabel((string)row["SeatLabel"]);
+                        seatE.Add(seatLabel);
+                    }
+                }
+
+            }
+            return seatE;
+        }
+
+        //public void LoadTickets()
+        //{
+        //    Tickets.Clear();
+        //    using (SqlConnection conn = new SqlConnection())
+        //    {
+        //        conn.ConnectionString = CONNECTION_STRING;
+        //        conn.Open();
+
+        //        SqlCommand command = conn.CreateCommand();
+        //        command.CommandText = @"SELECT * FROM Tickets";
+
+        //        SqlDataAdapter daTickets = new SqlDataAdapter();
+        //        DataSet dsTickets = new DataSet();
+
+        //        daTickets.SelectCommand = command;
+        //        daTickets.Fill(dsTickets, "Tickets");
+
+        //        foreach (DataRow row in dsTickets.Tables["Tickets"].Rows)
+        //        {
+        //            Tickets ticket = new Tickets();
+
+        //            ticket.Id = (int)row["Id"];
+        //            ticket.FlightNum = GetFlightNumber((string)row["FlightNum"]);
+        //            ticket.SeatClass = (EClass)row["SeatClass"];
+        //            ticket.SeatNum = GetSeatLabel((string)row["SeatNum"]);
+        //            ticket.CurrentUser = GetUserName((string)row["CurrentUser"]);
+        //            ticket.Gate = (string)row["Gate"];
+        //            ticket.TicketPrice = (double)row["TicketPrice"];
+        //            ticket.Active = (bool)row["Active"];
+
+        //            Tickets.Add(ticket);
+        //        }
+        //    }
+        //}
 
 
         public Airport AirportCity(String city)
@@ -378,6 +442,19 @@ namespace AirlineTickets.Database
             }
             return null;
         }
+
+        public User GetUserName(string username)
+        {
+            foreach(User u in Users)
+            {
+                if(u.Username.Equals(username))
+                {
+                    return u;
+                }
+            }
+
+            return null;
+        }
       
        public ObservableCollection<Flight> GetFlightNum(string num)
         {
@@ -396,7 +473,7 @@ namespace AirlineTickets.Database
         {
             foreach(Flight f in Flights)
             {
-                if(f.FlightNumber.Equals(flnum))
+                if(f.FlightNumber.Equals(flnum) && f.Active.Equals(false))
                 {
                     return f;
                 }
@@ -445,7 +522,7 @@ namespace AirlineTickets.Database
         public char[] ColumnLabel()
         {
 
-            char[] characters = "ABCDEFGH".ToCharArray();
+            char[] characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
             return characters;
 
         }
@@ -480,12 +557,12 @@ namespace AirlineTickets.Database
 
 
 
-        public ObservableCollection<Seat> SeatsBusiness(int rowNum, int colNum)
+        public ObservableCollection<Seat> SeatsBusiness(int rowNum, int colNum, int input)
         {
             ObservableCollection<Seat> seatB = new ObservableCollection<Seat>();
             for (int i = 0; i < SeatLabels(rowNum, colNum).Count; i++)
             {
-                if (i < 10)
+                if (i < input)
                 {
                     Seat seat = new Seat();
                     seat.SeatLabel = SeatLabels(rowNum, colNum)[i];
@@ -495,6 +572,7 @@ namespace AirlineTickets.Database
                     seatB.Add(seat);
                     SeatAvailable.Add(seat);
 
+
                 }
 
             }
@@ -502,12 +580,12 @@ namespace AirlineTickets.Database
 
         }
 
-        public ObservableCollection<Seat> SeatsEconomy(int rowNum, int colNum)
+        public ObservableCollection<Seat> SeatsEconomy(int rowNum, int colNum, int input)
         {
             ObservableCollection<Seat> seatE = new ObservableCollection<Seat>();
             for (int i = 0; i < SeatLabels(rowNum, colNum).Count; i++)
             {
-                if (i >= 10)
+                if (i >= input)
                 {
                     Seat seatEconomy = new Seat();
                     seatEconomy.SeatLabel = SeatLabels(rowNum, colNum)[i];
@@ -516,11 +594,20 @@ namespace AirlineTickets.Database
                     seatEconomy.Active = false;
                     seatE.Add(seatEconomy);
                     SeatAvailable.Add(seatEconomy);
+                    
                 }
 
             }
             return seatE;
 
+        }
+
+        public void GateValues()
+        {
+            Gate.Add("A4");
+            Gate.Add("B6");
+            Gate.Add("C8");
+            Gate.Add("D7");
         }
     }
 }

@@ -55,7 +55,7 @@ namespace AirlineTickets
                 }
                 else if(u.UserType == EUserType.PASSENGER)
                 {
-                    PassengerWindow pw = new PassengerWindow();
+                    PassengerWindow pw = new PassengerWindow(u);
                     pw.ShowDialog();
                     this.Close();
                 }

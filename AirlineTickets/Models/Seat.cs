@@ -16,21 +16,6 @@ namespace AirlineTickets.Models
 
         public int Id { get; set; }
 
-        private int rowNum;
-
-        public int RowNum
-        {
-            get { return rowNum; }
-            set { rowNum = value; }
-        }
-
-        private int columnNum;
-
-        public int ColumnNum
-        {
-            get { return columnNum; }
-            set { columnNum = value; }
-        }
 
         private String seatLabel;
 
@@ -54,14 +39,6 @@ namespace AirlineTickets.Models
         {
             get { return seatClass; }
             set { seatClass = value; }
-        }
-
-        private Airplane airplaneId;
-
-        public Airplane AirplaneId
-        {
-            get { return airplaneId; }
-            set { airplaneId = value; }
         }
 
 
@@ -96,12 +73,9 @@ namespace AirlineTickets.Models
             Seat newSeat = new Seat
             {
                 Id = this.Id,
-                RowNum = this.RowNum,
-                ColumnNum = this.ColumnNum,
                 SeatLabel = this.SeatLabel,
                 SeatState = this.SeatState,
                 SeatClass = this.SeatClass,
-                AirplaneId = this.AirplaneId,
                 Active = this.Active
             };
             return newSeat;
@@ -120,17 +94,12 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Seat( RowNum, ColumnNum, SeatLabel, SeatState, SeatClass, AirplaneId, Active)" +
-               " VALUES (@RowNum, @ColumNum, @SeatLabel, @SeatState, @SeatClass, @AirplaneId, @Active)";
+                command.CommandText = @"INSERT INTO Seat(SeatLabel, SeatState, SeatClass, Active)" +
+               " VALUES (@SeatLabel, @SeatState, @SeatClass, @Active)";
 
-
-
-                command.Parameters.Add(new SqlParameter("@RowNum", this.RowNum));
-                command.Parameters.Add(new SqlParameter("@ColumNum", this.ColumnNum));
                 command.Parameters.Add(new SqlParameter("@SeatLabel", this.SeatLabel));
                 command.Parameters.Add(new SqlParameter("@SeatState", this.SeatState));
                 command.Parameters.Add(new SqlParameter("@SeatClass", this.SeatClass));
-                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
                 command.ExecuteNonQuery();
@@ -148,17 +117,13 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"UPDATE Seat SET RowNum = @RowNum, ColumnNum = @ColumNum, 
-                SeatLabel = @SeatLabel, SeatState = @SeatState, SeatClass = @SeatClass, 
-                AirplaneId = @AirplaneId, Active = @Active WHERE @Id = Id";
+                command.CommandText = @"UPDATE Seat SET  
+                SeatLabel = @SeatLabel, SeatState = @SeatState, SeatClass = @SeatClass, Active = @Active WHERE @Id = Id";
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
-                command.Parameters.Add(new SqlParameter("@RowNum", this.RowNum));
-                command.Parameters.Add(new SqlParameter("@ColumNum", this.ColumnNum));
                 command.Parameters.Add(new SqlParameter("@SeatLabel", this.SeatLabel));
                 command.Parameters.Add(new SqlParameter("@SeatState", this.SeatState));
                 command.Parameters.Add(new SqlParameter("@SeatClass", this.SeatClass));
-                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId));
                 command.Parameters.Add(new SqlParameter("@Active", this.Active));
 
                 command.ExecuteNonQuery();

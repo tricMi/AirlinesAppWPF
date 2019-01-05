@@ -26,22 +26,20 @@ namespace AirlineTickets
 
         ICollectionView view;
        
-        Seats seats;
-       
+        Seat seat;
+        public enum Option { ADD, EDIT }
 
-        public EditSeatsWindow(Seats seats)
+
+        public EditSeatsWindow(Seat seat, Option option = Option.ADD)
         {
             InitializeComponent();
-            this.seats = seats;
-           
+            this.seat = seat;
 
-            this.DataContext = seats;
-            view = CollectionViewSource.GetDefaultView(seats.AllSeats);
-            DGSeat.ItemsSource = view;
-            DGSeat.IsReadOnly = true;
-            DGSeat.IsSynchronizedWithCurrentItem = true;
-            DGSeat.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-            view.Filter = CustomFilter;
+            this.DataContext = seat;
+            if (option.Equals(Option.EDIT))
+            {
+               // TxtSeatLabel.IsEnabled = false;
+            }
 
         }
 
@@ -59,7 +57,7 @@ namespace AirlineTickets
                 if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     int index = IndexOfSelectedSeat(seat.SeatLabel);
-                 //   Data.Instance.Seat[index].Active = true;
+                    Data.Instance.SeatAvailable[index].Active = true;
                     view.Refresh();
                 }
             }
@@ -76,7 +74,7 @@ namespace AirlineTickets
                 if (esw.ShowDialog() != true)
                 {
                     int index = IndexOfSelectedSeat(oldSeat.SeatLabel);
-                  //  Data.Instance.Seat[index] = oldSeat;
+                    Data.Instance.SeatAvailable[index] = oldSeat;
                     
                 }
             }

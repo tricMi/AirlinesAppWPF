@@ -35,6 +35,7 @@ namespace AirlineTickets
 
             this.DataContext = flight;
 
+            cbAirplaneId.ItemsSource = Data.Instance.Airplanes.Select(ar => ar);
             CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a);
             CbDestination.ItemsSource = Data.Instance.Airports.Select(b => b);
             cbCompanyId.ItemsSource = Data.Instance.Aircompanies.Select(c => c);

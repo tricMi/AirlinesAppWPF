@@ -25,17 +25,17 @@
                 <SolidColorBrush Color="#FF6C696C" Opacity="0.5"/>
             </StackPanel.Background>
         </StackPanel>
-        <Button Name ="BtnPassenger" Content="Passenger" Foreground="White" HorizontalAlignment="Left" Margin="359,216,0,0" VerticalAlignment="Top" Width="84" Height="33">
+        <Button Name ="BtnPassenger" Content="Passenger" Foreground="White" HorizontalAlignment="Left" Margin="359,216,0,0" VerticalAlignment="Top" Width="84" Height="33" Click="BtnPassenger_Click">
             <Button.Background>
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>
         </Button>
-        <Button Name ="BtnTickets" Content="Ticket" Foreground="White" HorizontalAlignment="Left" Margin="96,216,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="-1.013,-1.1" Height="33">
+        <Button Name ="BtnTickets" Content="Ticket" Foreground="White" HorizontalAlignment="Left" Margin="96,216,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="-1.013,-1.1" Height="33" Click="BtnTickets_Click">
             <Button.Background>
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>
         </Button>
-        <Button Name ="BtnFlights" Content="Flights" Foreground="White" HorizontalAlignment="Left" Margin="610,216,0,0" VerticalAlignment="Top" Width="86" Height="33">
+        <Button Name ="BtnFlights" Content="Flights" Foreground="White" HorizontalAlignment="Left" Margin="610,216,0,0" VerticalAlignment="Top" Width="86" Height="33" Click="BtnFlights_Click">
             <Button.Background>
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>

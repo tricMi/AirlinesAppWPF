@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AirlineTickets"
+        xmlns:local="clr-namespace:AirlineTickets.Validation"
         
         mc:Ignorable="d"
         Title="User Edit Window" Height="501" Width="343" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen">
@@ -16,7 +16,28 @@
         <Label Name="LblGender" Content="Gender" HorizontalAlignment="Left" Margin="40,243,0,0" VerticalAlignment="Top" Width="100" Height="33" FontWeight="Bold"/>
         <Label Name="LblSurname" Content="Surname" HorizontalAlignment="Left" Margin="40,81,0,0" VerticalAlignment="Top" Width="100" Height="35" FontWeight="Bold"/>
         <Label Name="LblPassword" Content="Password" HorizontalAlignment="Left" Margin="40,132,0,0" VerticalAlignment="Top" Width="100" Height="30" FontWeight="Bold"/>
-        <TextBox Name ="txtName" HorizontalAlignment="Left" Height="35" Margin="165,29,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="txtName" HorizontalAlignment="Left" Height="35" Margin="165,29,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
+            <TextBox.Text>
+                <Binding Path="Name"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">  
+
+                    <Binding.ValidationRules>
+                        <local:NameValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <TextBox Name ="txtSurname" HorizontalAlignment="Left" Height="35" Margin="165,81,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname}" VerticalAlignment="Top" Width="120"/>
         <TextBox Name ="txtUsername" HorizontalAlignment="Left" Height="35" Margin="165,186,0,0" TextWrapping="Wrap" Text="{Binding Path=Username}" VerticalAlignment="Top" Width="120"/>
         <TextBox Name ="txtAddress" HorizontalAlignment="Left" Height="35" Margin="165,299,0,0" TextWrapping="Wrap" Text="{Binding Path=Address}" VerticalAlignment="Top" Width="120"/>

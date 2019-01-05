@@ -27,7 +27,7 @@ namespace AirlineTickets
         public SeatsWindow()
         {
             InitializeComponent();
-            view = CollectionViewSource.GetDefaultView(Data.Instance.Seats);
+            view = CollectionViewSource.GetDefaultView(Data.Instance.SeatAvailable);
             DGSeats.ItemsSource = view;
             DGSeats.IsReadOnly = true;
             DGSeats.IsSynchronizedWithCurrentItem = true;
@@ -37,25 +37,71 @@ namespace AirlineTickets
 
         private bool CustomFilter(object obj)
         {
-            Seats seats = obj as Seats;
-            return !seats.Active;
+            Seat seat = obj as Seat;
+            return !seat.Active;
         }
 
-        private void BtnShow_Click(object sender, RoutedEventArgs e)
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            Seats seat = DGSeats.SelectedItem as Seats;
-            EditSeatsWindow ew = new EditSeatsWindow(seat);
-            ew.ShowDialog();
-        }
-
-        private void DGSeats_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            string headername = e.Column.Header.ToString();
-
-            if (headername == "AllSeats")
+            Seat seat = DGSeats.SelectedItem as Seat;
+            if (SelectedSeat(seat))
             {
-                e.Cancel = true;
+                if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
+                {
+                    int index = IndexOfSelectedSeat(seat.SeatLabel);
+                    Data.Instance.SeatAvailable[index].Active = true;
+                    view.Refresh();
+                }
             }
         }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Seat seat = DGSeats.SelectedItem as Seat;
+            if (SelectedSeat(seat))
+            {
+                Seat oldSeat = seat.Clone() as Seat;
+                EditSeatWindow esw = new EditSeatWindow(seat, EditSeatWindow.Option.EDIT);
+
+                if (esw.ShowDialog() != true)
+                {
+                    int index = IndexOfSelectedSeat(oldSeat.SeatLabel);
+                    Data.Instance.SeatAvailable[index] = oldSeat;
+
+                }
+            }
+            view.Refresh();
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            EditSeatWindow esw = new EditSeatWindow(new Seat(), EditSeatWindow.Option.ADD);
+            esw.ShowDialog();
+        }
+
+        private int IndexOfSelectedSeat(String seatLable)
+        {
+            var index = -1;
+            for (int i = 0; i < Data.Instance.SeatAvailable.Count; i++)
+            {
+                if (Data.Instance.SeatAvailable[i].SeatLabel.Equals(seatLable))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        private bool SelectedSeat(Seat seat)
+        {
+            if (seat == null)
+            {
+                MessageBox.Show("You haven't selected any seat!");
+                return false;
+            }
+            return true;
+        }
+
     }
 }

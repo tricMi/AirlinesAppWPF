@@ -24,13 +24,15 @@ namespace AirlineTickets.Models
             set { pilot = value; OnPropertyChanged("Pilot"); }
         }
 
-        private Flight flightNum;
 
-        public Flight FlightNum
+        private int input;
+
+        public int Input
         {
-            get { return flightNum; }
-            set { flightNum = value; OnPropertyChanged("FlightNum"); }
+            get { return input; }
+            set { input = value; OnPropertyChanged("Input"); }
         }
+
 
         private int rowNum;
 
@@ -94,13 +96,18 @@ namespace AirlineTickets.Models
             }
         }
 
+        public override string ToString()
+        {
+            return $"{Id}";
+        }
+
         public object Clone()
         {
             Airplane newPlane = new Airplane
             {
                 Id = this.Id,
                 Pilot = this.Pilot,
-                FlightNum = this.FlightNum,
+                Input = this.Input,
                 RowNum = this.RowNum,
                 ColumnNum = this.ColumnNum,
                 BusinessClass = this.BusinessClass,
@@ -120,17 +127,15 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Airplane( Pilot, FlightNumber, RowNum, ColumnNum, BusinessClass, EconomyClass, AircompanyName, Active)" +
-               " VALUES (@Pilot, @FlightNumber, @RowNum, @ColumnNum, @BusinessClass, @EconomyClass, @AircompanyName, @Active)";
+                command.CommandText = @"INSERT INTO Airplane( Pilot, Input, RowNum, ColumnNum, AircompanyName, Active)" +
+               " VALUES (@Pilot, @Input, @RowNum, @ColumnNum, @AircompanyName, @Active)";
 
 
 
                 command.Parameters.Add(new SqlParameter("@Pilot", this.Pilot));
-                command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNum.FlightNumber));
+                command.Parameters.Add(new SqlParameter("@Input", this.Input));
                 command.Parameters.Add(new SqlParameter("@RowNum", this.RowNum));
                 command.Parameters.Add(new SqlParameter("@ColumnNum", this.ColumnNum));
-                command.Parameters.Add(new SqlParameter("@BusinessClass", this.BusinessClass));
-                command.Parameters.Add(new SqlParameter("@EconomyClass", this.EconomyClass));
                 command.Parameters.Add(new SqlParameter("@AircompanyName", this.AircompanyName.CompanyName));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
@@ -150,13 +155,12 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"UPDATE Airplane SET Pilot = @Pilot, FlightNumber = @FlightNumber,
+                command.CommandText = @"UPDATE Airplane SET Pilot = @Pilot,
                 RowNum = @RowNum, ColumnNum = @ColumnNum, AircompanyName = @AircompanyName, 
-                Active = @Active, WHERE @Id = Id";
+                Active = @Active WHERE @Id = Id";
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@Pilot", this.Pilot));
-                command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNum.FlightNumber));
                 command.Parameters.Add(new SqlParameter("@RowNum", this.RowNum));
                 command.Parameters.Add(new SqlParameter("@ColumnNum", this.ColumnNum));
                 command.Parameters.Add(new SqlParameter("@AircompanyName", this.AircompanyName.CompanyName));
@@ -169,7 +173,7 @@ namespace AirlineTickets.Models
             Database.Data.Instance.LoadAirplane();
         }
 
-        public void SaveAirplaneSeats(string label, int id)
+        public void SaveAirplaneBusinessSeats(string label, int id)
         {
             using (SqlConnection conn = new SqlConnection())
             {
@@ -177,7 +181,7 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO AirplaneSeats(SeatLabel, AirplaneId)" +
+                command.CommandText = @"INSERT INTO BusinessSeats(SeatLabel, AirplaneId)" +
                                       " VALUES(@SeatLabel, @AirplaneId)";
 
                 command.Parameters.Add(new SqlParameter("@SeatLabel", label));
@@ -186,7 +190,27 @@ namespace AirlineTickets.Models
                 command.ExecuteNonQuery();
             }
 
-            Database.Data.Instance.AirplaneSeat(id);
+            Database.Data.Instance.AirplaneBusinessSeat(id);
+        }
+
+        public void SaveAirplaneEconomySeats(string label, int id)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"INSERT INTO EconomySeats(SeatLabel, AirplaneId)" +
+                                      " VALUES(@SeatLabel, @AirplaneId)";
+
+                command.Parameters.Add(new SqlParameter("@SeatLabel", label));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", id));
+
+                command.ExecuteNonQuery();
+            }
+
+            Database.Data.Instance.AirplaneEconomySeat(id);
         }
     }
 }
