@@ -45,12 +45,22 @@ namespace AirlineTickets
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            if(option.Equals(Option.ADDING) && !userExists(user.Name))
+            if (Validation() == true)
             {
-                user.SaveUsers();
+                BtnSave.IsEnabled = true;
+                if (!System.Windows.Controls.Validation.GetHasError(txtName))
+                {
+                    this.DialogResult = true;
+                    if (option.Equals(Option.ADDING) && !userExists(user.Name))
+                    {
+                        user.SaveUsers();
+                    }
+                    else
+                    {
+                        MessageBox.Show("User with this username already exists, please pick another one");
+                    }
+                }
             }
-
         }
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)
@@ -61,6 +71,42 @@ namespace AirlineTickets
         private bool userExists(string username)
         {
             return Data.Instance.Users.ToList().Find(a => a.Username.Equals(username)) != null ? true : false;
+        }
+
+        private Boolean Validation()
+        {
+            Boolean ok = true;
+            if (txtName.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (txtSurname.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (txtUsername.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (txtEmail.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (txtPassword.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (txtAddress.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            return ok;
         }
     }
 }

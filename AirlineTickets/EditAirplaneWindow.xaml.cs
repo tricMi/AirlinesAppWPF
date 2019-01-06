@@ -2,6 +2,7 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -30,7 +31,7 @@ namespace AirlineTickets
         Airplane airplane;
         Option option;
         ICollectionView view;
-        
+        public ObservableCollection<Aircompany> NameA = new ObservableCollection<Aircompany>();
 
 
         public EditAirplaneWindow(Airplane airplane, Option option = Option.ADDING)
@@ -53,26 +54,51 @@ namespace AirlineTickets
             DGBSeats.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             DGESeats.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
 
+            foreach (Aircompany a in Data.Instance.Aircompanies)
+            {
+                if (a.Active.Equals(false))
+                {
+                    NameA.Add(a);
+                }
+            }
 
-       
-            CbCompanyName.ItemsSource = Data.Instance.Aircompanies.Select(a => a);
+            CbCompanyName.ItemsSource = NameA.Select(a => a);
 
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            if (option.Equals(Option.ADDING) && !airplaneExists(airplane.Pilot))
+            if (Validation() == true)
+
             {
-     
-                airplane.SaveAirplane();
+                if (!System.Windows.Controls.Validation.GetHasError(TxtPilot))
+                {
+
+                    this.DialogResult = true;
+                    if (option.Equals(Option.ADDING) && !airplaneExists(airplane.Pilot))
+                    {
+
+                        airplane.SaveAirplane();
+
+                       
+
+                    }
+                }
+               // Seat seat = new Seat();
+                foreach (Seat s in Data.Instance.SeatAvailable)
+                {
+                    s.SaveSeat();
+                    s.AirplaneId = airplane;
+                    s.ChangeSeat();
+
+                }
                 
             }
         }
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            this.Close();
         }
 
         private bool airplaneExists(string Pilot)
@@ -96,6 +122,40 @@ namespace AirlineTickets
             {
                 e.Cancel = true;
             }
+        }
+
+        private Boolean Validation()
+        {
+            Boolean ok = true;
+            
+            if(Convert.ToInt32(txtInput.Text.Trim()) > 50)
+            {
+                ok = false;
+                MessageBox.Show("Value for input can't be greater than 50");
+            }
+            else if(Convert.ToInt32(txtColumnNumber.Text.Trim()) == 0)
+            {
+                ok = false;
+                MessageBox.Show("Wrong Column Format");
+            }
+            else if (Convert.ToInt32(txtRowNumber.Text.Trim()) == 0)
+            {
+                ok = false;
+                MessageBox.Show("Wrong Row Format");
+            }
+
+            else if (Convert.ToInt32(txtColumnNumber.Text.Trim()) > Convert.ToInt32(txtRowNumber.Text.Trim()))
+            {
+                ok = false;
+                MessageBox.Show("Value for column can't be greater than value for row");
+            }
+            else if(TxtPilot.Text.Equals(String.Empty))
+            {
+                ok = false;
+                MessageBox.Show("Field can't be empty ");
+            }
+
+            return ok;
         }
     }
 }

@@ -49,11 +49,11 @@ namespace AirlineTickets
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            //this.DialogResult = true;
-            //if (option.Equals(Option.ADD) && !TicketExists(ticket.CurrentUser))
-            //{
-            //    Data.Instance.Tickets.Add(ticket);
-            //}
+            this.DialogResult = true;
+            if (option.Equals(Option.ADD) && !TicketExists(ticket.CurrentUser))
+            {
+                ticket.SaveTicket();
+            }
         }
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)

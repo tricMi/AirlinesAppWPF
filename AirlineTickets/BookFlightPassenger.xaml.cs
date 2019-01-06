@@ -26,14 +26,34 @@ namespace AirlineTickets
         User user;
         Flight flight;
         public Seat SelectedSeat { get; set; }
-
+        public EClass clas { get; set; }
 
         public BookFlightPassenger(Flight flight, User user)
         {
             InitializeComponent();
             this.user = user;
             this.flight = flight;
-            
+
+
+            if (user != null)
+            {
+                txtFlight.IsEnabled = false;
+                txtName.IsEnabled = false;
+                txtSeat.IsEnabled = false;
+                txtGender.IsEnabled = false;
+                txtSurname.IsEnabled = false;
+                txtAddress.IsEnabled = false;
+
+
+                txtName.Text = user.Name;
+                txtSurname.Text = user.Surname;
+                txtGender.Text = user.Gender.ToString();
+                txtAddress.Text = user.Address;
+
+            }
+            this.txtSeat.DataContext = SelectedSeat;
+            this.cbClass.DataContext = SelectedSeat;
+            this.txtPrice.DataContext = flight;
 
             this.txtName.DataContext = user;
             this.txtSurname.DataContext = user;
@@ -42,43 +62,61 @@ namespace AirlineTickets
 
             this.txtFlight.DataContext = flight;
 
-            this.txtSeat.DataContext = SelectedSeat;
-            this.cbClass.DataContext = SelectedSeat;
-
-            txtFlight.IsEnabled = false;
-            txtName.IsEnabled = false;
-            txtSeat.IsEnabled = false;
-            txtGender.IsEnabled = false;
-            txtSurname.IsEnabled = false;
-            txtAddress.IsEnabled = false;
-
-
-            txtName.Text = user.Name;
-            txtSurname.Text = user.Surname;
-            txtGender.Text = user.Gender.ToString();
-            txtAddress.Text = user.Address;
 
             cbClass.ItemsSource = Enum.GetValues(typeof(EClass));
+           
+            txtPrice.Text = flight.OneWayTicketPrice.ToString();
+            
         }
 
         private void BtnBook_Click(object sender, RoutedEventArgs e)
         {
-            //Tickets ticket = new Tickets();
-            //ticket.FlightNum = flight;
-            //ticket.SeatNum = SelectedSeat;
-            //ticket.CurrentUser = user;
-            //ticket.Gate = "A5";
-            //ticket.TicketPrice = flight.OneWayTicketPrice;
-            //ticket.SaveTicket();
+            Tickets ticket = new Tickets();
+            if (user != null)
+            {
+                ticket.FlightNum = flight;
+                ticket.SeatClass = (EClass)cbClass.SelectedItem;
+                ticket.SeatNum = SelectedSeat;
+                ticket.CurrentUser = user.Username;
+                ticket.Gate = "A5";
+                ticket.TicketPrice = flight.OneWayTicketPrice;
+                if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
+                {
+                    ticket.TicketPrice = flight.OneWayTicketPrice * (decimal)5.0;
+                }
+            }
+            else
+            {
+                ticket.FlightNum = flight;
+                ticket.SeatClass = (EClass)cbClass.SelectedItem;
+                ticket.SeatNum = SelectedSeat;
+                ticket.CurrentUser = txtName.Text + " " + txtSurname.Text;
+                ticket.Gate = "A5";
+                ticket.TicketPrice = flight.OneWayTicketPrice;
+                if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
+                {
+                    ticket.TicketPrice = flight.OneWayTicketPrice * (decimal)5.0;
+                }
+            }
+            ticket.SaveTicket();
+            this.Close();
         }
 
         private void BtnSeat_Click(object sender, RoutedEventArgs e)
         {
-
-            PickSeatWindow ps = new PickSeatWindow(flight);
-            if (ps.ShowDialog() == true)
+            if (cbClass.SelectedIndex > -1)
             {
-                SelectedSeat = ps.SelectedSeat;
+                clas = (EClass)cbClass.SelectedItem;
+                PickSeatWindow ps = new PickSeatWindow(flight, clas);
+                if (ps.ShowDialog() == true)
+                {
+                    SelectedSeat = ps.SelectedSeat;
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("You must select a class");
             }
         }
 

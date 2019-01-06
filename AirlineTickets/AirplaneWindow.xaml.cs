@@ -39,7 +39,16 @@ namespace AirlineTickets
         private bool CustomFilter(object obj)
         {
             Airplane plane = obj as Airplane;
-            return !plane.Active;
+            if (TxtSearch.Text.Equals(string.Empty))
+            {
+                return !plane.Active;
+            }
+            else
+            {
+                return !plane.Active && plane.AircompanyName.CompanyName.Contains(TxtSearch.Text)
+                    || (!plane.Active && plane.Pilot.Contains(TxtSearch.Text));
+            }
+
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -126,6 +135,11 @@ namespace AirlineTickets
             {
                 e.Cancel = true;
             }
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
         }
     }
 }

@@ -48,7 +48,10 @@ namespace AirlineTickets
             {
                 if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
+                    
                     int index = IndexOfSelectedSeat(seat.SeatLabel);
+                    seat.Active = true;
+                    seat.ChangeSeat();
                     Data.Instance.SeatAvailable[index].Active = true;
                     view.Refresh();
                 }
@@ -69,8 +72,12 @@ namespace AirlineTickets
                     Data.Instance.SeatAvailable[index] = oldSeat;
 
                 }
+                else
+                {
+                    seat.ChangeSeat();
+                }
             }
-            view.Refresh();
+           
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)

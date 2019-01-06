@@ -64,8 +64,8 @@ namespace AirlineTickets
 
         private void BtnTickets_Click(object sender, RoutedEventArgs e)
         {
-            //TicketsWindow tw = new TicketsWindow();
-            //tw.ShowDialog();
+            TicketsWindow tw = new TicketsWindow();
+            tw.ShowDialog();
         }
     }
 }

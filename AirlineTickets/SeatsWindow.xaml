@@ -7,10 +7,13 @@
         mc:Ignorable="d"
         Title="Seats Window" Height="344" Width="709" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid Name ="DGSeats" GridLinesVisibility="None"  HorizontalAlignment="Left" Height="222" Margin="23,65,0,0" VerticalAlignment="Top" Width="599"/>
-        <Button Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="23,19,0,0" VerticalAlignment="Top" Width="88" Height="31" Click="BtnDelete_Click"/>
-        <Button Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="88" Height="29" Click="BtnEdit_Click"/>
-        <Button Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="252,19,0,0" VerticalAlignment="Top" Width="88" Height="32" Click="BtnAdd_Click"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
+        <DataGrid Name ="DGSeats" Opacity="0.8" GridLinesVisibility="None"  HorizontalAlignment="Left" Height="222" Margin="23,65,0,0" VerticalAlignment="Top" Width="599"/>
+        <Button Name="BtnDelete" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Delete" HorizontalAlignment="Left" Margin="23,19,0,0" VerticalAlignment="Top" Width="88" Height="31" Click="BtnDelete_Click"/>
+        <Button Name="BtnEdit" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Edit" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="88" Height="29" Click="BtnEdit_Click"/>
+        <Button Name="BtnAdd" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Add" HorizontalAlignment="Left" Margin="252,19,0,0" VerticalAlignment="Top" Width="88" Height="32" Click="BtnAdd_Click"/>
 
     </Grid>
 </Window>

@@ -5,11 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="PickSeatWindow" Height="365" Width="604" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+        Title="Pick Seat Window" Height="575" Width="653" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid Name ="DgSeat" GridLinesVisibility="None" HorizontalAlignment="Left" Height="254" Margin="23,60,0,0" VerticalAlignment="Top" Width="441"/>
-        <Button x:Name="BtnPick" Content="Pick" HorizontalAlignment="Left" Margin="485,60,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="BtnPick_Click"/>
-        <Button x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="485,107,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="BtnCancel_Click"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/air.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="620*"/>
+            <ColumnDefinition Width="133*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="BtnPick" Background="#FF725959" Opacity="0.8" Foreground="White" Content="Pick" HorizontalAlignment="Left" Margin="529,38,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="BtnPick_Click" Grid.ColumnSpan="2" FontWeight="Bold"/>
+        <Button x:Name="BtnCancel" Background="#FF725959" Opacity="0.8" Foreground="White" Content="Cancel" HorizontalAlignment="Left" Margin="529,83,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="BtnCancel_Click" RenderTransformOrigin="0.398,-0.467" Grid.ColumnSpan="2" FontWeight="Bold"/>
+        <ListBox x:Name ="LbBSeats" Opacity="0.8" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Height="480" Margin="21,38,0,0" VerticalAlignment="Top" Width="487">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="332" Background="#4CFFFFFF">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="132*"/>
+                            <ColumnDefinition Width="200*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="GridB" Grid.RowSpan="3" Margin="0,0,12,0" Background="Coral" Width="60" Height="60" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding SeatLabel}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                        </Grid>
+                        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Background="Beige" Text="{Binding SeatState}" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Background="Beige" Grid.ColumnSpan="1" Text="{Binding SeatClass}" TextWrapping="Wrap"/>
+                        
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding SeatState}" Value="True">
+                            <Setter TargetName="GridB" Property="Background" Value="Coral"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding SeatState}" Value="False">
+                            <Setter TargetName="GridB" Property="Background" Value="Green"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="6"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
 
     </Grid>
 </Window>

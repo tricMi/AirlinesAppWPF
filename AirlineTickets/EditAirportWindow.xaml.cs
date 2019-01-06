@@ -42,10 +42,23 @@ namespace AirlineTickets
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            if (option.Equals(Option.ADDING) && !airportExists(airport.AirportID)) {
+            if (Validation() == true)
 
-                airport.Save();
+            {
+                BtnSave.IsEnabled = true;
+                if (!System.Windows.Controls.Validation.GetHasError(TxtAirportID))
+                {
+                    this.DialogResult = true;
+                    if (option.Equals(Option.ADDING) && !airportExists(airport.AirportID))
+                    {
+
+                        airport.Save();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Airport with this ID already exists, please choose another ID");
+                    }
+                }
             }
         }
 
@@ -57,6 +70,27 @@ namespace AirlineTickets
         private bool airportExists(string airportID)
         {
             return Data.Instance.Airports.ToList().Find(a => a.AirportID.Equals(airportID)) != null ? true : false;
+        }
+
+        private Boolean Validation()
+        {
+            Boolean ok = true;
+            if(TxtAirportID.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (TxtCity.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (TxtName.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            return ok;
         }
     }
 }

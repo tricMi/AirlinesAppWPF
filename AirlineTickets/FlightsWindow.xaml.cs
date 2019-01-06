@@ -220,5 +220,10 @@ namespace AirlineTickets
         {
             view.Refresh();
         }
+
+        private void BtnSort_Click(object sender, RoutedEventArgs e)
+        {
+            view.SortDescriptions.Add(new SortDescription("OneWayTicketPrice", ListSortDirection.Ascending));
+        }
     }
 }

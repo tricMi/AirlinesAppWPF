@@ -34,10 +34,6 @@ namespace AirlineTickets
             DGUser.IsReadOnly = true;
             DGUser.IsSynchronizedWithCurrentItem = true;
             DGUser.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-            view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
-            view.SortDescriptions.Add(new SortDescription("Surname", ListSortDirection.Ascending));
-        
-           
 
         }
 
@@ -126,6 +122,13 @@ namespace AirlineTickets
         private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
         {
             view.Refresh();
+        }
+
+        private void BtnSort_Click(object sender, RoutedEventArgs e)
+        {
+            view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            view.SortDescriptions.Add(new SortDescription("Surname", ListSortDirection.Ascending));
+
         }
     }
 }

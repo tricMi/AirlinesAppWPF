@@ -40,9 +40,9 @@ namespace AirlineTickets.Models
             set { seatNum = value; OnPropertyChanged("SeatNum"); }
         }
 
-        private User currentUser;
+        private String currentUser;
 
-        public User CurrentUser
+        public String CurrentUser
         {
             get { return currentUser; }
             set { currentUser = value; OnPropertyChanged("CurrentUser"); }
@@ -57,9 +57,9 @@ namespace AirlineTickets.Models
             set { gate = value; OnPropertyChanged("Gate"); }
         }
 
-        private double ticketPrice;
+        private decimal ticketPrice;
 
-        public double TicketPrice
+        public decimal TicketPrice
         {
             get { return ticketPrice; }
             set { ticketPrice = value; OnPropertyChanged("TicketPrice"); }
@@ -113,7 +113,7 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@FlightNum", this.FlightNum.FlightNumber));
                 command.Parameters.Add(new SqlParameter("@SeatClass", this.SeatClass));
                 command.Parameters.Add(new SqlParameter("@SeatNum", this.SeatNum.SeatLabel));
-                command.Parameters.Add(new SqlParameter("@CurrentUser", this.CurrentUser.Username));
+                command.Parameters.Add(new SqlParameter("@CurrentUser", this.CurrentUser));
                 command.Parameters.Add(new SqlParameter("@Gate", this.Gate));
                 command.Parameters.Add(new SqlParameter("@TicketPrice", this.TicketPrice));
                 command.Parameters.Add(new SqlParameter("@Active", false));
@@ -122,7 +122,7 @@ namespace AirlineTickets.Models
                 
             }
 
-      //      Database.Data.Instance.LoadTickets();
+            Database.Data.Instance.LoadTickets();
         }
 
         public void ChangeTicket()
@@ -141,7 +141,7 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@FlightNum", this.FlightNum.FlightNumber));
                 command.Parameters.Add(new SqlParameter("@SeatClass", this.SeatClass));
                 command.Parameters.Add(new SqlParameter("@SeatNum", this.SeatNum.SeatLabel));
-                command.Parameters.Add(new SqlParameter("@CurrentUser", this.CurrentUser.Username));
+                command.Parameters.Add(new SqlParameter("@CurrentUser", this.CurrentUser));
                 command.Parameters.Add(new SqlParameter("@Gate", this.Gate));
                 command.Parameters.Add(new SqlParameter("@TicketPrice", this.TicketPrice));
                 command.Parameters.Add(new SqlParameter("@Active", this.Active));
@@ -150,7 +150,7 @@ namespace AirlineTickets.Models
 
             }
 
-          //  Database.Data.Instance.LoadTickets();
+            Database.Data.Instance.LoadTickets();
         }
     }
 }

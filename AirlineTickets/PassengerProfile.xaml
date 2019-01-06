@@ -15,7 +15,7 @@
             <ColumnDefinition Width="207*"/>
         </Grid.ColumnDefinitions>
         <DataGrid Name ="DGPassenger" GridLinesVisibility="None" HorizontalAlignment="Left" Height="265" Margin="27,69,0,0" VerticalAlignment="Top" Width="697" Grid.ColumnSpan="2" Opacity="0.8"/>
-        <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="27,21,0,0" VerticalAlignment="Top" Width="85" Height="34" Background="#FF725959" Click="BtnEdit_Click" Foreground="White" Opacity="0.8"/>
+        <Button Name ="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="27,21,0,0" VerticalAlignment="Top" Width="85" Height="34" Background="#FF725959"  Foreground="White" Opacity="0.8" Click="BtnEdit_Click"/>
 
 
     </Grid>

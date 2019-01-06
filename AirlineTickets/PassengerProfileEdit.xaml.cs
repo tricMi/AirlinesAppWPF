@@ -38,14 +38,17 @@ namespace AirlineTickets
 
         private void BtnDiscard_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            if (!userExists(user.Name))
+            if (!System.Windows.Controls.Validation.GetHasError(txtName))
             {
-                user.SaveUsers();
-            }
-            else
-            {
-                MessageBox.Show("User with this username already exists, please pick another one");
+                this.DialogResult = true;
+                if (!userExists(user.Name))
+                {
+                    user.SaveUsers();
+                }
+                else
+                {
+                    MessageBox.Show("User with this username already exists, please pick another one");
+                }
             }
         }
 

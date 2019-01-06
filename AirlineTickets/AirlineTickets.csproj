@@ -108,6 +108,9 @@
     <Compile Include="PassengerProfileEdit.xaml.cs">
       <DependentUpon>PassengerProfileEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PassengerTickets.xaml.cs">
+      <DependentUpon>PassengerTickets.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PassengerWindow.xaml.cs">
       <DependentUpon>PassengerWindow.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validation\AircompanyValidation.cs" />
+    <Compile Include="Validation\AirplaneValidation.cs" />
+    <Compile Include="Validation\AirportValidation.cs" />
+    <Compile Include="Validation\FlightValidation.cs" />
     <Compile Include="Validation\UserValidation.cs" />
     <Page Include="AddAirplane.xaml">
       <SubType>Designer</SubType>
@@ -225,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PassengerProfileEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PassengerTickets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

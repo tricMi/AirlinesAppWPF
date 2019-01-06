@@ -58,7 +58,7 @@ namespace AirlineTickets
             this.DialogResult = true;
             if (option.Equals(Option.ADD) && !seatExists(seat.SeatLabel))
             {
-                Data.Instance.SeatAvailable.Add(seat);
+                seat.SaveSeat();
             }
         }
 

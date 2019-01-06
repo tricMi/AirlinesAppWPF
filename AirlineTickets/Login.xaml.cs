@@ -46,7 +46,7 @@ namespace AirlineTickets
             else
             {
                 User u = Data.Instance.LoginUser(us, pass);
-                if (u.UserType == EUserType.ADMIN)
+                if (u.UserType.Equals(EUserType.ADMIN))
                 {
                     AdminWindow aw = new AdminWindow();
                     aw.ShowDialog();

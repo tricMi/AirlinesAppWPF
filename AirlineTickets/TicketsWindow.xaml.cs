@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -26,7 +27,7 @@ namespace AirlineTickets
         public TicketsWindow()
         {
             InitializeComponent();
-           // view = CollectionViewSource.GetDefaultView(Data.Instance.Tickets);
+            view = CollectionViewSource.GetDefaultView(Data.Instance.Tickets);
             DGTickets.ItemsSource = view;
             view.Filter = CustomFilter;
             DGTickets.IsReadOnly = true;
@@ -43,34 +44,40 @@ namespace AirlineTickets
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //Tickets selectedTicket = DGTickets.SelectedItem as Tickets;
-            //if (SelectedTicket(selectedTicket))
-            //{
-            //    if (MessageBox.Show("Are you sure that you want to delete this ticket?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
-            //    {
-            //        int index = IndexOfSelectedTicket(selectedTicket.CurrentUser);
-            //        Data.Instance.Tickets[index].Active = true;
-            //        view.Refresh();
-            //    }
-            //}
+            Tickets selectedTicket = DGTickets.SelectedItem as Tickets;
+            if (SelectedTicket(selectedTicket))
+            {
+                if (MessageBox.Show("Are you sure that you want to delete this ticket?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
+                {
+                    int index = IndexOfSelectedTicket(selectedTicket.CurrentUser);
+                    selectedTicket.Active = true;
+                    selectedTicket.ChangeTicket();
+                    Data.Instance.Tickets[index].Active = true;
+                    view.Refresh();
+                }
+            }
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            //Tickets selectedTicket = DGTickets.SelectedItem as Tickets;
-            //if (SelectedTicket(selectedTicket))
-            //{
-            //    Tickets oldTicket = selectedTicket.Clone() as Tickets;
-            //    EditTicketsWindow esw = new EditTicketsWindow(selectedTicket, EditTicketsWindow.Option.EDIT);
+            Tickets selectedTicket = DGTickets.SelectedItem as Tickets;
+            if (SelectedTicket(selectedTicket))
+            {
+                Tickets oldTicket = selectedTicket.Clone() as Tickets;
+                EditTicketsWindow esw = new EditTicketsWindow(selectedTicket, EditTicketsWindow.Option.EDIT);
 
-            //    if (esw.ShowDialog() != true)
-            //    {
-            //        int index = IndexOfSelectedTicket(oldTicket.CurrentUser);
-            //        Data.Instance.Tickets[index] = oldTicket;
+                if (esw.ShowDialog() != true)
+                {
+                    int index = IndexOfSelectedTicket(oldTicket.CurrentUser);
+                    Data.Instance.Tickets[index] = oldTicket;
 
-            //    }
-            //}
-            //view.Refresh();
+                }
+                else
+                {
+                    selectedTicket.ChangeTicket();
+                }
+            }
+            view.Refresh();
 
         }
 

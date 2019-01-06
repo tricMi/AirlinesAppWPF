@@ -155,12 +155,13 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"UPDATE Airplane SET Pilot = @Pilot,
+                command.CommandText = @"UPDATE Airplane SET Pilot = @Pilot, Input = @Input,
                 RowNum = @RowNum, ColumnNum = @ColumnNum, AircompanyName = @AircompanyName, 
                 Active = @Active WHERE @Id = Id";
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@Pilot", this.Pilot));
+                command.Parameters.Add(new SqlParameter("@Input", this.Input));
                 command.Parameters.Add(new SqlParameter("@RowNum", this.RowNum));
                 command.Parameters.Add(new SqlParameter("@ColumnNum", this.ColumnNum));
                 command.Parameters.Add(new SqlParameter("@AircompanyName", this.AircompanyName.CompanyName));

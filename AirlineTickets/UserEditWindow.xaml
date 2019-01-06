@@ -6,23 +6,23 @@
         xmlns:local="clr-namespace:AirlineTickets.Validation"
         
         mc:Ignorable="d"
-        Title="User Edit Window" Height="501" Width="343" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen">
-    
+        Title="User Edit Window" Height="551" Width="380" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen">
+
     <Grid>
         <Label Name="LblName" Content="Name" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100" Height="35" FontWeight="Bold"/>
         <Label Name="LblUsername" Content="Username" HorizontalAlignment="Left" Margin="40,186,0,0" VerticalAlignment="Top" Width="100" Height="29" FontWeight="Bold"/>
-        <Label Name="LblAddress" Content="Address" HorizontalAlignment="Left" Margin="40,299,0,0" VerticalAlignment="Top" Width="100" Height="32" FontWeight="Bold"/>
-        <Label Name="LblUserType" Content="User Type" HorizontalAlignment="Left" Margin="40,355,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.289,0.538" Width="100" Height="33" FontWeight="Bold"/>
-        <Label Name="LblGender" Content="Gender" HorizontalAlignment="Left" Margin="40,243,0,0" VerticalAlignment="Top" Width="100" Height="33" FontWeight="Bold"/>
+        <Label Name="LblAddress" Content="Address" HorizontalAlignment="Left" Margin="40,352,0,0" VerticalAlignment="Top" Width="100" Height="32" FontWeight="Bold"/>
+        <Label Name="LblUserType" Content="User Type" HorizontalAlignment="Left" Margin="40,406,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.289,0.538" Width="100" Height="33" FontWeight="Bold"/>
+        <Label Name="LblGender" Content="Gender" HorizontalAlignment="Left" Margin="40,304,0,0" VerticalAlignment="Top" Width="100" Height="33" FontWeight="Bold"/>
         <Label Name="LblSurname" Content="Surname" HorizontalAlignment="Left" Margin="40,81,0,0" VerticalAlignment="Top" Width="100" Height="35" FontWeight="Bold"/>
         <Label Name="LblPassword" Content="Password" HorizontalAlignment="Left" Margin="40,132,0,0" VerticalAlignment="Top" Width="100" Height="30" FontWeight="Bold"/>
-        <TextBox Name ="txtName" HorizontalAlignment="Left" Height="35" Margin="165,29,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
+        <TextBox Name ="txtName" HorizontalAlignment="Left" Height="35" Margin="165,29,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171">
             <TextBox.Text>
                 <Binding Path="Name"
                          NotifyOnValidationError="True" 
                          ValidatesOnDataErrors="True" 
                          ValidatesOnExceptions="True"
-                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">  
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
 
                     <Binding.ValidationRules>
                         <local:NameValidation/>
@@ -38,15 +38,122 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <TextBox Name ="txtSurname" HorizontalAlignment="Left" Height="35" Margin="165,81,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname}" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name ="txtUsername" HorizontalAlignment="Left" Height="35" Margin="165,186,0,0" TextWrapping="Wrap" Text="{Binding Path=Username}" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name ="txtAddress" HorizontalAlignment="Left" Height="35" Margin="165,299,0,0" TextWrapping="Wrap" Text="{Binding Path=Address}" VerticalAlignment="Top" Width="120"/>
-        
-        <ComboBox Name = "CbGender" HorizontalAlignment="Left" SelectedItem="{Binding Path=Gender}" Margin="165,243,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-        <ComboBox Name = "CbUserType" HorizontalAlignment="Left" SelectedItem="{Binding Path=UserType}" Margin="165,355,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="185,419,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="BtnSave_Click"/>
-        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="40,419,0,0" VerticalAlignment="Top" Width="100" Height="29" RenderTransformOrigin="0.48,0.552" Click="BtnDiscard_Click"/>
-        <TextBox Name ="txtPassword"  HorizontalAlignment="Left" Height="35" Margin="165,132,0,0" TextWrapping="Wrap" Text="{Binding Path=Password}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="txtSurname" HorizontalAlignment="Left" Height="35" Margin="165,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171">
+            <TextBox.Text>
+                <Binding Path="Surname"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:SurnameValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox Name ="txtUsername" HorizontalAlignment="Left" Height="35" Margin="165,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171">
+            <TextBox.Text>
+                <Binding Path="Username"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:UsernameValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox Name ="txtAddress" HorizontalAlignment="Left" Height="35" Margin="165,349,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171">
+            <TextBox.Text>
+                <Binding Path="Address"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:AddressValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <ComboBox Name = "CbGender" HorizontalAlignment="Left" SelectedItem="{Binding Path=Gender}" Margin="165,304,0,0" VerticalAlignment="Top" Width="171" Height="26"/>
+        <ComboBox Name = "CbUserType" HorizontalAlignment="Left" SelectedItem="{Binding Path=UserType}" Margin="165,406,0,0" VerticalAlignment="Top" Width="171" Height="26"/>
+        <Button x:Name="BtnSave" Content="Save" Background="IndianRed" HorizontalAlignment="Left" Margin="248,467,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="BtnSave_Click"/>
+        <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="27,467,0,0" VerticalAlignment="Top" Width="100" Height="29" RenderTransformOrigin="0.48,0.552" Click="BtnDiscard_Click"/>
+        <TextBox Name ="txtPassword"  HorizontalAlignment="Left" Height="35" Margin="165,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171">
+            <TextBox.Text>
+                <Binding Path="Password"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:PasswordValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <Label x:Name="lblEmail" Content="Email" HorizontalAlignment="Left" Margin="40,254,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="-0.933,0.115" FontWeight="Bold"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="40"  Margin="165,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171">
+            <TextBox.Text>
+                <Binding Path="Email"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:EmailValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
 
     </Grid>
 </Window>

@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static AirlineTickets.Models.Seat;
 
 namespace AirlineTickets
 {
@@ -28,7 +29,10 @@ namespace AirlineTickets
         public Seat SelectedSeat = null;
         Flight flight;
         public ObservableCollection<Airplane> seats = new ObservableCollection<Airplane>();
-        public PickSeatWindow(Flight flight)
+
+        public EClass Clas { get; set; }
+
+        public PickSeatWindow(Flight flight, EClass Clas)
         {
             InitializeComponent();
             this.flight = flight;
@@ -40,12 +44,16 @@ namespace AirlineTickets
                     seats.Add(a);
                     foreach(Airplane asc in seats)
                     {
-                        view = CollectionViewSource.GetDefaultView(asc.BusinessClass);
-                      //  view = CollectionViewSource.GetDefaultView(asc.EconomyClass);
-                        DgSeat.ItemsSource = view;
-                        DgSeat.IsReadOnly = true;
-                        DgSeat.IsSynchronizedWithCurrentItem = true;
-                        DgSeat.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+                        if (Clas.Equals(EClass.BUSINESS))
+                        {
+                            view = CollectionViewSource.GetDefaultView(asc.BusinessClass);
+                            LbBSeats.ItemsSource = view;
+                        }
+                        else
+                        {
+                            view = CollectionViewSource.GetDefaultView(asc.EconomyClass);
+                            LbBSeats.ItemsSource = view;
+                        }
                     }
                 }
                 
@@ -56,7 +64,7 @@ namespace AirlineTickets
 
         private void BtnPick_Click(object sender, RoutedEventArgs e)
         {
-            SelectedSeat = DgSeat.SelectedItem as Seat;
+            SelectedSeat = LbBSeats.SelectedItem as Seat;
             if (SelectedSeat.SeatState == false)
             {
                 MessageBox.Show("Seat is already taken!");
@@ -64,6 +72,7 @@ namespace AirlineTickets
             else
             {
                 SelectedSeat.SeatState = false;
+                SelectedSeat.ChangeSeat();
                 this.DialogResult = true;
                 this.Close();
             }

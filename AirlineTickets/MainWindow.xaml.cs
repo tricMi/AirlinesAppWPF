@@ -33,5 +33,11 @@ namespace AirlineTickets
             l.ShowDialog();
     
         }
+
+        private void BtnBuy_Click(object sender, RoutedEventArgs e)
+        {
+            FilterFlightsWindow fw = new FilterFlightsWindow(null);
+            fw.ShowDialog();
+        }
     }
 }

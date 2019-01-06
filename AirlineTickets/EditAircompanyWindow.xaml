@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AirlineTickets"
+        xmlns:local="clr-namespace:AirlineTickets.Validation"
         mc:Ignorable="d"
         Title="Edit Aircompany Window" Height="477" Width="764" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,-3">
@@ -15,11 +15,53 @@
             <ColumnDefinition Width="96*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="LblCompPass" Content="Company password" HorizontalAlignment="Left" Margin="28,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.658,0.462" Width="122" Height="37" FontWeight="Bold" Foreground="White"/>
-        <TextBox x:Name="TxtCompanyPass" HorizontalAlignment="Left" Height="37" Margin="166,44,0,0" Text="{Binding Path=CompanyPassword}" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Grid.ColumnSpan="2" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <TextBox x:Name="TxtCompanyPass" HorizontalAlignment="Left" Height="37" Margin="166,44,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Grid.ColumnSpan="2" Background="#FF725959" Foreground="White" Opacity="0.8">
+            <TextBox.Text>
+                <Binding Path="CompanyPassword"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:CompanyPasswordValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <Button x:Name="BtnSave" Content="Save" HorizontalAlignment="Left" Margin="73,374,0,0" VerticalAlignment="Top" Width="96" Height="35" Click="BtnSave_Click" FontWeight="Bold" RenderTransformOrigin="0.542,-0.2" Grid.Column="1" Background="#FF725959" Foreground="White" Opacity="0.8"/>
         <Button x:Name="BtnDiscard" Content="Discard" HorizontalAlignment="Left" Margin="28,374,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="BtnDiscard_Click" FontWeight="Bold" RenderTransformOrigin="-1.8,0.029" Background="#FF725959" Foreground="White" Opacity="0.8"/>
         <Label x:Name="lblCompName" Content="Company name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,121,0,0" Width="122" FontWeight="Bold" Foreground="White"/>
-        <TextBox x:Name="TxtComName" HorizontalAlignment="Left" Height="34" Margin="166,121,0,0" TextWrapping="Wrap" Text="{Binding Path=CompanyName}" VerticalAlignment="Top" Width="128" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <TextBox x:Name="TxtComName" HorizontalAlignment="Left" Height="34" Margin="166,121,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="128" Background="#FF725959" Foreground="White" Opacity="0.8" >
+            <TextBox.Text>
+                <Binding Path="CompanyName"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:AircompanyValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <DataGrid x:Name="DgFlights" HorizontalAlignment="Left" Height="165" Margin="28,191,0,0" VerticalAlignment="Top" Width="702" Grid.ColumnSpan="2" Opacity="0.8"/>
 
     </Grid>

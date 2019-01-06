@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AirlineTickets"
+        xmlns:local="clr-namespace:AirlineTickets.Validation"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AirlineTickets.EditFlightsWindow"
         mc:Ignorable="d"
         Title="Edit Flights Window" Height="559" Width="389" Background="#FFEAE3E3" WindowStartupLocation="CenterScreen" FontWeight="Bold">
@@ -14,8 +14,50 @@
         <Label x:Name="LblDeparturePlace" Content="Departure Place" HorizontalAlignment="Left" Margin="38,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.813,0.106" Width="147" Height="42"/>
         <Label x:Name="LblDestination" Content="Destination" HorizontalAlignment="Left" Margin="38,285,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.813,0.106" Width="147" Height="42"/>
         <Label x:Name="LblOneWayTicketPrice" Content="One Way Ticket Price" HorizontalAlignment="Left" Margin="38,341,0,0" VerticalAlignment="Top" Width="147" Height="39"/>
-        <TextBox Name ="tbFlightNum"  HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Text="{Binding Path=FlightNumber}" VerticalAlignment="Top" Width="132" Margin="201,24,0,0"/>
-        <TextBox Name ="tbOneWayTicketPrice" HorizontalAlignment="Left" Height="39" Margin="201,341,0,0" TextWrapping="Wrap" Text="{Binding Path=OneWayTicketPrice}" VerticalAlignment="Top" Width="132"/>
+        <TextBox Name ="tbFlightNum"  HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Margin="201,24,0,0">
+            <TextBox.Text>
+                <Binding Path="FlightNumber"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:FlightValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox Name ="tbOneWayTicketPrice" HorizontalAlignment="Left" Height="39" Margin="201,341,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="132">
+            <TextBox.Text>
+                <Binding Path="OneWayTicketPrice"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:OneWayTicketPriceValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <ComboBox Name="CbDepPlace" HorizontalAlignment="Left" Margin="201,228,0,0" SelectedItem="{Binding Path=DeparturePlace}" VerticalAlignment="Top" Width="132" Height="29"/>
         <ComboBox Name ="CbDestination" HorizontalAlignment="Left" Margin="201,285,0,0" SelectedItem="{Binding Path=Destination}" VerticalAlignment="Top" Width="132" Height="27"/>
         <Button x:Name="BtnDiscard" Content="Discard" Background="DarkGray" HorizontalAlignment="Left" Margin="38,471,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnDiscard_Click"/>

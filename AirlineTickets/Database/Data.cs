@@ -45,7 +45,7 @@ namespace AirlineTickets.Database
             LoadAirplane();
             LoadFlights();
             LoadSeats();
-         //   LoadTickets();
+            LoadTickets();
 
         }
 
@@ -91,6 +91,7 @@ namespace AirlineTickets.Database
                     user.Surname = (string)row["Surname"];
                     user.Password = (string)row["Password"];
                     user.Username = (string)row["Username"];
+                    user.Email = (string)row["Email"];
                     user.Gender = (EGender)row["Gender"];
                     user.Address = (string)row["Address"];
                     user.UserType = (EUserType)row["UserType"];
@@ -175,7 +176,7 @@ namespace AirlineTickets.Database
                     flight.ArrivalTime = (DateTime)row["ArrivalTime"];
                     flight.DeparturePlace = AirportCity((string)row["DeparturePlace"]);
                     flight.Destination = AirportCity((string)row["Destination"]);
-                    flight.OneWayTicketPrice = (int)row["OneWayTicketPrice"];
+                    flight.OneWayTicketPrice = (decimal)row["OneWayTicketPrice"];
                     flight.CompanyPassword = GetPass((string)row["CompanyPassword"]);
                     flight.Active = (bool)row["Active"];
 
@@ -312,6 +313,7 @@ namespace AirlineTickets.Database
                     seat.SeatLabel = (string)row["SeatLabel"];
                     seat.SeatClass = (EClass)row["SeatClass"];
                     seat.SeatState = (bool)row["SeatState"];
+                    seat.AirplaneId = GetAirplaneId((int)row["AirplaneId"]);
                     seat.Active = (bool)row["Active"];
 
                     SeatAvailable.Add(seat);
@@ -383,43 +385,43 @@ namespace AirlineTickets.Database
             return seatE;
         }
 
-        //public void LoadTickets()
-        //{
-        //    Tickets.Clear();
-        //    using (SqlConnection conn = new SqlConnection())
-        //    {
-        //        conn.ConnectionString = CONNECTION_STRING;
-        //        conn.Open();
+        public void LoadTickets()
+        {
+            Tickets.Clear();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = CONNECTION_STRING;
+                conn.Open();
 
-        //        SqlCommand command = conn.CreateCommand();
-        //        command.CommandText = @"SELECT * FROM Tickets";
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"SELECT * FROM Tickets";
 
-        //        SqlDataAdapter daTickets = new SqlDataAdapter();
-        //        DataSet dsTickets = new DataSet();
+                SqlDataAdapter daTickets = new SqlDataAdapter();
+                DataSet dsTickets = new DataSet();
 
-        //        daTickets.SelectCommand = command;
-        //        daTickets.Fill(dsTickets, "Tickets");
+                daTickets.SelectCommand = command;
+                daTickets.Fill(dsTickets, "Tickets");
 
-        //        foreach (DataRow row in dsTickets.Tables["Tickets"].Rows)
-        //        {
-        //            Tickets ticket = new Tickets();
+                foreach (DataRow row in dsTickets.Tables["Tickets"].Rows)
+                {
+                    Tickets ticket = new Tickets();
 
-        //            ticket.Id = (int)row["Id"];
-        //            ticket.FlightNum = GetFlightNumber((string)row["FlightNum"]);
-        //            ticket.SeatClass = (EClass)row["SeatClass"];
-        //            ticket.SeatNum = GetSeatLabel((string)row["SeatNum"]);
-        //            ticket.CurrentUser = GetUserName((string)row["CurrentUser"]);
-        //            ticket.Gate = (string)row["Gate"];
-        //            ticket.TicketPrice = (double)row["TicketPrice"];
-        //            ticket.Active = (bool)row["Active"];
+                    ticket.Id = (int)row["Id"];
+                    ticket.FlightNum = GetFlightNumber((string)row["FlightNum"]);
+                    ticket.SeatClass = (EClass)row["SeatClass"];
+                    ticket.SeatNum = GetSeatLabel((string)row["SeatNum"]);
+                    ticket.CurrentUser = (string)row["CurrentUser"];
+                    ticket.Gate = (string)row["Gate"];
+                    ticket.TicketPrice = (decimal)row["TicketPrice"];
+                    ticket.Active = (bool)row["Active"];
 
-        //            Tickets.Add(ticket);
-        //        }
-        //    }
-        //}
+                    Tickets.Add(ticket);
+                }
+            }
+        }
 
 
-        public Airport AirportCity(String city)
+            public Airport AirportCity(String city)
         {
             foreach(Airport a in Airports)
             {
@@ -571,7 +573,7 @@ namespace AirlineTickets.Database
                     seat.Active = false;
                     seatB.Add(seat);
                     SeatAvailable.Add(seat);
-
+                  //  seat.SaveSeat();
 
                 }
 
@@ -594,7 +596,7 @@ namespace AirlineTickets.Database
                     seatEconomy.Active = false;
                     seatE.Add(seatEconomy);
                     SeatAvailable.Add(seatEconomy);
-                    
+                  //  seatEconomy.SaveSeat();
                 }
 
             }

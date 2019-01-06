@@ -31,7 +31,7 @@
             </Button.Background>
         </Button>
         <Image HorizontalAlignment="Left" Height="40" Margin="79,33,0,0" VerticalAlignment="Top" Width="44" Source="Images/home.png"/>
-        <Button x:Name ="BtnBuy" Content="BOOK A FLIGHT" Foreground ="White" HorizontalAlignment="Left" Margin="0,154,0,0" VerticalAlignment="Top" Width="198" Height="52" FontSize="16">
+        <Button x:Name ="BtnBuy" Content="BOOK A FLIGHT" Foreground ="White" HorizontalAlignment="Left" Margin="0,154,0,0" VerticalAlignment="Top" Width="198" Height="52" FontSize="16" Click="BtnBuy_Click">
             <Button.Background>
                 <SolidColorBrush Color="#FF684B4B" Opacity="0.5"/>
             </Button.Background>

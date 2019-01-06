@@ -30,6 +30,7 @@ namespace AirlineTickets.Models
             set { surname = value; OnPropertyChanged("Surname"); }
         }
 
+
         private String password;
 
         public String Password
@@ -45,6 +46,15 @@ namespace AirlineTickets.Models
             get { return username; }
             set { username = value; OnPropertyChanged("Username"); }
         }
+
+        private String email;
+
+        public String Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+
 
         private EGender gender;
 
@@ -98,6 +108,7 @@ namespace AirlineTickets.Models
                 Surname = this.Surname,
                 Password = this.Password,
                 Username = this.Username,
+                Email = this.Email,
                 Gender = this.Gender,
                 Address = this.Address,
                 UserType = this.UserType,
@@ -121,13 +132,14 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Users(Name, Surname, Password, Username, Gender, Address, UserType, Active)" +
-                                        "VALUES(@Name, @Surname, @Password, @Username, @Gender, @Address, @UserType, @Active)";
+                command.CommandText = @"INSERT INTO Users(Name, Surname, Password, Username, Email, Gender, Address, UserType, Active)" +
+                                        "VALUES(@Name, @Surname, @Password, @Username, @Email, @Gender, @Address, @UserType, @Active)";
 
                 command.Parameters.Add(new SqlParameter("@Name", this.Name));
                 command.Parameters.Add(new SqlParameter("@Surname", this.Surname));
                 command.Parameters.Add(new SqlParameter("@Password", this.Password));
                 command.Parameters.Add(new SqlParameter("@Username", this.Username));
+                command.Parameters.Add(new SqlParameter("@Email", this.Email));
                 command.Parameters.Add(new SqlParameter("@Gender", this.Gender));
                 command.Parameters.Add(new SqlParameter("@Address", this.Address));
                 command.Parameters.Add(new SqlParameter("@UserType", this.UserType));
@@ -147,7 +159,7 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"UPDATE Users SET Name = @Name, Surname = @Surname,Password = @Password,Username= @Username,Gender= @Gender,Address= @Address,UserType= @UserType,Active= @Active WHERE @Id = Id";
+                command.CommandText = @"UPDATE Users SET Name = @Name, Surname = @Surname,Password = @Password,Username= @Username, Email = @Email, Gender= @Gender,Address= @Address,UserType= @UserType,Active= @Active WHERE @Id = Id";
 
 
                 command.Parameters.Add(new SqlParameter("@Id", Id));
@@ -155,6 +167,7 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@Surname", this.Surname));
                 command.Parameters.Add(new SqlParameter("@Password", this.Password));
                 command.Parameters.Add(new SqlParameter("@Username", this.Username));
+                command.Parameters.Add(new SqlParameter("@Email", this.Email));
                 command.Parameters.Add(new SqlParameter("@Gender", this.Gender));
                 command.Parameters.Add(new SqlParameter("@Address", this.Address));
                 command.Parameters.Add(new SqlParameter("@UserType", this.UserType));

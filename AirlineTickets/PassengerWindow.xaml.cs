@@ -36,7 +36,8 @@ namespace AirlineTickets
 
         private void BtnTickets_Click(object sender, RoutedEventArgs e)
         {
-            
+            PassengerTickets pt = new PassengerTickets(user);
+            pt.ShowDialog();
         }
 
         private void BtnFlights_Click(object sender, RoutedEventArgs e)

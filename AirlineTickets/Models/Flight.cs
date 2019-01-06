@@ -65,9 +65,9 @@ namespace AirlineTickets.Models
         }
 
 
-        private double oneWayTicketPrice;
+        private decimal oneWayTicketPrice;
 
-        public double OneWayTicketPrice
+        public decimal OneWayTicketPrice
         {
             get { return oneWayTicketPrice; }
             set { oneWayTicketPrice = value; OnPropertyChanged("OneWayTicketPrice"); }

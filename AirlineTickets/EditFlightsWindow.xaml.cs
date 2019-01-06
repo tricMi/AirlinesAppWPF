@@ -2,6 +2,7 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,10 @@ namespace AirlineTickets
         
         Flight flight;
         Option option;
-        
+        public ObservableCollection<Airplane> aId = new ObservableCollection<Airplane>();
+        public ObservableCollection<Airport> City = new ObservableCollection<Airport>();
+        public ObservableCollection<Aircompany> CompanyNum = new ObservableCollection<Aircompany>();
+
         public EditFlightsWindow(Flight flight, Option option= Option.ADDING)
         {
             InitializeComponent();
@@ -34,16 +38,35 @@ namespace AirlineTickets
             this.option = option;
 
             this.DataContext = flight;
+            foreach (Airplane a in Data.Instance.Airplanes)
+            {
+                if (a.Active.Equals(false))
+                {
+                    aId.Add(a);
+                }
+            }
 
-            cbAirplaneId.ItemsSource = Data.Instance.Airplanes.Select(ar => ar);
-            CbDepPlace.ItemsSource = Data.Instance.Airports.Select(a => a);
-            CbDestination.ItemsSource = Data.Instance.Airports.Select(b => b);
-            cbCompanyId.ItemsSource = Data.Instance.Aircompanies.Select(c => c);
+            foreach (Airport a in Data.Instance.Airports)
+            {
+                if (a.Active.Equals(false))
+                {
+                    City.Add(a);
+                }
+            }
 
-            //if (option.Equals(Option.EDIT))
-            //{
-            //    tbFlightNum.IsEnabled = false;
-            //}
+            foreach (Aircompany a in Data.Instance.Aircompanies)
+            {
+                if (a.Active.Equals(false))
+                {
+                    CompanyNum.Add(a);
+                }
+            }
+
+            cbAirplaneId.ItemsSource = aId.Select(ar => ar);
+            CbDepPlace.ItemsSource = City.Select(a => a);
+            CbDestination.ItemsSource = City.Select(b => b);
+            cbCompanyId.ItemsSource = CompanyNum.Select(c => c);
+
 
         }
 
@@ -55,13 +78,21 @@ namespace AirlineTickets
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            if (option.Equals(Option.ADDING) && !flightExists(flight.FlightNumber))
+            if (Validation() == true)
+
             {
-                flight.SaveFlights();
-                Aircompany pass = flight.CompanyPassword;
-                flight.SaveAircompanyFlights(pass.CompanyPassword, flight.FlightNumber);
-                
+                BtnSave.IsEnabled = true;
+                if (!System.Windows.Controls.Validation.GetHasError(tbFlightNum))
+                {
+                    this.DialogResult = true;
+                    if (option.Equals(Option.ADDING) && !flightExists(flight.FlightNumber))
+                    {
+                        flight.SaveFlights();
+                        Aircompany pass = flight.CompanyPassword;
+                        flight.SaveAircompanyFlights(pass.CompanyPassword, flight.FlightNumber);
+
+                    }
+                }
             }
 
         }
@@ -69,6 +100,22 @@ namespace AirlineTickets
         private bool flightExists(string flightNumber)
         {
             return Data.Instance.Flights.ToList().Find(a => a.FlightNumber.Equals(flightNumber)) != null ? true : false;
+        }
+
+        private Boolean Validation()
+        {
+            Boolean ok = true;
+            if(tbFlightNum.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            if (tbOneWayTicketPrice.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            return ok;
         }
     }
 }

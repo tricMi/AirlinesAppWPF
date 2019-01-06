@@ -53,11 +53,19 @@ namespace AirlineTickets
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            if(option.Equals(Option.ADDING) && !aircompanyExists(aircompany.Id))
+            if (Validation() == true)
+
             {
-               
-                aircompany.Save();
+                BtnSave.IsEnabled = true;
+                if (!System.Windows.Controls.Validation.GetHasError(TxtCompanyPass))
+                {
+                    this.DialogResult = true;
+                    if (option.Equals(Option.ADDING) && !aircompanyExists(aircompany.Id))
+                    {
+
+                        aircompany.Save();
+                    }
+                }
             }
         }
 
@@ -73,5 +81,20 @@ namespace AirlineTickets
             return Data.Instance.Aircompanies.ToList().Find(a => a.Id.Equals(companyId)) != null ? true : false;
         }
 
+        private Boolean Validation()
+        {
+            Boolean ok = true;
+            if (TxtComName.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            else if (TxtCompanyPass.Text.Equals(String.Empty))
+            {
+                ok = false;
+                BtnSave.IsEnabled = false;
+            }
+            return ok;
+        }
     }
 }

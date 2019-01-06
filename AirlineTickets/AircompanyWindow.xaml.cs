@@ -52,6 +52,15 @@ namespace AirlineTickets
             {
                 if (MessageBox.Show("Are you sure that you want to delete aircompany?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
+                    foreach(var f in Data.Instance.Flights.ToList())
+                    {
+                        if(f.CompanyPassword.ToString().Equals(selectedCompany.CompanyPassword))
+                        {
+                            f.Active = true;
+                            f.ChangeFlight();
+                            view.Refresh();
+                        }
+                    }
                     int index = IndexOfSelectedAircompany(selectedCompany.Id);
                     selectedCompany.Active = true;
                     selectedCompany.Change();

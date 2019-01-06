@@ -12,8 +12,8 @@
         </Grid.Background>
         <DataGrid Name ="DGFlights" GridLinesVisibility="None" HorizontalAlignment="Left" Height="293" Margin="29,121,0,0" VerticalAlignment="Top" Width="703" Opacity="0.8"/>
         <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="29,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnDelete_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
-        <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="163,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnEdit_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
-        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="299,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnAdd_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="146,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnEdit_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
+        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="259,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnAdd_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
         <Label x:Name="lblSearch" Content="Search" HorizontalAlignment="Left" Margin="496,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.079,0.654" Width="48" FontWeight="Bold" Foreground="White"/>
         <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="26" Margin="564,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtSearch_KeyUp"/>
         <Label x:Name="lblSearchByRange" Content="Search By Place" HorizontalAlignment="Left" Margin="811,25,0,0" VerticalAlignment="Top" Width="106" FontWeight="Bold" Foreground="White"/>
@@ -34,6 +34,7 @@
         <TextBox x:Name="txtFromDate" HorizontalAlignment="Left" Height="33" Margin="802,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtFromDate_KeyUp"/>
         <TextBox x:Name="txtToDate" HorizontalAlignment="Left" Height="33" Margin="802,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtToDate_KeyUp"/>
         <Button x:Name="BtnFilterDate" Content="Filter" HorizontalAlignment="Left" Margin="831,460,0,0" VerticalAlignment="Top" Width="75" Height="28" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterDate_Click"/>
+        <Button x:Name="BtnSort" Content="Sort" HorizontalAlignment="Left" Margin="368,45,0,0" VerticalAlignment="Top" Width="87"  Background="#FF725959" Foreground="White" Opacity="0.8" Height="29" Click="BtnSort_Click"/>
 
     </Grid>
 </Window>

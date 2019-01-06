@@ -41,6 +41,14 @@ namespace AirlineTickets.Models
             set { seatClass = value; }
         }
 
+        private Airplane airplaneId;
+
+        public Airplane AirplaneId
+        {
+            get { return airplaneId; }
+            set { airplaneId = value; }
+        }
+
 
         private bool active;
 
@@ -76,6 +84,7 @@ namespace AirlineTickets.Models
                 SeatLabel = this.SeatLabel,
                 SeatState = this.SeatState,
                 SeatClass = this.SeatClass,
+                AirplaneId = this.AirplaneId,
                 Active = this.Active
             };
             return newSeat;
@@ -94,12 +103,13 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Seat(SeatLabel, SeatState, SeatClass, Active)" +
-               " VALUES (@SeatLabel, @SeatState, @SeatClass, @Active)";
+                command.CommandText = @"INSERT INTO Seat(SeatLabel, SeatState, SeatClass, AirplaneId, Active)" +
+               " VALUES (@SeatLabel, @SeatState, @SeatClass, @AirplaneId, @Active)";
 
                 command.Parameters.Add(new SqlParameter("@SeatLabel", this.SeatLabel));
                 command.Parameters.Add(new SqlParameter("@SeatState", this.SeatState));
                 command.Parameters.Add(new SqlParameter("@SeatClass", this.SeatClass));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
                 command.ExecuteNonQuery();
@@ -118,12 +128,13 @@ namespace AirlineTickets.Models
 
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"UPDATE Seat SET  
-                SeatLabel = @SeatLabel, SeatState = @SeatState, SeatClass = @SeatClass, Active = @Active WHERE @Id = Id";
+                SeatLabel = @SeatLabel, SeatState = @SeatState, SeatClass = @SeatClass, AirplaneId = @AirplaneId, Active = @Active WHERE @Id = Id";
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@SeatLabel", this.SeatLabel));
                 command.Parameters.Add(new SqlParameter("@SeatState", this.SeatState));
                 command.Parameters.Add(new SqlParameter("@SeatClass", this.SeatClass));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Id));
                 command.Parameters.Add(new SqlParameter("@Active", this.Active));
 
                 command.ExecuteNonQuery();
