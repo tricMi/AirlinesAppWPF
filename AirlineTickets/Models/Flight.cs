@@ -141,7 +141,7 @@ namespace AirlineTickets.Models
                " VALUES (@FlightNumber, @AirplaneId, @DepartureTime, @ArrivalTime, @DeparturePlace, @Destination, @OneWayTicketPrice, @CompanyPassword, @Active)";
 
                 command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
-                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Id));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Pilot));
                 command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
                 command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
                 command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));
@@ -170,7 +170,7 @@ namespace AirlineTickets.Models
 
                 command.Parameters.Add(new SqlParameter("@Id", this.Id));
                 command.Parameters.Add(new SqlParameter("@FlightNumber", this.FlightNumber));
-                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Id));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Pilot));
                 command.Parameters.Add(new SqlParameter("@DepartureTime", this.DepartureTime));
                 command.Parameters.Add(new SqlParameter("@ArrivalTime", this.ArrivalTime));
                 command.Parameters.Add(new SqlParameter("@DeparturePlace", this.DeparturePlace.City));

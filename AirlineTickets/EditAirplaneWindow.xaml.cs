@@ -64,6 +64,11 @@ namespace AirlineTickets
 
             CbCompanyName.ItemsSource = NameA.Select(a => a);
 
+            if(option.Equals(Option.EDIT))
+            {
+                TxtPilot.IsEnabled = false;
+            }
+
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -79,20 +84,31 @@ namespace AirlineTickets
                     {
 
                         airplane.SaveAirplane();
-
                        
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pilot with that name already exists, please choose another pilot");
+                }
+
+                if (option.Equals(Option.ADDING))
+                {
+                    foreach (Seat s in Data.Instance.SeatsBusiness(airplane.RowNum, airplane.ColumnNum, airplane.Input).ToList())
+                    {
+                        s.AirplaneId = airplane.Pilot;
+                        s.SaveSeat();
+
+                    }
+
+                    foreach (Seat ss in Data.Instance.SeatsEconomy(airplane.RowNum, airplane.ColumnNum, airplane.Input).ToList())
+                    {
+                        ss.AirplaneId = airplane.Pilot;
+                        ss.SaveSeat();
 
                     }
                 }
-               // Seat seat = new Seat();
-                foreach (Seat s in Data.Instance.SeatAvailable)
-                {
-                    s.SaveSeat();
-                    s.AirplaneId = airplane;
-                    s.ChangeSeat();
 
-                }
-                
             }
         }
 

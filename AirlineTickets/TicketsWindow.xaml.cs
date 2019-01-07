@@ -39,7 +39,16 @@ namespace AirlineTickets
         private bool CustomFilter(object obj)
         {
             Tickets ticket = obj as Tickets;
-            return !ticket.Active;
+            if (txtSearch.Text.Equals(String.Empty))
+            {
+                return !ticket.Active;
+            }
+            else
+            {
+                return !ticket.Active && ticket.FlightNum.FlightNumber.Contains(txtSearch.Text) ||
+                    (!ticket.Active && ticket.CurrentUser.Contains(txtSearch.Text)) ||
+                    (!ticket.Active && ticket.SeatClass.ToString().ToUpper().Contains(txtSearch.Text.ToUpper()));
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -49,6 +58,15 @@ namespace AirlineTickets
             {
                 if (MessageBox.Show("Are you sure that you want to delete this ticket?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
+                    foreach(var seat in Data.Instance.SeatAvailable.ToList())
+                    {
+                        if(seat.SeatLabel.ToString().Equals(selectedTicket.SeatNum.SeatLabel))
+                        {
+                            seat.SeatState = true;
+                            seat.ChangeSeat();
+                            view.Refresh();
+                        }
+                    }
                     int index = IndexOfSelectedTicket(selectedTicket.CurrentUser);
                     selectedTicket.Active = true;
                     selectedTicket.ChangeTicket();
@@ -109,6 +127,16 @@ namespace AirlineTickets
                 return false;
             }
             return true;
+        }
+
+        private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void BtnSort_Click(object sender, RoutedEventArgs e)
+        {
+            view.SortDescriptions.Add(new SortDescription("TicketPrice", ListSortDirection.Ascending));
         }
     }
 }

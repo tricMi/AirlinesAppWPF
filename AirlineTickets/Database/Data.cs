@@ -171,7 +171,7 @@ namespace AirlineTickets.Database
 
                     flight.Id = (int)row["Id"];
                     flight.FlightNumber = (string)row["FlightNumber"];
-                    flight.AirplaneId = GetAirplaneId((int)row["AirplaneId"]);
+                    flight.AirplaneId = GetAirplanePilot((string)row["AirplaneId"]);
                     flight.DepartureTime = (DateTime)row["DepartureTime"];
                     flight.ArrivalTime = (DateTime)row["ArrivalTime"];
                     flight.DeparturePlace = AirportCity((string)row["DeparturePlace"]);
@@ -240,7 +240,6 @@ namespace AirlineTickets.Database
                     aircompany.Id = (int)row["Id"];
                     aircompany.CompanyName = (string)row["CompanyName"];
                     aircompany.CompanyPassword = (string)row["CompanyPassword"];
-                    aircompany.FlightList = GetFlightNum((string)row["FlightList"]);
                     aircompany.Active = (bool)row["Active"];
 
                     Aircompanies.Add(aircompany);
@@ -313,7 +312,7 @@ namespace AirlineTickets.Database
                     seat.SeatLabel = (string)row["SeatLabel"];
                     seat.SeatClass = (EClass)row["SeatClass"];
                     seat.SeatState = (bool)row["SeatState"];
-                    seat.AirplaneId = GetAirplaneId((int)row["AirplaneId"]);
+                    seat.AirplaneId = (string)row["AirplaneId"];
                     seat.Active = (bool)row["Active"];
 
                     SeatAvailable.Add(seat);
@@ -323,67 +322,7 @@ namespace AirlineTickets.Database
 
         }
 
-        public ObservableCollection<Seat> AirplaneBusinessSeat(int id)
-        {
-            ObservableCollection<Seat> seatB = new ObservableCollection<Seat>();
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = CONNECTION_STRING;
-                conn.Open();
-
-                SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"SELECT * FROM BusinessSeats";
-
-                SqlDataAdapter daAirplaneSeat = new SqlDataAdapter();
-                DataSet dsAirplaneSeat = new DataSet();
-
-                daAirplaneSeat.SelectCommand = command;
-                daAirplaneSeat.Fill(dsAirplaneSeat, "BusinessSeats");
-
-                foreach (DataRow row in dsAirplaneSeat.Tables["BusinessSeats"].Rows)
-                {
-                    int aId = (int)row["AirplaneId"];
-                    if(aId.Equals(id))
-                    {
-                        Seat seatLabel = GetSeatLabel((string)row["SeatLabel"]);
-                        seatB.Add(seatLabel);
-                    }
-                }
-
-            }
-                return seatB;
-        }
-
-        public ObservableCollection<Seat> AirplaneEconomySeat(int id)
-        {
-            ObservableCollection<Seat> seatE = new ObservableCollection<Seat>();
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = CONNECTION_STRING;
-                conn.Open();
-
-                SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"SELECT * FROM EconomySeats";
-
-                SqlDataAdapter daEconomySeat = new SqlDataAdapter();
-                DataSet dsEconomySeat = new DataSet();
-
-                daEconomySeat.SelectCommand = command;
-                daEconomySeat.Fill(dsEconomySeat, "EconomySeats");
-
-                foreach (DataRow row in dsEconomySeat.Tables["EconomySeats"].Rows)
-                {
-                    int aId = (int)row["AirplaneId"];
-                    if (aId.Equals(id))
-                    {
-                        Seat seatLabel = GetSeatLabel((string)row["SeatLabel"]);
-                        seatE.Add(seatLabel);
-                    }
-                }
-
-            }
-            return seatE;
-        }
+        
 
         public void LoadTickets()
         {
@@ -496,11 +435,11 @@ namespace AirlineTickets.Database
             return null;
         }
 
-        public Airplane GetAirplaneId(int id)
+        public Airplane GetAirplanePilot(string pilot)
         {
             foreach(Airplane a in Airplanes)
             {
-                if(a.Id.Equals(id))
+                if(a.Pilot.Equals(pilot))
                 {
                     return a;
                 }
@@ -573,7 +512,7 @@ namespace AirlineTickets.Database
                     seat.Active = false;
                     seatB.Add(seat);
                     SeatAvailable.Add(seat);
-                  //  seat.SaveSeat();
+                  
 
                 }
 
@@ -596,7 +535,7 @@ namespace AirlineTickets.Database
                     seatEconomy.Active = false;
                     seatE.Add(seatEconomy);
                     SeatAvailable.Add(seatEconomy);
-                  //  seatEconomy.SaveSeat();
+                  
                 }
 
             }

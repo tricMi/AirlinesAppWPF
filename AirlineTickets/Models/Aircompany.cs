@@ -32,13 +32,13 @@ namespace AirlineTickets.Models
             set { companyPassword = value; OnPropertyChanged("CompanyPassword"); }
         }
 
-        private ObservableCollection<Flight> flightList;
+        //private ObservableCollection<Flight> flightList;
 
-        public ObservableCollection<Flight> FlightList
-        {
-            get { return flightList; }
-            set { flightList = value; OnPropertyChanged("FlightList"); }
-        }
+        //public ObservableCollection<Flight> FlightList
+        //{
+        //    get { return flightList; }
+        //    set { flightList = value; OnPropertyChanged("FlightList"); }
+        //}
 
 
 
@@ -50,16 +50,16 @@ namespace AirlineTickets.Models
             set { active = value; OnPropertyChanged("Active"); }
         }
 
-        public Aircompany()
-        {
-            FlightList = new ObservableCollection<Flight>();
-        }
+        //public Aircompany()
+        //{
+        //    FlightList = new ObservableCollection<Flight>();
+        //}
 
-        public Aircompany(String companyPassword)
-        {
-            this.CompanyPassword = CompanyPassword;
-            FlightList = new ObservableCollection<Flight>();
-        }
+        //public Aircompany(String companyPassword)
+        //{
+        //    this.CompanyPassword = CompanyPassword;
+        //    FlightList = new ObservableCollection<Flight>();
+        //}
 
 
 
@@ -85,7 +85,6 @@ namespace AirlineTickets.Models
                 Id = this.Id,
                 CompanyName = this.companyName,
                 CompanyPassword = this.CompanyPassword,
-                FlightList = this.FlightList,
                 Active = this.Active
             };
 
@@ -107,12 +106,11 @@ namespace AirlineTickets.Models
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO Aircompany(CompanyName, CompanyPassword, FlightList, Active)" +
-               " VALUES (@CompanyName, @CompanyPassword, @FlightList, @Active)";
+                command.CommandText = @"INSERT INTO Aircompany(CompanyName, CompanyPassword, Active)" +
+               " VALUES (@CompanyName, @CompanyPassword, @Active)";
 
                 command.Parameters.Add(new SqlParameter("@CompanyName", this.CompanyName));
                 command.Parameters.Add(new SqlParameter("@CompanyPassword", this.CompanyPassword));
-                command.Parameters.Add(new SqlParameter("@FlightList", this.FlightList == null));
                 command.Parameters.Add(new SqlParameter("@Active", false));
 
                 command.ExecuteNonQuery();

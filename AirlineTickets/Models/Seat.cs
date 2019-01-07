@@ -41,9 +41,9 @@ namespace AirlineTickets.Models
             set { seatClass = value; }
         }
 
-        private Airplane airplaneId;
+        private string airplaneId;
 
-        public Airplane AirplaneId
+        public string AirplaneId
         {
             get { return airplaneId; }
             set { airplaneId = value; }
@@ -92,7 +92,7 @@ namespace AirlineTickets.Models
 
         public override string ToString()
         {
-            return "Seat " + SeatLabel + " Class " + SeatClass;
+            return $"{SeatLabel}";
         }
 
         public void SaveSeat()
@@ -134,7 +134,7 @@ namespace AirlineTickets.Models
                 command.Parameters.Add(new SqlParameter("@SeatLabel", this.SeatLabel));
                 command.Parameters.Add(new SqlParameter("@SeatState", this.SeatState));
                 command.Parameters.Add(new SqlParameter("@SeatClass", this.SeatClass));
-                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId.Id));
+                command.Parameters.Add(new SqlParameter("@AirplaneId", this.AirplaneId));
                 command.Parameters.Add(new SqlParameter("@Active", this.Active));
 
                 command.ExecuteNonQuery();

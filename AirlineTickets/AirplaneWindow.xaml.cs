@@ -81,6 +81,15 @@ namespace AirlineTickets
             {
                 if (MessageBox.Show("Are you sure that you want to delete airplane?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
+                    foreach(var seat in Data.Instance.SeatAvailable.ToList())
+                    {
+                        if(seat.AirplaneId.Equals(selectedPlane.Pilot))
+                        {
+                            seat.Active = true;
+                            seat.ChangeSeat();
+                            view.Refresh();
+                        }
+                    }
                     int index = IndexOfSelectedAirplane(selectedPlane.Pilot);
                     Data.Instance.Airplanes[index].Active = true;
                     view.Refresh();

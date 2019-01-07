@@ -2,8 +2,10 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,12 +29,16 @@ namespace AirlineTickets
         User user;
         ICollectionView view;
         public Flight SelectedFlight { get; set; }
+        public EFlightType type;
+        public ObservableCollection<Flight> fl = new ObservableCollection<Flight>();
 
-        public FilterFlightsWindow(User user)
+        public FilterFlightsWindow(User user, EFlightType type)
         {
             InitializeComponent();
             this.user = user;
             BtnPickFlight.IsEnabled = false;
+
+            CbFlightType.ItemsSource = Enum.GetValues(typeof(EFlightType));
         }
 
 
@@ -96,6 +102,11 @@ namespace AirlineTickets
                 ok = false;
                 MessageBox.Show("Field can't be empty");
             }
+            else if(CbFlightType.SelectedIndex <= -1)
+            {
+                ok = false;
+                MessageBox.Show("You must select a flight type");
+            }
             return ok;
         }
 
@@ -104,9 +115,10 @@ namespace AirlineTickets
         private void BtnPickSeat_Click(object sender, RoutedEventArgs e)
         {
             SelectedFlight = DGFlights.SelectedItem as Flight;
-            BookFlightPassenger bf = new BookFlightPassenger(SelectedFlight, user);
+            type = (EFlightType)CbFlightType.SelectedItem;
+            BookFlightPassenger bf = new BookFlightPassenger(SelectedFlight, user, type);
             bf.ShowDialog();
-            
+            this.Close();
         }
 
         private void BtnShowFlights_Click(object sender, RoutedEventArgs e)
@@ -114,6 +126,7 @@ namespace AirlineTickets
             
             if (Validation() == true)
             {
+                
                 view = CollectionViewSource.GetDefaultView(Data.Instance.Flights);
                 DGFlights.ItemsSource = view;
                 view.Filter = RangeFilter;
@@ -122,6 +135,9 @@ namespace AirlineTickets
                 DGFlights.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
                 BtnPickFlight.IsEnabled = true;
                 view.SortDescriptions.Add(new SortDescription("OneWayTicketPrice", ListSortDirection.Descending));
+
+              //  BookFlightPassenger bfp = new BookFlightPassenger(SelectedFlight, user, type);
+              //  SelectedFlight = bfp.flight;
             }
 
         }

@@ -67,6 +67,10 @@ namespace AirlineTickets
             CbDestination.ItemsSource = City.Select(b => b);
             cbCompanyId.ItemsSource = CompanyNum.Select(c => c);
 
+            if(option.Equals(Option.EDIT))
+            {
+                tbFlightNum.IsEnabled = false;
+            }
 
         }
 
@@ -91,6 +95,10 @@ namespace AirlineTickets
                         Aircompany pass = flight.CompanyPassword;
                         flight.SaveAircompanyFlights(pass.CompanyPassword, flight.FlightNumber);
 
+                    }
+                    else
+                    {
+                        MessageBox.Show("Flight with that number already exists, please choose another flight number");
                     }
                 }
             }

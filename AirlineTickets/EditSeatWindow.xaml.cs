@@ -36,7 +36,7 @@ namespace AirlineTickets
             CbSeatCls.ItemsSource = Enum.GetValues(typeof(EClass));
             TxtSeatState.Text = true.ToString();
             TxtSeatState.IsEnabled = false;
-            seat.SeatState = true;
+            
 
             if (option.Equals(Option.EDIT))
             {

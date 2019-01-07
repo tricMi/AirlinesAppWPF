@@ -5,15 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="Seats Window" Height="344" Width="709" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+        Title="Seats Window" Height="587" Width="725" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Images/air.jpg"/>
         </Grid.Background>
-        <DataGrid Name ="DGSeats" Opacity="0.8" GridLinesVisibility="None"  HorizontalAlignment="Left" Height="222" Margin="23,65,0,0" VerticalAlignment="Top" Width="599"/>
-        <Button Name="BtnDelete" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Delete" HorizontalAlignment="Left" Margin="23,19,0,0" VerticalAlignment="Top" Width="88" Height="31" Click="BtnDelete_Click"/>
-        <Button Name="BtnEdit" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Edit" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="88" Height="29" Click="BtnEdit_Click"/>
-        <Button Name="BtnAdd" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Add" HorizontalAlignment="Left" Margin="252,19,0,0" VerticalAlignment="Top" Width="88" Height="32" Click="BtnAdd_Click"/>
+        <ListBox x:Name ="LbBSeats" Opacity="0.8" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Height="480" Margin="23,54,0,0" VerticalAlignment="Top" Width="487">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="332" Background="#4CFFFFFF">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="132*"/>
+                            <ColumnDefinition Width="200*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="GridB" Grid.RowSpan="3" Margin="0,0,12,0" Background="Coral" Width="60" Height="60" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding SeatLabel}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                        </Grid>
+                        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Background="Beige" Text="{Binding SeatState}" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Background="Beige" Grid.ColumnSpan="1" Text="{Binding SeatClass}" TextWrapping="Wrap"/>
+                        <!--<TextBlock Grid.Row="1" Grid.Column="3" Background="Beige" Grid.ColumnSpan="1" Text="{Binding AirplaneId}" TextWrapping="Wrap"/>-->
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding SeatState}" Value="True">
+                            <Setter TargetName="GridB" Property="Background" Value="Coral"/>
+                        </DataTrigger>
 
+                        <DataTrigger Binding="{Binding SeatState}" Value="False">
+                            <Setter TargetName="GridB" Property="Background" Value="Green"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="6"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <Button Name="BtnEdit" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Edit" HorizontalAlignment="Left" Margin="529,54,0,0" VerticalAlignment="Top" Width="88" Height="29" Click="BtnEdit_Click"/>
+        <StackPanel Grid.ColumnSpan="2" Background="White" Opacity="0.8" HorizontalAlignment="Left" Height="130" Margin="529,137,0,0" VerticalAlignment="Top" Width="164"/>
+        <Image HorizontalAlignment="Left"   Height="28" Margin="543,152,0,0" VerticalAlignment="Top" Width="26" Source="Images/green.png"/>
+        <Image HorizontalAlignment="Left" Height="25" Margin="543,204,0,0" VerticalAlignment="Top" Width="26" RenderTransformOrigin="0.286,-1.172" Source="Images/orange.png"/>
+        <Label x:Name="lblGreen" Content="Taken Seat" HorizontalAlignment="Left" Margin="587,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.737,-1.115" Width="90"/>
+        <Label x:Name="lblOrange" Content="Available Seat" HorizontalAlignment="Left" Margin="587,204,0,0" VerticalAlignment="Top" Width="90"/>
     </Grid>
 </Window>

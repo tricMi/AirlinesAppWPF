@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Models\Aircompany.cs" />
     <Compile Include="Models\Airplane.cs" />
+    <Compile Include="Models\FlightType.cs" />
     <Compile Include="Models\Seat.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\Tickets.cs" />
@@ -341,6 +342,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\gradient.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\orange.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

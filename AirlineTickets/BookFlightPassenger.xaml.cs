@@ -2,6 +2,7 @@
 using AirlineTickets.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,46 +28,55 @@ namespace AirlineTickets
         Flight flight;
         public Seat SelectedSeat { get; set; }
         public EClass clas { get; set; }
+        public List<string> gate = new List<string>();
+        public EFlightType type;
 
-        public BookFlightPassenger(Flight flight, User user)
+        public BookFlightPassenger(Flight flight, User user, EFlightType type)
         {
             InitializeComponent();
             this.user = user;
             this.flight = flight;
-
+            this.type = type;
 
             if (user != null)
             {
                 txtFlight.IsEnabled = false;
                 txtName.IsEnabled = false;
                 txtSeat.IsEnabled = false;
-                txtGender.IsEnabled = false;
+                CbGender.IsEnabled = false;
                 txtSurname.IsEnabled = false;
                 txtAddress.IsEnabled = false;
 
 
                 txtName.Text = user.Name;
                 txtSurname.Text = user.Surname;
-                txtGender.Text = user.Gender.ToString();
+                CbGender.SelectedItem = user.Gender;
                 txtAddress.Text = user.Address;
 
             }
+
             this.txtSeat.DataContext = SelectedSeat;
             this.cbClass.DataContext = SelectedSeat;
             this.txtPrice.DataContext = flight;
 
             this.txtName.DataContext = user;
             this.txtSurname.DataContext = user;
-            this.txtGender.DataContext = user;
+            this.CbGender.DataContext = user;
             this.txtAddress.DataContext = user;
 
             this.txtFlight.DataContext = flight;
 
-
+            CbGender.ItemsSource = Enum.GetValues(typeof(EGender));
             cbClass.ItemsSource = Enum.GetValues(typeof(EClass));
            
             txtPrice.Text = flight.OneWayTicketPrice.ToString();
-            
+
+            gate.Add("A5");
+            gate.Add("B4");
+            gate.Add("D5");
+
+            CbGate.ItemsSource = gate;
+
         }
 
         private void BtnBook_Click(object sender, RoutedEventArgs e)
@@ -78,7 +88,14 @@ namespace AirlineTickets
                 ticket.SeatClass = (EClass)cbClass.SelectedItem;
                 ticket.SeatNum = SelectedSeat;
                 ticket.CurrentUser = user.Username;
-                ticket.Gate = "A5";
+                if (CbGate.SelectedIndex > -1)
+                {
+                    ticket.Gate = CbGate.SelectedItem.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("You must select a gate");
+                }
                 ticket.TicketPrice = flight.OneWayTicketPrice;
                 if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
                 {
@@ -91,7 +108,14 @@ namespace AirlineTickets
                 ticket.SeatClass = (EClass)cbClass.SelectedItem;
                 ticket.SeatNum = SelectedSeat;
                 ticket.CurrentUser = txtName.Text + " " + txtSurname.Text;
-                ticket.Gate = "A5";
+                if (CbGate.SelectedIndex > -1)
+                {
+                    ticket.Gate = CbGate.SelectedItem.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("You must select a gate");
+                }
                 ticket.TicketPrice = flight.OneWayTicketPrice;
                 if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
                 {
@@ -99,7 +123,17 @@ namespace AirlineTickets
                 }
             }
             ticket.SaveTicket();
-            this.Close();
+            FilterFlightsWindow fw = new FilterFlightsWindow(user, type);
+            if (type.Equals(EFlightType.ROUNDTRIP))
+            {
+                fw.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+            }
+
         }
 
         private void BtnSeat_Click(object sender, RoutedEventArgs e)
@@ -112,7 +146,7 @@ namespace AirlineTickets
                 {
                     SelectedSeat = ps.SelectedSeat;
                 }
-                
+                BtnSeat.IsEnabled = false;
             }
             else
             {

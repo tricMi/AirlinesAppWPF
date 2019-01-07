@@ -29,5 +29,6 @@
         <xctk:DateTimePicker x:Name="AD" HorizontalAlignment="Left" Background="#FF725959" Foreground="White" Margin="802,425,0,0" VerticalAlignment="Top" Width="134" Height="30"/>
         <Button Name="BtnPickFlight" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Pick A Flight" HorizontalAlignment="Left" Margin="29,62,0,0" VerticalAlignment="Top" Width="114" Height="34" Click="BtnPickSeat_Click"/>
         <Button Name="BtnShowFlights" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Show Flights" HorizontalAlignment="Left" Margin="169,62,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.493,1.25" Height="34" Click="BtnShowFlights_Click"/>
+        <ComboBox Name="CbFlightType"  Opacity="0.8" Background="#FF725959" HorizontalAlignment="Left" Margin="341,62,0,0" VerticalAlignment="Top" Width="120" Height="34"/>
     </Grid>
 </Window>

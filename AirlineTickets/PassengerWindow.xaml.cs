@@ -21,6 +21,7 @@ namespace AirlineTickets
     public partial class PassengerWindow : Window
     {
         private User user;
+        private EFlightType type;
 
         public PassengerWindow(User user)
         {
@@ -42,7 +43,7 @@ namespace AirlineTickets
 
         private void BtnFlights_Click(object sender, RoutedEventArgs e)
         {
-            FilterFlightsWindow fw = new FilterFlightsWindow(user);
+            FilterFlightsWindow fw = new FilterFlightsWindow(user, type);
             fw.ShowDialog();
         }
     }

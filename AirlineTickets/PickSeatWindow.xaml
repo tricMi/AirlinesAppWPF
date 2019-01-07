@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="Pick Seat Window" Height="575" Width="653" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
+        Title="Pick Seat Window" Height="575" Width="716" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Images/air.jpg"/>
@@ -39,7 +39,7 @@
                         </Grid>
                         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Background="Beige" Text="{Binding SeatState}" FontSize="12" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="1" Grid.Column="3" Background="Beige" Grid.ColumnSpan="1" Text="{Binding SeatClass}" TextWrapping="Wrap"/>
-                        
+
                     </Grid>
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding SeatState}" Value="True">
@@ -59,6 +59,11 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
+        <StackPanel Grid.ColumnSpan="2" Background="White" Opacity="0.8" HorizontalAlignment="Left" Height="130" Margin="519,138,0,0" VerticalAlignment="Top" Width="164"/>
+        <Image HorizontalAlignment="Left"   Height="28" Margin="543,152,0,0" VerticalAlignment="Top" Width="26" Source="Images/green.png"/>
+        <Image HorizontalAlignment="Left" Height="25" Margin="543,204,0,0" VerticalAlignment="Top" Width="26" RenderTransformOrigin="0.286,-1.172" Source="Images/orange.png"/>
+        <Label x:Name="lblGreen" Content="Taken Seat" Grid.Column="1" HorizontalAlignment="Left" Margin="0,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.737,-1.115" Width="90"/>
+        <Label x:Name="lblOrange" Content="Available Seat" Grid.Column="1" HorizontalAlignment="Left" Margin="0,203,0,0" VerticalAlignment="Top" Width="90"/>
 
     </Grid>
 </Window>

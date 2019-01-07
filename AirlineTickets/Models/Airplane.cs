@@ -98,7 +98,7 @@ namespace AirlineTickets.Models
 
         public override string ToString()
         {
-            return $"{Id}";
+            return $"{Pilot}";
         }
 
         public object Clone()
@@ -145,7 +145,7 @@ namespace AirlineTickets.Models
 
             Database.Data.Instance.LoadAirplane();
         }
-    
+
 
         public void ChangeAirplane()
         {
@@ -174,44 +174,5 @@ namespace AirlineTickets.Models
             Database.Data.Instance.LoadAirplane();
         }
 
-        public void SaveAirplaneBusinessSeats(string label, int id)
-        {
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = CONNECTION_STRING;
-                conn.Open();
-
-                SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO BusinessSeats(SeatLabel, AirplaneId)" +
-                                      " VALUES(@SeatLabel, @AirplaneId)";
-
-                command.Parameters.Add(new SqlParameter("@SeatLabel", label));
-                command.Parameters.Add(new SqlParameter("@AirplaneId", id));
-
-                command.ExecuteNonQuery();
-            }
-
-            Database.Data.Instance.AirplaneBusinessSeat(id);
-        }
-
-        public void SaveAirplaneEconomySeats(string label, int id)
-        {
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = CONNECTION_STRING;
-                conn.Open();
-
-                SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"INSERT INTO EconomySeats(SeatLabel, AirplaneId)" +
-                                      " VALUES(@SeatLabel, @AirplaneId)";
-
-                command.Parameters.Add(new SqlParameter("@SeatLabel", label));
-                command.Parameters.Add(new SqlParameter("@AirplaneId", id));
-
-                command.ExecuteNonQuery();
-            }
-
-            Database.Data.Instance.AirplaneEconomySeat(id);
-        }
     }
 }

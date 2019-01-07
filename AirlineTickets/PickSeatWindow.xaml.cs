@@ -28,7 +28,7 @@ namespace AirlineTickets
         ICollectionView view;
         public Seat SelectedSeat = null;
         Flight flight;
-        public ObservableCollection<Airplane> seats = new ObservableCollection<Airplane>();
+        public ObservableCollection<Seat> seats = new ObservableCollection<Seat>();
 
         public EClass Clas { get; set; }
 
@@ -37,24 +37,23 @@ namespace AirlineTickets
             InitializeComponent();
             this.flight = flight;
 
-            foreach (Airplane a in Data.Instance.Airplanes)
+            foreach (Seat s in Data.Instance.SeatAvailable)
             {
-                if (a.Id == flight.AirplaneId.Id)
+                if (s.AirplaneId == flight.AirplaneId.Pilot)
                 {
-                    seats.Add(a);
-                    foreach(Airplane asc in seats)
-                    {
+                        seats.Add(s);
+                    
                         if (Clas.Equals(EClass.BUSINESS))
                         {
-                            view = CollectionViewSource.GetDefaultView(asc.BusinessClass);
+                            view = CollectionViewSource.GetDefaultView(seats.Where(ss => ss.SeatClass.Equals(EClass.BUSINESS)));
                             LbBSeats.ItemsSource = view;
                         }
                         else
                         {
-                            view = CollectionViewSource.GetDefaultView(asc.EconomyClass);
+                            view = CollectionViewSource.GetDefaultView(seats.Where(ss => ss.SeatClass.Equals(EClass.ECONOMY)));
                             LbBSeats.ItemsSource = view;
                         }
-                    }
+                    
                 }
                 
             }
@@ -74,8 +73,9 @@ namespace AirlineTickets
                 SelectedSeat.SeatState = false;
                 SelectedSeat.ChangeSeat();
                 this.DialogResult = true;
-                this.Close();
+                
             }
+            BtnPick.IsEnabled = false;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

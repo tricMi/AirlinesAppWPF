@@ -69,15 +69,16 @@ namespace AirlineTickets.Validation
 
     public class EmailValidation : ValidationRule
     {
-        Regex regex = new Regex(@"^[a-zA-Z]+$");
+        Regex regex = new Regex(@"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b",
+           RegexOptions.IgnoreCase);
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (value.ToString().Any(char.IsLetter) && value.ToString().Contains("@") && value.ToString().EndsWith(".com") && value != null)
-            {
-                return new ValidationResult(true, "Email Format is Correct!");
-            }
-            return new ValidationResult(false, "Email Format is Wrong!");
+            String v = value as string;
+            if (v != null && regex.Match(v).Success)
+                return new ValidationResult(true, null);
+            else
+                return new ValidationResult(false, "Wrong email address format!");
         }
     }
 

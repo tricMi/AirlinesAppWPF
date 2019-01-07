@@ -51,7 +51,7 @@ namespace AirlineTickets
                 if (!System.Windows.Controls.Validation.GetHasError(txtName))
                 {
                     this.DialogResult = true;
-                    if (option.Equals(Option.ADDING) && !userExists(user.Name))
+                    if (option.Equals(Option.ADDING) && !userExists(user.Username))
                     {
                         user.SaveUsers();
                     }

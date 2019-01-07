@@ -28,11 +28,8 @@ namespace AirlineTickets
         {
             InitializeComponent();
             view = CollectionViewSource.GetDefaultView(Data.Instance.SeatAvailable);
-            DGSeats.ItemsSource = view;
-            DGSeats.IsReadOnly = true;
-            DGSeats.IsSynchronizedWithCurrentItem = true;
-            DGSeats.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-            view.Filter = CustomFilter;
+            LbBSeats.ItemsSource = view;
+           
         }
 
         private bool CustomFilter(object obj)
@@ -41,26 +38,11 @@ namespace AirlineTickets
             return !seat.Active;
         }
 
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            Seat seat = DGSeats.SelectedItem as Seat;
-            if (SelectedSeat(seat))
-            {
-                if (MessageBox.Show("Are you sure that you want to delete airport?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
-                {
-                    
-                    int index = IndexOfSelectedSeat(seat.SeatLabel);
-                    seat.Active = true;
-                    seat.ChangeSeat();
-                    Data.Instance.SeatAvailable[index].Active = true;
-                    view.Refresh();
-                }
-            }
-        }
+        
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Seat seat = DGSeats.SelectedItem as Seat;
+            Seat seat = LbBSeats.SelectedItem as Seat;
             if (SelectedSeat(seat))
             {
                 Seat oldSeat = seat.Clone() as Seat;
@@ -80,11 +62,7 @@ namespace AirlineTickets
            
         }
 
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            EditSeatWindow esw = new EditSeatWindow(new Seat(), EditSeatWindow.Option.ADD);
-            esw.ShowDialog();
-        }
+       
 
         private int IndexOfSelectedSeat(String seatLable)
         {

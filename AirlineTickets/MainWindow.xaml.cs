@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirlineTickets.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,10 @@ namespace AirlineTickets
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
+
     {
+        private EFlightType type;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,7 +40,7 @@ namespace AirlineTickets
 
         private void BtnBuy_Click(object sender, RoutedEventArgs e)
         {
-            FilterFlightsWindow fw = new FilterFlightsWindow(null);
+            FilterFlightsWindow fw = new FilterFlightsWindow(null, type);
             fw.ShowDialog();
         }
     }
