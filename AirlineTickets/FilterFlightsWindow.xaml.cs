@@ -30,7 +30,7 @@ namespace AirlineTickets
         ICollectionView view;
         public Flight SelectedFlight { get; set; }
         public EFlightType type;
-        public ObservableCollection<Flight> fl = new ObservableCollection<Flight>();
+        
 
         public FilterFlightsWindow(User user, EFlightType type)
         {
@@ -136,8 +136,7 @@ namespace AirlineTickets
                 BtnPickFlight.IsEnabled = true;
                 view.SortDescriptions.Add(new SortDescription("OneWayTicketPrice", ListSortDirection.Descending));
 
-              //  BookFlightPassenger bfp = new BookFlightPassenger(SelectedFlight, user, type);
-              //  SelectedFlight = bfp.flight;
+
             }
 
         }

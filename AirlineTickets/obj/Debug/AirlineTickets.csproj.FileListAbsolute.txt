@@ -88,3 +88,5 @@ D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\BookFlightPassen
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerTickets.g.cs
 D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\PassengerTickets.baml
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\RoundTripFlights.g.cs
+D:\Documents\POP2018\pop2018-sf13-2017\AirlineTickets\obj\Debug\RoundTripFlights.baml

@@ -123,9 +123,11 @@ namespace AirlineTickets
                 }
             }
             ticket.SaveTicket();
-            FilterFlightsWindow fw = new FilterFlightsWindow(user, type);
+            RoundTripFlights fw = new RoundTripFlights(flight, user, type);
             if (type.Equals(EFlightType.ROUNDTRIP))
             {
+               // fw.SelectedFlight = flight;
+               // Trace.WriteLine(fw.SelectedFlight);
                 fw.ShowDialog();
                 this.Close();
             }

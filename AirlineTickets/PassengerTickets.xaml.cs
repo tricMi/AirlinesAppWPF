@@ -45,6 +45,7 @@ namespace AirlineTickets
             DGPassengerTicket.IsReadOnly = true;
             DGPassengerTicket.IsSynchronizedWithCurrentItem = true;
             DGPassengerTicket.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+            view.Refresh();
         }
     }
 }

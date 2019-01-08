@@ -118,6 +118,9 @@
     <Compile Include="PickSeatWindow.xaml.cs">
       <DependentUpon>PickSeatWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RoundTripFlights.xaml.cs">
+      <DependentUpon>RoundTripFlights.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SeatsWindow.xaml.cs">
       <DependentUpon>SeatsWindow.xaml</DependentUpon>
     </Compile>
@@ -245,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PickSeatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RoundTripFlights.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
