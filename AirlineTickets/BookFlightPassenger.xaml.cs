@@ -46,12 +46,15 @@ namespace AirlineTickets
                 CbGender.IsEnabled = false;
                 txtSurname.IsEnabled = false;
                 txtAddress.IsEnabled = false;
+                txtEmail.IsEnabled = false;
 
 
                 txtName.Text = user.Name;
                 txtSurname.Text = user.Surname;
+                txtEmail.Text = user.Email;
                 CbGender.SelectedItem = user.Gender;
                 txtAddress.Text = user.Address;
+                
 
             }
 
@@ -61,6 +64,7 @@ namespace AirlineTickets
 
             this.txtName.DataContext = user;
             this.txtSurname.DataContext = user;
+            this.txtEmail.DataContext = user;
             this.CbGender.DataContext = user;
             this.txtAddress.DataContext = user;
 
@@ -68,7 +72,8 @@ namespace AirlineTickets
 
             CbGender.ItemsSource = Enum.GetValues(typeof(EGender));
             cbClass.ItemsSource = Enum.GetValues(typeof(EClass));
-           
+ 
+            
             txtPrice.Text = flight.OneWayTicketPrice.ToString();
 
             gate.Add("A5");
@@ -82,58 +87,63 @@ namespace AirlineTickets
         private void BtnBook_Click(object sender, RoutedEventArgs e)
         {
             Tickets ticket = new Tickets();
-            if (user != null)
+            if (!System.Windows.Controls.Validation.GetHasError(txtName))
             {
-                ticket.FlightNum = flight;
-                ticket.SeatClass = (EClass)cbClass.SelectedItem;
-                ticket.SeatNum = SelectedSeat;
-                ticket.CurrentUser = user.Username;
-                if (CbGate.SelectedIndex > -1)
+                if (user != null)
                 {
-                    ticket.Gate = CbGate.SelectedItem.ToString();
+                    ticket.FlightNum = flight;
+                    ticket.SeatClass = (EClass)cbClass.SelectedItem;
+                    ticket.SeatNum = SelectedSeat;
+                    ticket.CurrentUser = user.Username;
+                    if (CbGate.SelectedIndex > -1)
+                    {
+                        ticket.Gate = CbGate.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You must select a gate");
+                    }
+                    ticket.TicketPrice = flight.OneWayTicketPrice;
+                    if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
+                    {
+                        ticket.TicketPrice = flight.OneWayTicketPrice * (decimal)5.0;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("You must select a gate");
+
+                    ticket.FlightNum = flight;
+                    ticket.SeatClass = (EClass)cbClass.SelectedItem;
+                    ticket.SeatNum = SelectedSeat;
+                    ticket.CurrentUser = txtName.Text + " " + txtSurname.Text;
+                    if (CbGate.SelectedIndex > -1)
+                    {
+                        ticket.Gate = CbGate.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You must select a gate");
+                    }
+                    ticket.TicketPrice = flight.OneWayTicketPrice;
+                    if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
+                    {
+                        ticket.TicketPrice = flight.OneWayTicketPrice * (decimal)5.0;
+                    }
+
+
                 }
-                ticket.TicketPrice = flight.OneWayTicketPrice;
-                if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
+                ticket.SaveTicket();
+                RoundTripFlights fw = new RoundTripFlights(flight, user, type);
+                if (type.Equals(EFlightType.ROUNDTRIP))
                 {
-                    ticket.TicketPrice = flight.OneWayTicketPrice * (decimal)5.0;
-                }
-            }
-            else
-            {
-                ticket.FlightNum = flight;
-                ticket.SeatClass = (EClass)cbClass.SelectedItem;
-                ticket.SeatNum = SelectedSeat;
-                ticket.CurrentUser = txtName.Text + " " + txtSurname.Text;
-                if (CbGate.SelectedIndex > -1)
-                {
-                    ticket.Gate = CbGate.SelectedItem.ToString();
+
+                    fw.ShowDialog();
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("You must select a gate");
+                    this.Close();
                 }
-                ticket.TicketPrice = flight.OneWayTicketPrice;
-                if (SelectedSeat.SeatClass.Equals(EClass.BUSINESS))
-                {
-                    ticket.TicketPrice = flight.OneWayTicketPrice * (decimal)5.0;
-                }
-            }
-            ticket.SaveTicket();
-            RoundTripFlights fw = new RoundTripFlights(flight, user, type);
-            if (type.Equals(EFlightType.ROUNDTRIP))
-            {
-               // fw.SelectedFlight = flight;
-               // Trace.WriteLine(fw.SelectedFlight);
-                fw.ShowDialog();
-                this.Close();
-            }
-            else
-            {
-                this.Close();
             }
 
         }
@@ -143,10 +153,16 @@ namespace AirlineTickets
             if (cbClass.SelectedIndex > -1)
             {
                 clas = (EClass)cbClass.SelectedItem;
+                if (clas.Equals(EClass.BUSINESS))
+                {
+                    txtPrice.Text = (flight.OneWayTicketPrice * (decimal)5.0).ToString();
+                }
+
                 PickSeatWindow ps = new PickSeatWindow(flight, clas);
                 if (ps.ShowDialog() == true)
                 {
                     SelectedSeat = ps.SelectedSeat;
+                    txtSeat.Text = SelectedSeat.SeatLabel.ToString();
                 }
                 BtnSeat.IsEnabled = false;
             }

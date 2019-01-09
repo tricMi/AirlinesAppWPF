@@ -1,16 +1,17 @@
-﻿<Window x:Class="AirlineTickets.FlightsWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AirlineTickets.FlightsWindow"
         mc:Ignorable="d"
         Title="Flights" Height="542" Width="986" Background="#FFF1EAEA" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,2,0">
         <Grid.Background>
             <ImageBrush ImageSource="Images/air.jpg"/>
         </Grid.Background>
-        <DataGrid Name ="DGFlights" GridLinesVisibility="None" HorizontalAlignment="Left" Height="293" Margin="29,121,0,0" VerticalAlignment="Top" Width="703" Opacity="0.8"/>
+        <DataGrid x:Name ="DGFlights" GridLinesVisibility="None" HorizontalAlignment="Left" Height="293" Margin="29,121,0,0" VerticalAlignment="Top" Width="703" Opacity="0.8"/>
         <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="29,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnDelete_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
         <Button x:Name="BtnEdit" Content="Edit" HorizontalAlignment="Left" Margin="146,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnEdit_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
         <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="259,45,0,0" VerticalAlignment="Top" Width="93" Height="29" Click="BtnAdd_Click" Background="#FF725959" Foreground="White" Opacity="0.8"/>
@@ -30,11 +31,12 @@
         <Button x:Name="BtnFilterPrice" Content="Filter" HorizontalAlignment="Left" Margin="831,301,0,0" VerticalAlignment="Top" Width="75" Height="29" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterPrice_Click"/>
         <Label x:Name="lblSearchByDate" Content="Search By Date" HorizontalAlignment="Left" Margin="811,349,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold" Foreground="White"/>
         <Label x:Name="lblFromDate" Content="From" HorizontalAlignment="Left" Margin="760,388,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
-        <Label x:Name="lblToDate" Content="To" HorizontalAlignment="Left" Margin="764,419,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
-        <TextBox x:Name="txtFromDate" HorizontalAlignment="Left" Height="33" Margin="802,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtFromDate_KeyUp"/>
-        <TextBox x:Name="txtToDate" HorizontalAlignment="Left" Height="33" Margin="802,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="TxtToDate_KeyUp"/>
-        <Button x:Name="BtnFilterDate" Content="Filter" HorizontalAlignment="Left" Margin="831,460,0,0" VerticalAlignment="Top" Width="75" Height="28" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterDate_Click"/>
+        <Label x:Name="lblToDate" Content="To" HorizontalAlignment="Left" Margin="764,433,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.739,1.077"/>
+        <Button x:Name="BtnFilterDate" Content="Filter" HorizontalAlignment="Left" Margin="831,473,0,0" VerticalAlignment="Top" Width="75" Height="28" Background="#FF725959" Foreground="White" Opacity="0.8" Click="BtnFilterDate_Click"/>
         <Button x:Name="BtnSort" Content="Sort" HorizontalAlignment="Left" Margin="368,45,0,0" VerticalAlignment="Top" Width="87"  Background="#FF725959" Foreground="White" Opacity="0.8" Height="29" Click="BtnSort_Click"/>
+
+        <xctk:DateTimePicker Name ="dtDep" HorizontalAlignment="Left" Margin="811,388,0,0" VerticalAlignment="Top" Width="125" Height="36" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="DtDep_KeyUp"/>
+        <xctk:DateTimePicker Name ="dtD"  HorizontalAlignment="Left" Margin="811,429,0,0" VerticalAlignment="Top" Width="125" Height="30" Opacity="0.8" Background="#FF725959" Foreground="White" KeyUp="DtD_KeyUp"/>
 
     </Grid>
 </Window>

@@ -41,11 +41,18 @@ namespace AirlineTickets
             }
 
             view = CollectionViewSource.GetDefaultView(tickets);
+            view.Filter = CustomFilter;
             DGPassengerTicket.ItemsSource = view;
             DGPassengerTicket.IsReadOnly = true;
             DGPassengerTicket.IsSynchronizedWithCurrentItem = true;
             DGPassengerTicket.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             view.Refresh();
+        }
+
+        private bool CustomFilter(object obj)
+        {
+            Tickets ticket = obj as Tickets;
+            return !ticket.Active;
         }
     }
 }

@@ -188,14 +188,14 @@ namespace AirlineTickets
         private bool DateFilter(object obj)
         {
             Flight fl = obj as Flight;
-            if (txtFromDate.Text.Equals(String.Empty) || txtToDate.Text.Equals(String.Empty))
+            if (dtDep.Text.Equals(String.Empty) || dtD.Text.Equals(String.Empty))
             {
                 return !fl.Active;
             }
             else
             {
-                DateTime start = Convert.ToDateTime(txtFromDate.Text);
-                DateTime end = Convert.ToDateTime(txtToDate.Text);
+                DateTime start = Convert.ToDateTime(dtDep.Text);
+                DateTime end = Convert.ToDateTime(dtD.Text);
 
                 return fl.DepartureTime >= start && fl.ArrivalTime <= end;
             }
@@ -211,19 +211,20 @@ namespace AirlineTickets
             view.Refresh();
         }
 
-        private void TxtFromDate_KeyUp(object sender, KeyEventArgs e)
-        {
-            view.Refresh();
-        }
-
-        private void TxtToDate_KeyUp(object sender, KeyEventArgs e)
-        {
-            view.Refresh();
-        }
 
         private void BtnSort_Click(object sender, RoutedEventArgs e)
         {
             view.SortDescriptions.Add(new SortDescription("OneWayTicketPrice", ListSortDirection.Ascending));
+        }
+
+        private void DtDep_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
+        }
+
+        private void DtD_KeyUp(object sender, KeyEventArgs e)
+        {
+            view.Refresh();
         }
     }
 }

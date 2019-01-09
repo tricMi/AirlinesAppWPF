@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AirlineTickets"
+        xmlns:local="clr-namespace:AirlineTickets.Validation"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="AirlineTickets.FilterFlightsWindow"
         mc:Ignorable="d"
         Title="Filter Flights Window" WindowStartupLocation="CenterScreen" Height="541" Width="985">

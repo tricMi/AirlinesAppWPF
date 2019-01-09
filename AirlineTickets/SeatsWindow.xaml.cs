@@ -38,55 +38,7 @@ namespace AirlineTickets
             return !seat.Active;
         }
 
-        
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            Seat seat = LbBSeats.SelectedItem as Seat;
-            if (SelectedSeat(seat))
-            {
-                Seat oldSeat = seat.Clone() as Seat;
-                EditSeatWindow esw = new EditSeatWindow(seat, EditSeatWindow.Option.EDIT);
-
-                if (esw.ShowDialog() != true)
-                {
-                    int index = IndexOfSelectedSeat(oldSeat.SeatLabel);
-                    Data.Instance.SeatAvailable[index] = oldSeat;
-
-                }
-                else
-                {
-                    seat.ChangeSeat();
-                }
-            }
-           
-        }
-
-       
-
-        private int IndexOfSelectedSeat(String seatLable)
-        {
-            var index = -1;
-            for (int i = 0; i < Data.Instance.SeatAvailable.Count; i++)
-            {
-                if (Data.Instance.SeatAvailable[i].SeatLabel.Equals(seatLable))
-                {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
-        }
-
-        private bool SelectedSeat(Seat seat)
-        {
-            if (seat == null)
-            {
-                MessageBox.Show("You haven't selected any seat!");
-                return false;
-            }
-            return true;
-        }
 
     }
 }

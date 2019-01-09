@@ -45,6 +45,13 @@ namespace AirlineTickets
                     aId.Add(a);
                 }
             }
+            foreach (Aircompany a in Data.Instance.Aircompanies)
+            {
+                if (a.Active.Equals(false))
+                {
+                    CompanyNum.Add(a);
+                }
+            }
 
             foreach (Airport a in Data.Instance.Airports)
             {
@@ -54,13 +61,7 @@ namespace AirlineTickets
                 }
             }
 
-            foreach (Aircompany a in Data.Instance.Aircompanies)
-            {
-                if (a.Active.Equals(false))
-                {
-                    CompanyNum.Add(a);
-                }
-            }
+
 
             cbAirplaneId.ItemsSource = aId.Select(ar => ar);
             CbDepPlace.ItemsSource = City.Select(a => a);

@@ -17,7 +17,7 @@
         <Label Name="LblGender" Content="Gender" HorizontalAlignment="Left" Margin="40,329,0,0" VerticalAlignment="Top" Width="100" Height="33" FontWeight="Bold"/>
         <Label Name="LblSurname" Content="Surname" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top" Width="100" Height="35" FontWeight="Bold"/>
         <Label Name="LblPassword" Content="Password" HorizontalAlignment="Left" Margin="40,146,0,0" VerticalAlignment="Top" Width="100" Height="30" FontWeight="Bold"/>
-        <TextBox Name ="txtName" HorizontalAlignment="Left" Height="35" Margin="209,25,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Background="#FFCBCCDA">
+        <TextBox Name ="txtName" HorizontalAlignment="Left" Height="35" Margin="158,25,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171" Background="#FFCBCCDA">
             <TextBox.Text>
                 <Binding Path="Name"
                          NotifyOnValidationError="True" 
@@ -39,7 +39,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <TextBox Name ="txtSurname" HorizontalAlignment="Left" Height="35" Margin="209,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Background="#FFCBCCDA">
+        <TextBox Name ="txtSurname" HorizontalAlignment="Left" Height="35" Margin="158,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171" Background="#FFCBCCDA">
             <TextBox.Text>
                 <Binding Path="Surname"
                          NotifyOnValidationError="True" 
@@ -61,7 +61,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-            <TextBox Name ="txtUsername" HorizontalAlignment="Left" Height="35" Margin="209,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FFCBCCDA">
+        <TextBox Name ="txtUsername" HorizontalAlignment="Left" Height="35" Margin="158,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Background="#FFCBCCDA">
             <TextBox.Text>
                 <Binding Path="Username"
                          NotifyOnValidationError="True" 
@@ -83,7 +83,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <TextBox Name ="txtAddress" HorizontalAlignment="Left" Height="35" Margin="209,387,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Background="#FFCBCCDA">
+        <TextBox Name ="txtAddress" HorizontalAlignment="Left" Height="35" Margin="158,387,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171" Background="#FFCBCCDA">
             <TextBox.Text>
                 <Binding Path="Address"
                          NotifyOnValidationError="True" 
@@ -106,11 +106,11 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <ComboBox Name = "CbGender" HorizontalAlignment="Left" SelectedItem="{Binding Path=Gender}" Margin="209,329,0,0" VerticalAlignment="Top" Width="120" Height="32" Background="#FFCBCCDA" RenderTransformOrigin="0.542,2"/>
-        <ComboBox Name = "CbUserType" HorizontalAlignment="Left" SelectedItem="{Binding Path=UserType}" Margin="209,449,0,0" VerticalAlignment="Top" Width="120" Height="33" Background="#FFCBCCDA"/>
+        <ComboBox Name = "CbGender" HorizontalAlignment="Left" SelectedItem="{Binding Path=Gender}" Margin="158,329,0,0" VerticalAlignment="Top" Width="171" Height="32" Background="#FFCBCCDA" RenderTransformOrigin="0.542,2"/>
+        <ComboBox Name = "CbUserType" HorizontalAlignment="Left" SelectedItem="{Binding Path=UserType}" Margin="158,449,0,0" VerticalAlignment="Top" Width="171" Height="33" Background="#FFCBCCDA"/>
         <Button x:Name="BtnSave" Content="Save" Background="#FFC4ADCD" HorizontalAlignment="Left" Margin="229,516,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="BtnSave_Click" RenderTransformOrigin="0.82,2.069" Opacity="0.9"/>
         <Button x:Name="BtnDiscard" Content="Discard" Background="#FF947F9C" HorizontalAlignment="Left" Margin="40,516,0,0" VerticalAlignment="Top" Width="100" Height="29" RenderTransformOrigin="0.48,0.552" Click="BtnDiscard_Click" Opacity="0.9"/>
-        <TextBox Name ="txtPassword"  HorizontalAlignment="Left" Height="35" Margin="209,146,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Background="#FFCBCCDA">
+        <TextBox Name ="txtPassword"  HorizontalAlignment="Left" Height="35" Margin="158,146,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171" Background="#FFCBCCDA">
             <TextBox.Text>
                 <Binding Path="Password"
                          NotifyOnValidationError="True" 
@@ -133,7 +133,7 @@
             </Validation.ErrorTemplate>
         </TextBox>
         <Label x:Name="LblEmail" Content="Email" HorizontalAlignment="Left" Margin="40,266,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold"/>
-        <TextBox x:Name="TxtEmail" HorizontalAlignment="Left" Height="35" Margin="209,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+        <TextBox x:Name="TxtEmail" Background="#FFCBCCDA" HorizontalAlignment="Left" Height="35" Margin="158,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171">
             <TextBox.Text>
                 <Binding Path="Email"
                          NotifyOnValidationError="True" 
@@ -154,7 +154,7 @@
                     </StackPanel>
                 </ControlTemplate>
             </Validation.ErrorTemplate>
-        
+
 
         </TextBox>
     </Grid>

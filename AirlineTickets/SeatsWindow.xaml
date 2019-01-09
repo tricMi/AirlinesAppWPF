@@ -53,7 +53,6 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        <Button Name="BtnEdit" Background="#FF725959"  Foreground="White" Opacity="0.8" Content="Edit" HorizontalAlignment="Left" Margin="529,54,0,0" VerticalAlignment="Top" Width="88" Height="29" Click="BtnEdit_Click"/>
         <StackPanel Grid.ColumnSpan="2" Background="White" Opacity="0.8" HorizontalAlignment="Left" Height="130" Margin="529,137,0,0" VerticalAlignment="Top" Width="164"/>
         <Image HorizontalAlignment="Left"   Height="28" Margin="543,152,0,0" VerticalAlignment="Top" Width="26" Source="Images/green.png"/>
         <Image HorizontalAlignment="Left" Height="25" Margin="543,204,0,0" VerticalAlignment="Top" Width="26" RenderTransformOrigin="0.286,-1.172" Source="Images/orange.png"/>

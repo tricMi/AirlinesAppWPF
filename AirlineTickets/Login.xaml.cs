@@ -46,7 +46,11 @@ namespace AirlineTickets
             else
             {
                 User u = Data.Instance.LoginUser(us, pass);
-                if (u.UserType.Equals(EUserType.ADMIN))
+                if(u == null)
+                {
+                    MessageBox.Show("Username or password isn't correct");
+                }
+                else if (u.UserType.Equals(EUserType.ADMIN))
                 {
                     AdminWindow aw = new AdminWindow();
                     aw.ShowDialog();
@@ -59,10 +63,7 @@ namespace AirlineTickets
                     pw.ShowDialog();
                     this.Close();
                 }
-                else
-                {
-                    MessageBox.Show("There is not user with that username or password");
-                }
+                
             }
             
         }

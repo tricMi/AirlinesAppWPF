@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirlineTickets"
         mc:Ignorable="d"
-        Title="RoundTripFlights" Height="450" Width="768">
+        Title="Round Trip Flights" WindowStartupLocation="CenterScreen" Height="450" Width="768">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="331*"/>

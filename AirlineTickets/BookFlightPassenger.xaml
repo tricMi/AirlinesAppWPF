@@ -3,43 +3,121 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AirlineTickets"
+        xmlns:local="clr-namespace:AirlineTickets.Validation"
         mc:Ignorable="d"
-        Title="Book Flight" WindowStartupLocation="CenterScreen" Height="637" Width="553">
+        Title="Book Flight" WindowStartupLocation="CenterScreen" Height="734" Width="584">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Images/air.jpg"/>
         </Grid.Background>
-        <Label x:Name="lblFlight" Content="Flight" Foreground="White" HorizontalAlignment="Left" Margin="130,64,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold"/>
-        <Label x:Name="lblGender" Content="Gender" Foreground="White" HorizontalAlignment="Left" Margin="132,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.289,-0.192" Width="82" FontWeight="Bold"/>
-        <Label x:Name="lblName" Content="Name" Foreground="White" HorizontalAlignment="Left" Margin="132,183,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold"/>
-        <Label x:Name="lblSurname" Content="Surname" Foreground="White" HorizontalAlignment="Left" Margin="132,240,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold"/>
-        <Label x:Name="lblAddress" Content="Address" Foreground="White" HorizontalAlignment="Left" Margin="130,291,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold"/>
-        <Label x:Name="lblGate" Content="Gate" Foreground="White" HorizontalAlignment="Left" Margin="130,340,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,0.423" Width="82" FontWeight="Bold"/>
-        <Label x:Name="lblSeat" Content="Seat" Foreground="White" HorizontalAlignment="Left" Margin="135,450,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.51,1.27" Width="80" FontWeight="Bold">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.585"/>
-                    <TranslateTransform X="0.202" Y="-0.008"/>
-                </TransformGroup>
-            </Label.RenderTransform>
+        <Label x:Name="lblFlight" Content="Flight" Foreground="White" HorizontalAlignment="Left" Margin="104,81,0,0" VerticalAlignment="Top" Width="82" FontSize="16"/>
+        <Label x:Name="lblGender" Content="Gender" Foreground="White" HorizontalAlignment="Left" Margin="104,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.289,-0.192" Width="82" FontSize="16"/>
+        <Label x:Name="lblName" Content="Name" Foreground="White" HorizontalAlignment="Left" Margin="104,197,0,0" VerticalAlignment="Top" Width="82" FontSize="16"/>
+        <Label x:Name="lblSurname" Content="Surname" Foreground="White" HorizontalAlignment="Left" Margin="104,255,0,0" VerticalAlignment="Top" Width="82" FontSize="16"/>
+        <Label x:Name="lblAddress" Content="Address" Foreground="White" HorizontalAlignment="Left" Margin="104,308,0,0" VerticalAlignment="Top" Width="93" FontSize="16"/>
+        <Label x:Name="lblGate" Content="Gate" Foreground="White" HorizontalAlignment="Left" Margin="104,413,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,0.423" Width="82" FontSize="16"/>
+        <Label x:Name="lblSeat" Content="Seat" Foreground="White" HorizontalAlignment="Left" Margin="104,518,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.51,1.27" Width="80" FontSize="16">
         </Label>
-        <TextBox x:Name="txtFlight" Opacity="0.8" Background="#FF725959" Text="{Binding Path=FlightNumber}" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
-        <TextBox x:Name="txtName" Text="{Binding Path=Name}" Opacity="0.8" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
-        <TextBox x:Name="txtSurname" Opacity="0.8" Text ="{Binding Path=Surname}" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
-        <TextBox x:Name="txtAddress" Opacity="0.8" Text="{Binding Path=Address}" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
-        <TextBox x:Name="txtSeat" Text="{Binding Path=SeatLabel}"  Opacity="0.8" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,441,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
-        <Button x:Name="BtnBook" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Book Flight" HorizontalAlignment="Left" Margin="327,551,0,0" VerticalAlignment="Top" Width="75" Height="35" Click="BtnBook_Click"/>
-        <Button x:Name="BtnCancel" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Cancel" HorizontalAlignment="Left" Margin="132,551,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
-        <Label x:Name="LblData" HorizontalContentAlignment="Center"  Background="#FF725959" Foreground="White" Content="Ticket Data" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" Width="451" FontWeight="Bold" FontSize="16"/>
-        <Label x:Name="lblPrice" Content="Ticket Price" HorizontalAlignment="Left" Foreground="White" Margin="132,506,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold"/>
-        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="35" Margin="230,497,0,0" Opacity="0.8"  Background="#FF725959" Foreground="White" TextWrapping="Wrap" Text="{Binding Path=OneWayTicketPrice}" VerticalAlignment="Top" Width="172" RenderTransformOrigin="0.512,0.886"/>
-        <Button Name="BtnSeat" Content="Pick Seat" HorizontalAlignment="Left" Margin="436,396,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,-0.35" Height="35" Click="BtnSeat_Click"/>
-        <Label x:Name="SeatClass" Foreground="White" Content="Seat Class" HorizontalAlignment="Left" Margin="130,396,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold"/>
-        <ComboBox x:Name="cbClass" SelectedItem="{Binding Path=SeatClass}" HorizontalAlignment="Left" Opacity="0.8" Background="#FF725959" Margin="230,396,0,0" VerticalAlignment="Top" Width="172" Height="30"/>
-        <ComboBox x:Name="CbGender" HorizontalAlignment="Left" Margin="230,120,0,0" SelectedItem="{Binding Path=Gender}" VerticalAlignment="Top" Opacity="0.8" Background="#FF725959" Width="172" Height="35"/>
-        <ComboBox x:Name="CbGate" HorizontalAlignment="Left" Margin="230,340,0,0" VerticalAlignment="Top" Width="172" Height="35"/>
+        <TextBox x:Name="txtFlight" Opacity="0.8" Background="#FF725959" Text="{Binding Path=FlightNumber}" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209"/>
+        <TextBox x:Name="txtName"  Opacity="0.8" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209">
+            <TextBox.Text>
+                <Binding Path="Name"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:NameValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox x:Name="txtSurname" Opacity="0.8"  Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" RenderTransformOrigin="0.512,0.943">
+            <TextBox.Text>
+                <Binding Path="Surname"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:SurnameValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox x:Name="txtAddress" Opacity="0.8"  Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209">
+            <TextBox.Text>
+                <Binding Path="Address"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:AddressValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox x:Name="txtSeat" Text="{Binding Path=SeatLabel}"  Opacity="0.8" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,514,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" RenderTransformOrigin="0.512,-0.057"/>
+        <Button x:Name="BtnBook" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Book Flight" HorizontalAlignment="Left" Margin="364,649,0,0" VerticalAlignment="Top" Width="75" Height="35" Click="BtnBook_Click"/>
+        <Button x:Name="BtnCancel" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Cancel" HorizontalAlignment="Left" Margin="104,649,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+        <Label x:Name="LblData" HorizontalContentAlignment="Center"  Background="#FF725959" Foreground="White" Content="Ticket Data" HorizontalAlignment="Left" Margin="104,20,0,0" VerticalAlignment="Top" Width="335" FontWeight="Bold" FontSize="16"/>
+        <Label x:Name="lblPrice" Content="Ticket Price" HorizontalAlignment="Left" Foreground="White" Margin="104,594,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
+        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="35" Margin="230,594,0,0" Opacity="0.8"  Background="#FF725959" Foreground="White" TextWrapping="Wrap" Text="{Binding Path=OneWayTicketPrice}" VerticalAlignment="Top" Width="209" RenderTransformOrigin="0.512,0.886"/>
+        <Button Name="BtnSeat" Content="Pick Seat" HorizontalAlignment="Left" Margin="301,554,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,-0.35" Height="35" Click="BtnSeat_Click"/>
+        <Label x:Name="SeatClass" Foreground="White" Content="Seat Class" HorizontalAlignment="Left" Margin="104,464,0,0" VerticalAlignment="Top" Width="80" FontSize="16"/>
+        <ComboBox x:Name="cbClass" SelectedItem="{Binding Path=SeatClass}" HorizontalAlignment="Left" Opacity="0.8" Background="#FF725959" Margin="230,464,0,0" VerticalAlignment="Top" Width="209" Height="30"/>
+        <ComboBox x:Name="CbGender" HorizontalAlignment="Left" Margin="230,139,0,0" SelectedItem="{Binding Path=Gender}" VerticalAlignment="Top" Opacity="0.8" Background="#FF725959" Width="209" Height="35"/>
+        <ComboBox x:Name="CbGate" HorizontalAlignment="Left" Margin="230,413,0,0" VerticalAlignment="Top" Width="209" Height="35"/>
+        <Label x:Name="lblEmail" Foreground="White" Content="Email" HorizontalAlignment="Left" Margin="104,360,0,0" VerticalAlignment="Top" Width="75" FontSize="16"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Opacity="0.8"  Background="#FF725959" Height="35" Margin="230,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209">
+            <TextBox.Text>
+                <Binding Path="Email"
+                         NotifyOnValidationError="True" 
+                         ValidatesOnDataErrors="True" 
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+
+                    <Binding.ValidationRules>
+                        <local:EmailValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBox Text="{Binding Path=ErrorContent}" Foreground="Red"></TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
     </Grid>
 </Window>
