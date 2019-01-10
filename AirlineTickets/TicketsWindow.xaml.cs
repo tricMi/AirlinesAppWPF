@@ -84,6 +84,7 @@ namespace AirlineTickets
                 Tickets oldTicket = selectedTicket.Clone() as Tickets;
                 EditTicketsWindow esw = new EditTicketsWindow(selectedTicket, EditTicketsWindow.Option.EDIT);
 
+
                 if (esw.ShowDialog() != true)
                 {
                     int index = IndexOfSelectedTicket(oldTicket.CurrentUser);
@@ -92,6 +93,15 @@ namespace AirlineTickets
                 }
                 else
                 {
+                    foreach (var seat in Data.Instance.SeatAvailable.ToList())
+                    {
+                        if (seat.SeatLabel.ToString().Equals(selectedTicket.SeatNum.SeatLabel))
+                        {
+                            seat.SeatState = false;
+                            seat.ChangeSeat();
+                            view.Refresh();
+                        }
+                    }
                     selectedTicket.ChangeTicket();
                 }
             }

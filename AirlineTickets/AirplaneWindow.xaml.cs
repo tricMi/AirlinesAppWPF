@@ -84,7 +84,7 @@ namespace AirlineTickets
                     foreach(var seat in Data.Instance.SeatAvailable.ToList())
                     {
 
-                            if (seat.AirplaneId.Equals(selectedPlane.Pilot))
+                            if (seat.AirplaneId.ToString().Equals(selectedPlane.Pilot))
                             {
                                 seat.Active = true;
                                 seat.ChangeSeat();
@@ -92,6 +92,7 @@ namespace AirlineTickets
                             }
                         
                     }
+
                     int index = IndexOfSelectedAirplane(selectedPlane.Pilot);
                     Data.Instance.Airplanes[index].Active = true;
                     view.Refresh();

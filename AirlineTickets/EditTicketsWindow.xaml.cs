@@ -40,7 +40,10 @@ namespace AirlineTickets
 
             this.DataContext = ticket;
             this.TxtSeat.DataContext = ticket;
-
+            this.CbFlNum.DataContext = ticket;
+            this.CbGate.DataContext = ticket;
+            this.CbSeatClass.DataContext = ticket;
+            this.CbUser.DataContext = ticket;
             foreach(Flight f in Data.Instance.Flights)
             {
                 if(f.Active.Equals(false))
@@ -74,7 +77,6 @@ namespace AirlineTickets
         {
             if(Validation() == true)
             {
-                BtnPickSeat.IsEnabled = true;
                 flight = CbFlNum.SelectedItem as Flight;
                 clas = (EClass)CbSeatClass.SelectedItem;
 
@@ -84,7 +86,6 @@ namespace AirlineTickets
                     ticket.SeatNum = s.SelectedSeat;
                 }
             }
-            BtnPickSeat.IsEnabled = false;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -104,8 +105,10 @@ namespace AirlineTickets
                     if(CbSeatClass.SelectedItem.Equals(EClass.BUSINESS))
                     {
                         ticket.TicketPrice = fly.OneWayTicketPrice * (decimal)5.0;
+                        TxtPrice.Text = (fly.OneWayTicketPrice * (decimal)5.0).ToString();
                     }
                     ticket.TicketPrice = fly.OneWayTicketPrice;
+                    TxtPrice.Text = fly.OneWayTicketPrice.ToString();
                     
                     ticket.SaveTicket();
                 }
@@ -117,44 +120,29 @@ namespace AirlineTickets
             this.DialogResult = false;
         }
 
-        
-
-
-        //private bool TicketExists(string user)
-        //{
-        //    return Data.Instance.Tickets.ToList().Find(a => a.CurrentUser.Equals(user)) != null ? true : false;
-        //}
 
         private Boolean ValidationSave()
         {
             Boolean ok = true;
 
-            if(CbGate.SelectedIndex <= -1)
+            if(CbGate.SelectedIndex <= -1 || CbUser.SelectedIndex <= -1)
             {
                 ok = false;
-                BtnSave.IsEnabled = false;
+                MessageBox.Show("You must select something");
             }
-            else if(CbUser.SelectedIndex <= -1)
-            {
-                ok = false;
-                BtnSave.IsEnabled = false;
-            }
+
             return ok;
         }
 
         private Boolean Validation()
         {
             Boolean ok = true;
-            if (CbFlNum.SelectedIndex <= -1)
+            if (CbFlNum.SelectedIndex <= -1 || CbSeatClass.SelectedIndex <= -1)
             {
                 ok = false;
-                BtnPickSeat.IsEnabled = false;
+                MessageBox.Show("You must select something");
             }
-            else if (CbSeatClass.SelectedIndex <= -1)
-            {
-                ok = false;
-                BtnPickSeat.IsEnabled = false;
-            }
+
             return ok;
         }
     }

@@ -54,7 +54,7 @@ namespace AirlineTickets
                 {
                     foreach(var f in Data.Instance.Flights.ToList())
                     {
-                        if(f.CompanyPassword.ToString().Equals(selectedCompany.CompanyPassword))
+                        if(f.CompanyPassword.CompanyPassword.ToString().Equals(selectedCompany.CompanyPassword))
                         {
                             f.Active = true;
                             f.ChangeFlight();
