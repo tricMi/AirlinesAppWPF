@@ -76,38 +76,7 @@ namespace AirlineTickets
             }
         }
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            Tickets selectedTicket = DGTickets.SelectedItem as Tickets;
-            if (SelectedTicket(selectedTicket))
-            {
-                Tickets oldTicket = selectedTicket.Clone() as Tickets;
-                EditTicketsWindow esw = new EditTicketsWindow(selectedTicket, EditTicketsWindow.Option.EDIT);
 
-
-                if (esw.ShowDialog() != true)
-                {
-                    int index = IndexOfSelectedTicket(oldTicket.CurrentUser);
-                    Data.Instance.Tickets[index] = oldTicket;
-
-                }
-                else
-                {
-                    foreach (var seat in Data.Instance.SeatAvailable.ToList())
-                    {
-                        if (seat.SeatLabel.ToString().Equals(selectedTicket.SeatNum.SeatLabel))
-                        {
-                            seat.SeatState = false;
-                            seat.ChangeSeat();
-                            view.Refresh();
-                        }
-                    }
-                    selectedTicket.ChangeTicket();
-                }
-            }
-            view.Refresh();
-
-        }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {

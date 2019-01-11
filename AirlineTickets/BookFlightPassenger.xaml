@@ -21,14 +21,10 @@
         <TextBox x:Name="txtFlight" Opacity="0.8" Background="#FF725959" Text="{Binding Path=FlightNumber}" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209"/>
         <TextBox x:Name="txtName"  Opacity="0.8" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209">
             <TextBox.Text>
-                <Binding Path="Name"
-                         NotifyOnValidationError="True" 
-                         ValidatesOnDataErrors="True" 
-                         ValidatesOnExceptions="True"
-                         UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                <Binding Path="Name">
 
                     <Binding.ValidationRules>
-                        <local:NameValidation/>
+                        <local:UsernameValidation/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -87,7 +83,7 @@
         </TextBox>
         <TextBox x:Name="txtSeat" Text="{Binding Path=SeatLabel}"  Opacity="0.8" Background="#FF725959" Foreground="White" HorizontalAlignment="Left" Height="35" Margin="230,514,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" RenderTransformOrigin="0.512,-0.057"/>
         <Button x:Name="BtnBook" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Book Flight" HorizontalAlignment="Left" Margin="364,649,0,0" VerticalAlignment="Top" Width="75" Height="35" Click="BtnBook_Click"/>
-        <Button x:Name="BtnCancel" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Cancel" HorizontalAlignment="Left" Margin="104,649,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+        <Button x:Name="BtnCancel" Opacity="0.8" Background="#FF725959" Foreground="White" Content="Cancel" HorizontalAlignment="Left" Margin="104,649,0,0" VerticalAlignment="Top" Width="75" Height="35" Click="BtnCancel_Click"/>
         <Label x:Name="LblData" HorizontalContentAlignment="Center"  Background="#FF725959" Foreground="White" Content="Ticket Data" HorizontalAlignment="Left" Margin="104,20,0,0" VerticalAlignment="Top" Width="335" FontWeight="Bold" FontSize="16"/>
         <Label x:Name="lblPrice" Content="Ticket Price" HorizontalAlignment="Left" Foreground="White" Margin="104,594,0,0" VerticalAlignment="Top" Width="106" FontSize="16"/>
         <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="35" Margin="230,594,0,0" Opacity="0.8"  Background="#FF725959" Foreground="White" TextWrapping="Wrap" Text="{Binding Path=OneWayTicketPrice}" VerticalAlignment="Top" Width="209" RenderTransformOrigin="0.512,0.886"/>

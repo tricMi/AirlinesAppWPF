@@ -68,6 +68,9 @@ namespace AirlineTickets
             CbDestination.ItemsSource = City.Select(b => b);
             cbCompanyId.ItemsSource = CompanyNum.Select(c => c);
 
+            flight.DepartureTime = DateTime.Now;
+            flight.ArrivalTime = DateTime.Now;
+
             if(option.Equals(Option.EDIT))
             {
                 tbFlightNum.IsEnabled = false;

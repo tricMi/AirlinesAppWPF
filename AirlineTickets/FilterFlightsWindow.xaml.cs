@@ -39,6 +39,17 @@ namespace AirlineTickets
             BtnPickFlight.IsEnabled = false;
 
             CbFlightType.ItemsSource = Enum.GetValues(typeof(EFlightType));
+
+           
+                view = CollectionViewSource.GetDefaultView(Data.Instance.Flights);
+                DGFlights.ItemsSource = view;
+                view.Filter = RangeFilter;
+                DGFlights.IsReadOnly = true;
+                DGFlights.IsSynchronizedWithCurrentItem = true;
+                DGFlights.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+                BtnPickFlight.IsEnabled = true;
+                view.SortDescriptions.Add(new SortDescription("OneWayTicketPrice", ListSortDirection.Descending));
+            
         }
 
 
@@ -107,18 +118,53 @@ namespace AirlineTickets
                 ok = false;
                 MessageBox.Show("You must select a flight type");
             }
+            try
+            {
+                int start = Convert.ToInt32(txtFromPrice.Text.Trim());
+            }
+            catch
+            {
+                
+                ok = false;
+                MessageBox.Show("Start price must be a number");
+            }
+            try
+            {
+                int end = Convert.ToInt32(txtToPrice.Text.Trim());
+            }
+            catch
+            {
+                ok = false;
+                MessageBox.Show("End price must be a number");
+            }
+
+
             return ok;
         }
 
+        private Boolean ValidationPick()
+        {
+            Boolean ok = true;
+            if (CbFlightType.SelectedIndex <= -1)
+            {
+                ok = false;
+                MessageBox.Show("You must select a flight type");
+            }
+
+            return ok;
+        }
         
 
         private void BtnPickSeat_Click(object sender, RoutedEventArgs e)
         {
-            SelectedFlight = DGFlights.SelectedItem as Flight;
-            type = (EFlightType)CbFlightType.SelectedItem;
-            BookFlightPassenger bf = new BookFlightPassenger(SelectedFlight, user, type);
-            bf.ShowDialog();
-            this.Close();
+            if (ValidationPick() == true)
+            {
+                SelectedFlight = DGFlights.SelectedItem as Flight;
+                type = (EFlightType)CbFlightType.SelectedItem;
+                BookFlightPassenger bf = new BookFlightPassenger(SelectedFlight, user, type);
+                bf.ShowDialog();
+                this.Close();
+            }
         }
 
         private void BtnShowFlights_Click(object sender, RoutedEventArgs e)
@@ -126,17 +172,7 @@ namespace AirlineTickets
             
             if (Validation() == true)
             {
-                
-                view = CollectionViewSource.GetDefaultView(Data.Instance.Flights);
-                DGFlights.ItemsSource = view;
-                view.Filter = RangeFilter;
-                DGFlights.IsReadOnly = true;
-                DGFlights.IsSynchronizedWithCurrentItem = true;
-                DGFlights.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-                BtnPickFlight.IsEnabled = true;
-                view.SortDescriptions.Add(new SortDescription("OneWayTicketPrice", ListSortDirection.Descending));
-
-
+                view.Refresh();
             }
 
         }

@@ -67,6 +67,9 @@ namespace AirlineTickets
             if(option.Equals(Option.EDIT))
             {
                 TxtPilot.IsEnabled = false;
+                txtInput.IsEnabled = false;
+                txtRowNumber.IsEnabled = false;
+                txtColumnNumber.IsEnabled = false;
             }
 
         }
