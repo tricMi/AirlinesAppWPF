@@ -75,7 +75,7 @@ namespace AirlineTickets
                 this.DialogResult = true;
                 
             }
-            BtnPick.IsEnabled = false;
+            
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

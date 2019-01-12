@@ -13,7 +13,7 @@ namespace AirlineTickets.Validation
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (value.ToString().Any(char.IsUpper) && value != null)
+            if (Regex.IsMatch(value.ToString(), @"^[a-zA-Z]+$") && value != null)
             {
                 return new ValidationResult(true, null);
             }

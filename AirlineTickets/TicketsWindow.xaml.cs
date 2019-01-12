@@ -60,7 +60,7 @@ namespace AirlineTickets
                 {
                     foreach(var seat in Data.Instance.SeatAvailable.ToList())
                     {
-                        if(seat.SeatLabel.ToString().Equals(selectedTicket.SeatNum.SeatLabel))
+                        if(seat.SeatLabel.Equals(selectedTicket.SeatNum.SeatLabel))
                         {
                             seat.SeatState = true;
                             seat.ChangeSeat();

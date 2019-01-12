@@ -168,7 +168,7 @@ namespace AirlineTickets
                     SelectedSeat = ps.SelectedSeat;
                     txtSeat.Text = SelectedSeat.SeatLabel.ToString();
                 }
-                BtnSeat.IsEnabled = false;
+
             }
             else
             {

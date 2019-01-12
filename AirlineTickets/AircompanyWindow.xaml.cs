@@ -50,7 +50,7 @@ namespace AirlineTickets
             Aircompany selectedCompany = (Aircompany)DGAircompany.SelectedItem;
             if (SelectedAircompany(selectedCompany))
             {
-                if (MessageBox.Show("Are you sure that you want to delete aircompany?", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
+                if (MessageBox.Show("By deleting aircompany you will delete all flights and tickets related to this aircompany. Are you sure that you want to delete aircompany? ", "Confirm", MessageBoxButton.YesNo).Equals(MessageBoxResult.Yes))
                 {
                     foreach(var f in Data.Instance.Flights.ToList())
                     {
@@ -61,6 +61,7 @@ namespace AirlineTickets
                             view.Refresh();
                         }
                     }
+
                     int index = IndexOfSelectedAircompany(selectedCompany.Id);
                     selectedCompany.Active = true;
                     selectedCompany.Change();
